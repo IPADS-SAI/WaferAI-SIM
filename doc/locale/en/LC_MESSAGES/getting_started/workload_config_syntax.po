@@ -1,0 +1,682 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/workload_config_syntax.rst:4
+msgid "配置字段与书写规范"
+msgstr "Configuration Fields and Writing Specifications"
+
+#: ../../source/getting_started/workload_config_syntax.rst:6
+msgid "完整的工作负载配置以 **JSON** 字典的形式呈现，以下对各个字段的含义与书写规范进行说明。"
+msgstr ""
+"The complete workload configuration is presented in the form of a **JSON** "
+"dictionary. The following explains the meaning and writing specifications of"
+" each field."
+
+#: ../../source/getting_started/workload_config_syntax.rst:9
+msgid "仿真模式"
+msgstr "Simulation Mode"
+
+#: ../../source/getting_started/workload_config_syntax.rst:12
+msgid "mode : string"
+msgstr "mode: string"
+
+#: ../../source/getting_started/workload_config_syntax.rst:14
+msgid "**支持的值：[\"dataflow\", \"pd\", \"pds\", \"gpu\", \"gpu_pd\"]**"
+msgstr "**Supported values: [\"dataflow\", \"pd\", \"pds\", \"gpu\", \"gpu_pd\"]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:16
+msgid "指定当前配置文件的仿真模式。对于不同的仿真模式，配置文件的书写方法略有不同。"
+msgstr ""
+"Specify the simulation mode for the current configuration file. The writing "
+"method of the configuration file varies slightly for different simulation "
+"modes."
+
+#: ../../source/getting_started/workload_config_syntax.rst:18
+msgid "**dataflow**: 众核数据流模式。"
+msgstr "**dataflow**: Many-core dataflow model."
+
+#: ../../source/getting_started/workload_config_syntax.rst:19
+msgid "**pd**: LLM Serving模式，且采用 **PD-aggregation** 。"
+msgstr "**pd**: LLM Serving mode, and using **PD-aggregation**."
+
+#: ../../source/getting_started/workload_config_syntax.rst:20
+msgid "**pds**: LLM Serving模式，且采用 **PD-split** 。"
+msgstr "**pds**: LLM Serving mode using **PD-split**."
+
+#: ../../source/getting_started/workload_config_syntax.rst:21
+msgid "**gpu**: GPU模式。"
+msgstr "**gpu**: GPU mode."
+
+#: ../../source/getting_started/workload_config_syntax.rst:22
+msgid "**gpu_pd**: GPU模式，且采用 **PD-aggregation** 。"
+msgstr "**gpu_pd**: GPU mode, using **PD-aggregation**."
+
+#: ../../source/getting_started/workload_config_syntax.rst:25
+msgid "一个配置文件仅支持一种仿真模式。"
+msgstr "A configuration file supports only one simulation mode."
+
+#: ../../source/getting_started/workload_config_syntax.rst:26
+msgid "在本页面其余字段的说明下方，会标记出该字段所适用的仿真模式。"
+msgstr ""
+"Below the description of each field on this page, the simulation modes to "
+"which the field applies are indicated."
+
+#: ../../source/getting_started/workload_config_syntax.rst:29
+msgid "模型参数与架构设置"
+msgstr "Model Parameters and Architecture Settings"
+
+#: ../../source/getting_started/workload_config_syntax.rst:32
+msgid "vars : dict"
+msgstr "vars: dict"
+
+#: ../../source/getting_started/workload_config_syntax.rst:34
+msgid "**适用模式：dataflow, gpu**"
+msgstr "**Applicable modes: dataflow, gpu**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:36
+msgid ""
+"定义在配置文件中所使用到的变量键值对。键代表变量名，值代表变量值。在配置文件中，若使用字符串作为任意字段的值，优先为其赋予 ``vars`` "
+"中该变量名所对应的值。"
+msgstr ""
+"Define variable key-value pairs used in the configuration file. The key "
+"represents the variable name, and the value represents the variable value. "
+"In the configuration file, if a string is used as the value for any field, "
+"priority is given to assigning the value corresponding to that variable name"
+" in ``vars``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:38
+#: ../../source/getting_started/workload_config_syntax.rst:100
+msgid "示例"
+msgstr "Example"
+
+#: ../../source/getting_started/workload_config_syntax.rst:41
+msgid "在配置文件中，vars定义如下："
+msgstr "In the configuration file, vars is defined as follows:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:52
+msgid "随后在配置文件的其他位置，使用如下写法，将 ``some_random_field`` 的值设置为123.456："
+msgstr ""
+"Subsequently, elsewhere in the configuration file, use the following "
+"notation to set the value of ``some_random_field`` to 123.456:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:61
+msgid "变量值仅支持整型与浮点型。"
+msgstr "Variable values only support integer and floating-point types."
+
+#: ../../source/getting_started/workload_config_syntax.rst:62
+msgid "不能对同一变量名重复定义，且不能在配置文件中使用未定义的变量。"
+msgstr ""
+"A variable name cannot be defined repeatedly, and undefined variables cannot"
+" be used in the configuration file."
+
+#: ../../source/getting_started/workload_config_syntax.rst:63
+msgid "使用变量时，不支持对变量名进行运算。例如\"foo+1\"、\"foo / bar\"、\"2foo\"等，在仅定义了 ``foo`` 变量的情况下，均是错误写法。"
+msgstr ""
+"When using variables, operations on variable names are not supported. For "
+"example, \"foo+1\", \"foo / bar\", \"2foo\", etc., are all incorrect syntax "
+"when only the variable ``foo`` is defined."
+
+#: ../../source/getting_started/workload_config_syntax.rst:66
+msgid "pipeline : number, optional"
+msgstr "pipeline: number, optional"
+
+#: ../../source/getting_started/workload_config_syntax.rst:68
+msgid "**适用模式：dataflow**"
+msgstr "**Applicable mode: dataflow**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:70
+msgid "在简单数据流模式下，表示 **总请求个数** 。该模式无法指定请求到达时间分布，因此所有请求视为在仿真开始时刻（0s）同时到达。"
+msgstr ""
+"In simple data flow mode, it represents the **total number of requests**. "
+"This mode cannot specify the request arrival time distribution, so all "
+"requests are considered to arrive simultaneously at the start of the "
+"simulation (0s)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:73
+msgid "requests : dict"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:75
+#: ../../source/getting_started/workload_config_syntax.rst:119
+msgid "**适用模式：pd, pds**"
+msgstr "**Applicable modes: pd, pds**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:77
+msgid "描述所有请求的元数据。包括总请求个数、请求到达时刻、请求token长度（input token）。"
+msgstr ""
+"Describe the metadata of all requests. Includes the total number of "
+"requests, request arrival time, and request token length (input token)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:79
+msgid "**count : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:81
+msgid "所有请求的总个数。"
+msgstr "Total number of all requests."
+
+#: ../../source/getting_started/workload_config_syntax.rst:83
+msgid "**seq_len : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:85
+msgid "所有请求的平均token数，代表模型推理的平均input token长度。"
+msgstr ""
+"The average number of tokens per request represents the average input token "
+"length for model inference."
+
+#: ../../source/getting_started/workload_config_syntax.rst:87
+msgid "**eof_chance : double**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:89
+msgid "所有请求所生成的平均token数，代表模型推理的平均output token长度。实际数值等同于 ``2 / eof_chance`` 。"
+msgstr ""
+"The average number of tokens generated per request represents the average "
+"output token length of model inference. The actual value is equivalent to "
+"``2 / eof_chance``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:91
+msgid "**arrival : number[]**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:93
+msgid ""
+"所有请求的到达时刻分布。数组中的每一个元素代表请求到达的时间戳（单位：ns）。 "
+"若数组长度小于总请求个数，则剩余请求的到达时刻统一为数组中的最后一个元素。"
+msgstr ""
+"The arrival time distribution for all requests. Each element in the array "
+"represents the timestamp when a request arrives (unit: ns). If the array "
+"length is less than the total number of requests, the arrival times of the "
+"remaining requests are uniformly set to the last element in the array."
+
+#: ../../source/getting_started/workload_config_syntax.rst:97
+msgid "请求的到达时刻分布必须为非递减序列。"
+msgstr ""
+"The arrival time distribution of requests must be a non-decreasing sequence."
+
+#: ../../source/getting_started/workload_config_syntax.rst:98
+msgid "数组长度至少为1。"
+msgstr "The array length must be at least 1."
+
+#: ../../source/getting_started/workload_config_syntax.rst:103
+msgid ""
+"定义一次LLM Serving流程，共10个请求。所有请求的平均input "
+"token长度为64。前三个请求的到达时刻分别为1、10、100ns，从第4个请求开始，所有请求的到达时刻均为1000ns。"
+msgstr ""
+"Define an LLM Serving process with a total of 10 requests. The average input"
+" token length for all requests is 64. The arrival times of the first three "
+"requests are 1, 10, and 100 ns respectively. Starting from the fourth "
+"request, all requests arrive at 1000 ns."
+
+#: ../../source/getting_started/workload_config_syntax.rst:117
+msgid "model : dict"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:121
+msgid "在LLM Serving仿真模式下，定义有关模型与仿真流程的元信息。"
+msgstr ""
+"In LLM Serving simulation mode, define metadata related to the model and "
+"simulation process."
+
+#: ../../source/getting_started/workload_config_syntax.rst:123
+msgid "**heads : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:125
+msgid "模型注意力头个数。"
+msgstr "Number of attention heads in the model."
+
+#: ../../source/getting_started/workload_config_syntax.rst:127
+msgid "**stage : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:129
+msgid "**适用模式：pd**"
+msgstr "Applicable mode: pd"
+
+#: ../../source/getting_started/workload_config_syntax.rst:131
+msgid "模型进行流水线并行（PP）的大小。"
+msgstr "Pipeline parallelism (PP) size for the model."
+
+#: ../../source/getting_started/workload_config_syntax.rst:133
+msgid "**prefill_stage : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:135
+#: ../../source/getting_started/workload_config_syntax.rst:141
+#: ../../source/getting_started/workload_config_syntax.rst:147
+#: ../../source/getting_started/workload_config_syntax.rst:153
+#: ../../source/getting_started/workload_config_syntax.rst:316
+#: ../../source/getting_started/workload_config_syntax.rst:322
+msgid "**适用模式：pds**"
+msgstr "Applicable mode: pds"
+
+#: ../../source/getting_started/workload_config_syntax.rst:137
+msgid "Prefill工作核进行流水线并行（PP）的大小。"
+msgstr "Prefill worker core size for pipeline parallelism (PP)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:139
+msgid "**decode_stage : number**"
+msgstr "decode_stage : number"
+
+#: ../../source/getting_started/workload_config_syntax.rst:143
+msgid "Decode工作核进行流水线并行（PP）的大小。"
+msgstr "The size of the Decode worker kernel for pipeline parallelism (PP)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:145
+msgid "**prefill_cores : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:149
+msgid "进行Prefill的工作核个数，需保证为 ``prefill_stage`` 的倍数。"
+msgstr ""
+"The number of work cores for Prefill must be a multiple of "
+"``prefill_stage``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:151
+msgid "**decode_cores : number**"
+msgstr "**decode_cores : integer**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:155
+msgid "进行Decode的工作核个数，需保证为 ``decode_stage`` 的倍数。"
+msgstr ""
+"The number of cores performing decode tasks must be a multiple of "
+"``decode_stage``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:157
+msgid "**kv_heads : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:159
+msgid "模型KV头个数，用于包含GQA算子的模型。"
+msgstr ""
+"Number of model KV heads, used for models that include the GQA operator."
+
+#: ../../source/getting_started/workload_config_syntax.rst:161
+msgid "**head_size : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:163
+msgid "模型注意力头维度。"
+msgstr "Model attention head dimension."
+
+#: ../../source/getting_started/workload_config_syntax.rst:165
+msgid "**hidden_size : number**"
+msgstr "hidden_size : number"
+
+#: ../../source/getting_started/workload_config_syntax.rst:167
+msgid "模型隐藏层维度。"
+msgstr "Model hidden layer dimension."
+
+#: ../../source/getting_started/workload_config_syntax.rst:169
+msgid "**intermediate_size**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:171
+msgid "模型中间层维度。"
+msgstr "Model intermediate layer dimension."
+
+#: ../../source/getting_started/workload_config_syntax.rst:173
+msgid "**prefill_iters : number**"
+msgstr "prefill_iters : number"
+
+#: ../../source/getting_started/workload_config_syntax.rst:175
+msgid ""
+"使用Chunked Prefill优化，将Prefill工作拆分为均等chunk的个数。如果希望关闭Chunked Prefill，则设置为1。"
+msgstr ""
+"Chunked Prefill optimization divides the Prefill work into equal chunks. Set"
+" it to 1 to disable Chunked Prefill."
+
+#: ../../source/getting_started/workload_config_syntax.rst:177
+#: ../../source/getting_started/workload_config_syntax.rst:350
+msgid "示例1"
+msgstr "Example 1"
+
+#: ../../source/getting_started/workload_config_syntax.rst:180
+msgid ""
+"在LLM Serving **PD aggregation** "
+"模式中，模型的注意力头数为24，KV头数为6，模型头维度为128，流水线并行大小为12（每一拍流水线执行的模型层数等于 ``模型总层数 / PP大小``"
+" ）。不使用Chunked Prefill。"
+msgstr ""
+"In LLM Serving **PD aggregation** mode, the model has 24 attention heads, 6 "
+"KV heads, and a model head dimension of 128. The pipeline parallel size is "
+"12 (the number of model layers executed per pipeline stage equals `total "
+"model layers / PP size`). Chunked Prefill is not used."
+
+#: ../../source/getting_started/workload_config_syntax.rst:182
+msgid ""
+"此时使用的核心总数量至少为12个，实际数量由硬件配置文件决定（可参阅硬件配置文件 :doc:`hardware_config_detail` ）。"
+msgstr ""
+"At this point, the minimum number of cores used is 12, and the actual number"
+" is determined by the hardware configuration file (you can refer to the "
+"hardware configuration file :doc:`hardware_config_detail`)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:196
+#: ../../source/getting_started/workload_config_syntax.rst:397
+msgid "示例2"
+msgstr "Example 2"
+
+#: ../../source/getting_started/workload_config_syntax.rst:199
+msgid ""
+"在LLM Serving **PD Split** 模式中，模型的注意力头数为24，KV头数为6，模型头维度为128。使用Chunked "
+"Prefill将每一个Prefill任务分解为均等的2个小chunk。Prefill与Decode的流水线并行大小均为7，其中进行Prefill的总核数为42，进行Decode的总核数为21。这意味着Prefill工作核的数据并行（DP）大小为"
+" ``42 / 7 = 6`` ，Decode工作核的数据并行（DP）大小为 ``21 / 7 = 3`` 。"
+msgstr ""
+"In the LLM Serving **PD Split** mode, the model has 24 attention heads, 6 KV"
+" heads, and a model head dimension of 128. Chunked Prefill is used to split "
+"each Prefill task into 2 equal small chunks. The pipeline parallel size for "
+"both Prefill and Decode is 7, with a total of 42 cores for Prefill and 21 "
+"cores for Decode. This means the data parallel (DP) size for the Prefill "
+"worker cores is ``42 / 7 = 6``, and the data parallel (DP) size for the "
+"Decode worker cores is ``21 / 7 = 3``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:201
+msgid "此时使用核心总数量为 ``42 + 21 = 63`` 个，在指定硬件配置文件时需满足这一点。"
+msgstr ""
+"The total number of cores used at this point is ``42 + 21 = 63``, which must"
+" be met when specifying the hardware configuration file."
+
+#: ../../source/getting_started/workload_config_syntax.rst:219
+msgid "工作核负载"
+msgstr "Workload Core"
+
+#: ../../source/getting_started/workload_config_syntax.rst:221
+msgid ""
+"工作核的负载由原语按顺序排列而成，记录在 ``cores`` 字段中。为了仿真平台的可扩展性，我们要求在书写 ``cores`` 字段时，必须将其包含在"
+" ``chips`` 字段中，具体写法如下："
+msgstr ""
+"The workload of the work core is composed of primitives arranged in sequence"
+" and recorded in the ``cores`` field. For the scalability of the simulation "
+"platform, we require that when writing the ``cores`` field, it must be "
+"included within the ``chips`` field, with the specific writing method as "
+"follows:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:237
+msgid "除了 ``cores`` 字段以外，其余内容为固定结构，不允许修改。"
+msgstr ""
+"Except for the `cores` field, the rest of the content has a fixed structure "
+"and cannot be modified."
+
+#: ../../source/getting_started/workload_config_syntax.rst:240
+msgid "cores : dict[]"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:242
+msgid "**适用模式：dataflow, pd, pds, gpu, gpu_pd**"
+msgstr "**Applicable modes: dataflow, pd, pds, gpu, gpu_pd**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:244
+msgid "记录每一个工作核的负载信息。"
+msgstr "Record the load information of each worker core."
+
+#: ../../source/getting_started/workload_config_syntax.rst:246
+msgid "**id : number**"
+msgstr "**id: number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:248
+msgid "工作核编号。"
+msgstr "Worker ID."
+
+#: ../../source/getting_started/workload_config_syntax.rst:250
+msgid "**loop : string/number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:252
+msgid "循环执行 ``worklist`` 中所记录原语的次数。"
+msgstr ""
+"Number of times to execute the primitive recorded in the ``worklist`` in a "
+"loop."
+
+#: ../../source/getting_started/workload_config_syntax.rst:254
+msgid "**prim_copy : number, optional**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:256
+msgid ""
+"为了书写便利，使用此字段复制其他工作核的所有worklist及其中的所有原语。需注意被复制的核不能是未定义的核、或是另一个指定了 "
+"``prim_copy`` 字段的核。在主动复制原语之后，仍需填写所有 ``worklist`` 中的 ``cast`` 字段，无需填写 "
+"``worklist`` 中的 ``prims`` 字段。"
+msgstr ""
+"For convenience in writing, use this field to copy all worklists and all "
+"primitives within them from other work cores. Note that the copied core "
+"cannot be an undefined core or another core that has specified the "
+"``prim_copy`` field. After actively copying the primitives, it is still "
+"necessary to fill in all ``cast`` fields in the ``worklist``, and there is "
+"no need to fill in the ``prims`` fields in the ``worklist``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:258
+msgid "**worklist : dict[]**"
+msgstr "worklist : dict[]"
+
+#: ../../source/getting_started/workload_config_syntax.rst:260
+msgid ""
+"按顺序执行的原语列表。每一个worklist中记录了一系列 **计算** 原语（COMP_PRIM）。NPU-"
+"SIM会自动在每一个worklist执行前加上一个 **接收** 原语（RECV_PRIM），在worklist执行结束后加上一个 **发送** "
+"原语（SEND_PRIM），因此工作核间的通信流程由 ``worklist`` 数组对工作流程的切割隐式决定。具体原语通信范式可参阅 "
+":doc:`primitive_detail` 。"
+msgstr ""
+"A list of primitives executed in sequence. Each worklist contains a series "
+"of **computation** primitives (COMP_PRIM). NPU-SIM automatically adds a "
+"**receive** primitive (RECV_PRIM) before executing each worklist and a "
+"**send** primitive (SEND_PRIM) after the worklist execution. Therefore, the "
+"communication flow between worker cores is implicitly determined by how the "
+"``worklist`` array segments the workflow. For specific primitive "
+"communication paradigms, refer to :doc:`primitive_detail`."
+
+#: ../../source/getting_started/workload_config_syntax.rst:262
+msgid "**recv_cnt : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:264
+msgid "在执行此 ``worklist`` 之前，需要等待从其他工作核传来的数据份数。若为0，则表示无需等待。"
+msgstr ""
+"Before executing this ``worklist``, it is necessary to wait for the number "
+"of data pieces transmitted from other worker cores. If it is 0, it indicates"
+" no waiting is required."
+
+#: ../../source/getting_started/workload_config_syntax.rst:266
+msgid "**recv_tag : number, optional**"
+msgstr "**recv_tag : int, optional**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:268
+msgid ""
+"接收数据时，过滤指定的标签号。只有与发送核侧指定了相同的标签号时，才能成功接收。与 ``cast`` 中的 ``tag`` "
+"配合使用。若未指定此字段，则默认为本核编号。"
+msgstr ""
+"When receiving data, filter by the specified tag number. Data can only be "
+"successfully received if the tag number matches the one specified on the "
+"sending core. Used in conjunction with the `tag` in `cast`. If this field is"
+" not specified, it defaults to the local core number."
+
+#: ../../source/getting_started/workload_config_syntax.rst:270
+msgid "**cast : dict[]**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:272
+msgid "在此worklist执行完毕后，将数据发送至其他工作核的相关信息。"
+msgstr ""
+"After the worklist execution is completed, send the data to the relevant "
+"information of other work cores."
+
+#: ../../source/getting_started/workload_config_syntax.rst:274
+msgid "**dest : number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:276
+msgid "目标核编号。"
+msgstr "Target core number."
+
+#: ../../source/getting_started/workload_config_syntax.rst:278
+msgid "**tag : number, optional**"
+msgstr "**tag**: number, optional"
+
+#: ../../source/getting_started/workload_config_syntax.rst:280
+msgid ""
+"发送数据时，为数据添加的标签号。只有与接收核侧指定了相同的标签号时，才能成功发送。与 ``worklist`` 中的 ``recv_tag`` "
+"配合使用。若未指定此字段，则默认为目标核编号。"
+msgstr ""
+"The tag number added to the data when sending. Data can only be successfully"
+" sent if the receiving core specifies the same tag number. Used in "
+"conjunction with `recv_tag` in `worklist`. If this field is not specified, "
+"it defaults to the target core number."
+
+#: ../../source/getting_started/workload_config_syntax.rst:282
+msgid "**weight : number, optional**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:284
+msgid "发送数据占总数据的比例（ ``1 / weight`` ，均匀划分）。默认值为1。"
+msgstr ""
+"Ratio of sent data to total data (``1 / weight``, evenly distributed). "
+"Default value is 1."
+
+#: ../../source/getting_started/workload_config_syntax.rst:286
+msgid "**prims : dict[]**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:288
+msgid "此worklist的原语序列，由前至后依次执行。"
+msgstr ""
+"The primitive sequence of this worklist is executed sequentially from front "
+"to back."
+
+#: ../../source/getting_started/workload_config_syntax.rst:290
+msgid "**type : string**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:292
+msgid "原语类型（需填写指定字符串，见下）。"
+msgstr "Primitive type (must fill in the specified string, see below)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:294
+msgid "**{{var}} : string/number**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:296
+msgid "原语的参数列表。不同原语所需参数及参数名均不相同，可参考以下目录中的头文件定义（其中包含原语类型名）："
+msgstr ""
+"Parameter list of the primitive. The required parameters and parameter names"
+" vary for different primitives. Please refer to the header file definitions "
+"in the following directory (which include primitive type names):"
+
+#: ../../source/getting_started/workload_config_syntax.rst:302
+msgid "**sram_address : dict**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:304
+msgid "指定计算原语在SRAM中的输入输出标签，具体内存读写与标签管理范式可参考 :doc:`memory_detail` 。"
+msgstr ""
+"Specify the input and output labels of the computing primitive in SRAM. For "
+"specific memory read/write and label management paradigms, refer to "
+":doc:`memory_detail`."
+
+#: ../../source/getting_started/workload_config_syntax.rst:306
+msgid "**indata : string**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:308
+msgid "输入标签。此字段不会被NPU-SIM理解为 ``vars`` 中的变量。"
+msgstr ""
+"Input label. This field is not interpreted by NPU-SIM as a variable in "
+"``vars``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:310
+msgid "**outdata : string**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:312
+msgid "输出标签。此字段不会被NPU-SIM理解为 ``vars`` 中的变量。"
+msgstr ""
+"Output label. This field is not interpreted by NPU-SIM as a variable in "
+"``vars``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:314
+msgid "**prefill : dict[]**"
+msgstr ""
+
+#: ../../source/getting_started/workload_config_syntax.rst:318
+msgid "标记Prefill工作核的 ``worklist`` 。使用方法见下。"
+msgstr "Mark the worklist of the Prefill worker core. See below for usage."
+
+#: ../../source/getting_started/workload_config_syntax.rst:320
+msgid "**decode : dict[]**"
+msgstr "decode : dict[]"
+
+#: ../../source/getting_started/workload_config_syntax.rst:324
+msgid "标记Decode工作核的 ``worklist`` 。使用方法见下。"
+msgstr "Mark the Decode work kernel's ``worklist``. See below for usage."
+
+#: ../../source/getting_started/workload_config_syntax.rst:346
+msgid ""
+"在 **pd** 与 **pds** 模式中，只需在配置文件中指定单个张量并行（TP）组中所有核心的配置即可。例如在 **pds** "
+"模式下，Prefill任务与Decode任务的TP大小均为2，此时配置文件中 ``prefill`` 和 ``decode`` "
+"字段中都只应包含核0与核1的配置。对于其中的收发目标和编号与数据标签号，按照该TP组内填写（例如在核0与核1组成的TP组中，核0的发送目的地即为核1）。"
+msgstr ""
+"In **pd** and **pds** modes, you only need to specify the configuration for "
+"all cores in a single tensor parallel (TP) group in the configuration file. "
+"For example, in **pds** mode, both the Prefill task and the Decode task have"
+" a TP size of 2. In this case, the configuration file's `prefill` and "
+"`decode` fields should only include the configurations for core 0 and core "
+"1. For the send/receive targets, numbers, and data label numbers, fill them "
+"according to the TP group (for example, in a TP group consisting of core 0 "
+"and core 1, the send destination for core 0 is core 1)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:348
+msgid ""
+"在 **pd** 模式下，所需求的最少核心总数量等于 ``stage * TP大小`` 。在 **pds** 模式下，核心总数量等于 "
+"``(prefill_cores + decode_cores) * TP大小`` 。"
+msgstr ""
+"In **pd** mode, the minimum required total number of cores equals ``stage * "
+"TP size``. In **pds** mode, the total number of cores equals "
+"``(prefill_cores + decode_cores) * TP size``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:353
+msgid ""
+"对于一组收发核，发送方的数据标签需等同于接收方的数据标签。在示例中，需要等待核0与核1 ``worklist`` "
+"中的原语执行完毕，发送给核2，使其接收到两份数据后，方可执行核2的第一个 ``worklist`` 中的原语。"
+msgstr ""
+"For a set of sending and receiving cores, the sender's data tag must be "
+"equivalent to the receiver's data tag. In the example, it is necessary to "
+"wait for the primitives in the worklist of Core 0 and Core 1 to complete "
+"execution and be sent to Core 2. Only after Core 2 receives both sets of "
+"data can it execute the first primitive in its worklist."
+
+#: ../../source/getting_started/workload_config_syntax.rst:400
+msgid "对于使用 ``prim_copy`` 的原语，需要显式指定所有 ``worklist`` 及其中的 ``cast`` 字段。"
+msgstr ""
+"For primitives using ``prim_copy``, all ``worklist`` and the ``cast`` fields"
+" within them must be explicitly specified."
+
+#: ../../source/getting_started/workload_config_syntax.rst:440
+msgid "示例3"
+msgstr "Example 3"
+
+#: ../../source/getting_started/workload_config_syntax.rst:443
+msgid ""
+"需确保每一个计算原语的输入标签都曾经作为某个其他计算原语的输出标签出现过（相关内存读取与标签管理范式可参阅 :doc:`memory_detail` "
+"）。在示例中， ``layernorm1_in`` 标签就曾作为 ``parse_input`` 原语的输出标签出现过。"
+msgstr ""
+"Ensure that the input label of each computational primitive has previously "
+"appeared as the output label of some other computational primitive (for "
+"related memory reading and label management paradigms, refer to "
+":doc:`memory_detail`). In the example, the ``layernorm1_in`` label has "
+"previously appeared as the output label of the ``parse_input`` primitive."

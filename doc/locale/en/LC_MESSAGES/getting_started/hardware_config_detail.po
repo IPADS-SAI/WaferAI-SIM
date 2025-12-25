@@ -1,0 +1,275 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/hardware_config_detail.rst:4
+msgid "硬件配置"
+msgstr "Hardware Configuration"
+
+#: ../../source/getting_started/hardware_config_detail.rst:6
+msgid ""
+"硬件配置用于描述 **NPU-SIM** 所使用的硬件架构参数，以 **JSON** "
+"格式保存。它主要描述了计算核的总个数、每个计算核的内存大小，带宽、计算核算力、片上网络的核间带宽等参数。"
+msgstr ""
+"Hardware configuration describes the hardware architecture parameters used "
+"by **NPU-SIM**, saved in **JSON** format. It primarily describes parameters "
+"such as the total number of computing cores, the memory size of each "
+"computing core, bandwidth, computing core performance, and inter-core "
+"bandwidth of the on-chip network."
+
+#: ../../source/getting_started/hardware_config_detail.rst:8
+msgid "我们提供了若干示例配置文件，用以对不同场景进行仿真。此外硬件配置文件还支持异构计算核心的配置。这些示例配置位于以下目录中："
+msgstr ""
+"We provide several example configuration files for simulating different "
+"scenarios. Additionally, the hardware configuration files also support the "
+"configuration of heterogeneous computing cores. These example configurations"
+" are located in the following directory:"
+
+#: ../../source/getting_started/hardware_config_detail.rst:14
+msgid "硬件配置文件书写相较工作负载配置文件而言更加简单，详细的字段说明见下。"
+msgstr ""
+"Writing hardware configuration files is simpler compared to workload "
+"configuration files. Detailed field descriptions are provided below."
+
+#: ../../source/getting_started/hardware_config_detail.rst:17
+msgid "配置字段与书写规范"
+msgstr "Configuration Fields and Writing Specifications"
+
+#: ../../source/getting_started/hardware_config_detail.rst:20
+msgid "计算核阵列"
+msgstr "Computing core array"
+
+#: ../../source/getting_started/hardware_config_detail.rst:23
+msgid "x : number"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:25
+msgid "计算核心排布为 ``x * x`` 的方阵。"
+msgstr "The compute cores are arranged in a square matrix of ``x * x``."
+
+#: ../../source/getting_started/hardware_config_detail.rst:28
+msgid "片上网络（Network on Chip）"
+msgstr "Network on Chip"
+
+#: ../../source/getting_started/hardware_config_detail.rst:31
+msgid "noc : dict"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:33
+msgid "片上网络的配置。"
+msgstr "On-chip network configuration."
+
+#: ../../source/getting_started/hardware_config_detail.rst:35
+msgid "**noc_payload_per_cycle : number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:37
+msgid "片上网络相邻计算核间信道，在一个时钟周期内可以传输的负载包个数（约定一个负载包为128个bits）。"
+msgstr ""
+"The number of payload packets (each defined as 128 bits) that can be "
+"transmitted over the on-chip network channel between adjacent computing "
+"cores within one clock cycle."
+
+#: ../../source/getting_started/hardware_config_detail.rst:40
+msgid "算子"
+msgstr "operator"
+
+#: ../../source/getting_started/hardware_config_detail.rst:43
+msgid "operand : dict"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:45
+msgid "运算算子的配置。"
+msgstr "Configuration of arithmetic operators."
+
+#: ../../source/getting_started/hardware_config_detail.rst:47
+msgid "**comp_util : double**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:49
+msgid "算子的计算资源使用效率，即在计算与访存过程中的重叠时间比例。"
+msgstr ""
+"The computational resource utilization efficiency of the operator, i.e., the"
+" proportion of overlapping time between computation and memory access."
+
+#: ../../source/getting_started/hardware_config_detail.rst:51
+msgid "**core_credit : number**"
+msgstr "core credit : number"
+
+#: ../../source/getting_started/hardware_config_detail.rst:53
+#: ../../source/getting_started/hardware_config_detail.rst:59
+msgid "**适用模式：pd**"
+msgstr "Applicable mode: pd"
+
+#: ../../source/getting_started/hardware_config_detail.rst:55
+msgid "在一拍中，一个计算核可以最多分配的计算任务量，与 ``pd_ratio`` 相关。"
+msgstr ""
+"In a single beat, the maximum number of computational tasks that can be "
+"assigned to a compute core is related to the ``pd_ratio``."
+
+#: ../../source/getting_started/hardware_config_detail.rst:57
+msgid "**pd_ratio : number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:61
+msgid "在 **pd** 模式中，规定一次Decode任务的计算任务量为1。此字段定义了一次Prefill任务的计算量是Decode任务的多少倍。"
+msgstr ""
+"In **pd** mode, the computational workload of one Decode task is defined as "
+"1. This field defines how many times the computational workload of one "
+"Prefill task is compared to that of a Decode task."
+
+#: ../../source/getting_started/hardware_config_detail.rst:63
+msgid "示例"
+msgstr "Example"
+
+#: ../../source/getting_started/hardware_config_detail.rst:66
+msgid ""
+"若 ``core_credit`` 为8， ``pd_ratio`` 为3，则一拍中可最多为一个计算核分配“2个Prefill + "
+"2个Decode”或“1个Prefill + 5个Decode”或“0个Prefill + 8个Decode”的计算任务。"
+msgstr ""
+"If ``core_credit`` is 8 and ``pd_ratio`` is 3, then within one beat, a "
+"maximum of \"2 Prefill + 2 Decode\" or \"1 Prefill + 5 Decode\" or \"0 "
+"Prefill + 8 Decode\" computational tasks can be allocated to a single "
+"compute core."
+
+#: ../../source/getting_started/hardware_config_detail.rst:69
+msgid "memory : dict"
+msgstr "memory: dict"
+
+#: ../../source/getting_started/hardware_config_detail.rst:71
+msgid "片上内存的配置。"
+msgstr "On-chip memory configuration."
+
+#: ../../source/getting_started/hardware_config_detail.rst:73
+msgid "**beha_dram_util : double**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:75
+#: ../../source/getting_started/hardware_config_detail.rst:98
+#: ../../source/getting_started/hardware_config_detail.rst:102
+msgid "TODO"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:77
+msgid "**dram_default_bitwidth: number**"
+msgstr "dram_default_bitwidth: number"
+
+#: ../../source/getting_started/hardware_config_detail.rst:79
+msgid "DRAM的位宽。"
+msgstr "DRAM bit width."
+
+#: ../../source/getting_started/hardware_config_detail.rst:81
+msgid "**sram_size: number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:83
+msgid "SRAM的大小，目前仅支持所有核心的SRAM大小相同。"
+msgstr ""
+"The SRAM size currently only supports identical sizes across all cores."
+
+#: ../../source/getting_started/hardware_config_detail.rst:86
+msgid "gpu : dict"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:88
+msgid "**适用模式：gpu, gpu_pd**"
+msgstr "Applicable modes: gpu, gpu_pd"
+
+#: ../../source/getting_started/hardware_config_detail.rst:90
+msgid "GPU的配置。"
+msgstr "GPU Configuration."
+
+#: ../../source/getting_started/hardware_config_detail.rst:92
+msgid "**dram_bandwidth: number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:94
+msgid "DRAM的带宽。"
+msgstr "DRAM bandwidth."
+
+#: ../../source/getting_started/hardware_config_detail.rst:96
+msgid "**dram_burst_size: number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:100
+msgid "**dram_aligned : number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:105
+msgid "cores : dict[]"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:107
+msgid "计算核的配置。"
+msgstr "Configuration of compute kernels."
+
+#: ../../source/getting_started/hardware_config_detail.rst:109
+msgid "**id : number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:111
+msgid "计算核的编号。"
+msgstr "Compute the core number."
+
+#: ../../source/getting_started/hardware_config_detail.rst:113
+msgid "**exu_x : number**"
+msgstr "**exu_x: number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:115
+msgid "矩阵运算单元阵列的横向维度大小。"
+msgstr "The horizontal dimension size of the matrix operation unit array."
+
+#: ../../source/getting_started/hardware_config_detail.rst:117
+msgid "**exu_y : number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:119
+msgid "矩阵运算单元阵列的纵向维度大小。"
+msgstr "Number of rows in the matrix arithmetic unit array."
+
+#: ../../source/getting_started/hardware_config_detail.rst:121
+msgid "**sfu_x : number**"
+msgstr "sfu_x : number"
+
+#: ../../source/getting_started/hardware_config_detail.rst:123
+msgid "非线性运算单元的阵列大小。"
+msgstr "Array size of the nonlinear operation unit."
+
+#: ../../source/getting_started/hardware_config_detail.rst:125
+msgid "**sram_bitwidth : number**"
+msgstr ""
+
+#: ../../source/getting_started/hardware_config_detail.rst:127
+msgid "SRAM的位宽。"
+msgstr "SRAM bit width."
+
+#: ../../source/getting_started/hardware_config_detail.rst:130
+msgid "``core`` 数组的长度至少为1。"
+msgstr "The length of the ``core`` array must be at least 1."
+
+#: ../../source/getting_started/hardware_config_detail.rst:132
+msgid ""
+"若在 ``core`` 数组中省略任意核的配置（假设该核编号为 ``x`` ），则核 ``x`` 的配置将被自动设置等同于编号小于 ``x`` "
+"的已定义核中编号最大的核配置。"
+msgstr ""
+"If any core configuration in the ``core`` array is omitted (assuming the "
+"core number is ``x``), the configuration of core ``x`` will be automatically"
+" set to be the same as the configuration of the largest-numbered core "
+"defined among the cores with numbers less than ``x``."

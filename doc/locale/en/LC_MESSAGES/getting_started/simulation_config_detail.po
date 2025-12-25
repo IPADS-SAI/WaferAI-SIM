@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/simulation_config_detail.rst:4
+msgid "仿真配置"
+msgstr "Simulation Configuration"
+
+#: ../../source/getting_started/simulation_config_detail.rst:6
+msgid ""
+"仿真配置用于描述 **NPU-SIM** 在仿真过程中使用的仿真参数，以 **JSON** 格式保存。它主要描述了 **NPU-SIM** "
+"对不同组件的仿真方式、优化技术、控制台输出等参数。"
+msgstr ""
+"Simulation configuration describes the simulation parameters used by **NPU-"
+"SIM** during the simulation process and is saved in **JSON** format. It "
+"primarily defines how **NPU-SIM** simulates different components, "
+"optimization techniques, console output parameters, and other settings."
+
+#: ../../source/getting_started/simulation_config_detail.rst:8
+msgid "我们提供了示例配置文件，其中包含对于所有可配置参数的记录。它位于以下目录中："
+msgstr ""
+"We provide a sample configuration file that documents all configurable "
+"parameters. It is located in the following directory:"
+
+#: ../../source/getting_started/simulation_config_detail.rst:14
+msgid "有关仿真配置的详细字段说明见下。"
+msgstr ""
+"For detailed field descriptions of the simulation configuration, see below."
+
+#: ../../source/getting_started/simulation_config_detail.rst:17
+msgid "配置字段与书写规范"
+msgstr "Configuration Fields and Writing Specifications"
+
+#: ../../source/getting_started/simulation_config_detail.rst:20
+msgid "字体文件"
+msgstr "Font file"
+
+#: ../../source/getting_started/simulation_config_detail.rst:23
+msgid "ttf_file : string"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:25
+msgid "字体文件相对于主程序入口文件的路径。"
+msgstr "The relative path of the font file to the main program entry file."
+
+#: ../../source/getting_started/simulation_config_detail.rst:29
+msgid "算子"
+msgstr "operator"
+
+#: ../../source/getting_started/simulation_config_detail.rst:32
+msgid "operand : dict"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:34
+msgid "**use_perf_gemm : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:36
+msgid "是否使用性能优化的GEMM算子。在模拟计算周期时，会得到更准确的结果。"
+msgstr ""
+"Whether to use the performance-optimized GEMM operator. More accurate "
+"results will be obtained when simulating the computation cycle."
+
+#: ../../source/getting_started/simulation_config_detail.rst:38
+msgid "**load_static_as_tile : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:40
+msgid ""
+"在向SRAM中加载数据时，是否将静态数据作为tile进行加载。此方法会显著减少SRAM用量，从而减少溢出次数。但会引入额外的DRAM访问开销。"
+msgstr ""
+"When loading data into SRAM, static data is loaded as tiles. This method "
+"significantly reduces SRAM usage, thereby decreasing the number of spills. "
+"However, it introduces additional DRAM access overhead."
+
+#: ../../source/getting_started/simulation_config_detail.rst:44
+msgid "内存"
+msgstr "Memory"
+
+#: ../../source/getting_started/simulation_config_detail.rst:47
+msgid "memory : dict"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:49
+msgid "**use_beha_sram : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:51
+msgid "是否使用行为级SRAM仿真。此方法会大幅加快仿真现实速度，但会略微丢失仿真精度。"
+msgstr ""
+"Whether to use behavioral-level SRAM simulation. This method significantly "
+"accelerates simulation speed but slightly reduces simulation accuracy."
+
+#: ../../source/getting_started/simulation_config_detail.rst:53
+msgid "**use_beha_dram : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:55
+msgid "是否使用行为级DRAM仿真。此方法会大幅加快仿真现实速度，但会略微丢失仿真精度。"
+msgstr ""
+"Whether to use behavioral-level DRAM simulation. This method significantly "
+"accelerates simulation speed but slightly reduces simulation accuracy."
+
+#: ../../source/getting_started/simulation_config_detail.rst:57
+msgid "**use_dramsys : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:59
+#: ../../source/getting_started/simulation_config_detail.rst:95
+msgid "TODO"
+msgstr "待办事项"
+
+#: ../../source/getting_started/simulation_config_detail.rst:62
+msgid "片上网络（Network on Chip）"
+msgstr "Network on Chip (NoC)"
+
+#: ../../source/getting_started/simulation_config_detail.rst:65
+msgid "noc : dict"
+msgstr "noc: dict"
+
+#: ../../source/getting_started/simulation_config_detail.rst:67
+msgid "**use_beha_noc : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:69
+msgid "是否使用行为级片上网络仿真。此方法会大幅加快仿真现实速度，但会略微丢失仿真精度。"
+msgstr ""
+"Enable behavioral on-chip network simulation. This method significantly "
+"accelerates simulation speed at the cost of slightly reduced accuracy."
+
+#: ../../source/getting_started/simulation_config_detail.rst:71
+msgid "**router_pipe : boolean**"
+msgstr "router_pipe : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:73
+msgid "是否开启路由器的流水线模式。此方法可以隐藏路由器从SRAM中读取数据的时间。"
+msgstr ""
+"Whether to enable the router's pipeline mode. This method can hide the time "
+"the router takes to read data from SRAM."
+
+#: ../../source/getting_started/simulation_config_detail.rst:75
+msgid "**fast_warmup : boolean**"
+msgstr "fast_warmup : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:77
+msgid "是否跳过激活数据流图的初始数据分发。"
+msgstr ""
+"Skip the initial data distribution for activating the data flow graph."
+
+#: ../../source/getting_started/simulation_config_detail.rst:79
+msgid "**send_recv_parallel : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:81
+msgid "是否同时执行工作核的SEND_PRIM和RECV_PRIM。在开启 ``use_beha_noc`` 时，启用此参数将不会有显著效果。"
+msgstr ""
+"Whether to simultaneously execute the SEND_PRIM and RECV_PRIM of the work "
+"core. When `use_beha_noc` is enabled, activating this parameter will not "
+"have a significant effect."
+
+#: ../../source/getting_started/simulation_config_detail.rst:84
+msgid "GPU"
+msgstr "Graphics Processing Unit"
+
+#: ../../source/getting_started/simulation_config_detail.rst:87
+msgid "gpu : dict"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:89
+msgid "**use_inner_mm : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:91
+msgid "执行矩阵乘法时，是否使用内积。若不开启，则采用外积。"
+msgstr ""
+"Whether to use inner product when performing matrix multiplication. If not "
+"enabled, outer product is used."
+
+#: ../../source/getting_started/simulation_config_detail.rst:93
+msgid "**cache_log : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:97
+msgid "**dram_config_file : string**"
+msgstr "dram_config_file : string"
+
+#: ../../source/getting_started/simulation_config_detail.rst:99
+msgid "指定GPU的内存配置文件相对于主程序文件入口的路径。"
+msgstr ""
+"Specify the path of the GPU memory configuration file relative to the main "
+"program entry point."
+
+#: ../../source/getting_started/simulation_config_detail.rst:102
+msgid "控制台输出"
+msgstr "Console output"
+
+#: ../../source/getting_started/simulation_config_detail.rst:105
+msgid "log : dict"
+msgstr "log: dict"
+
+#: ../../source/getting_started/simulation_config_detail.rst:107
+msgid "**log_level : number**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:109
+msgid "控制台输出的详细程度。0为输出所有信息，1为省略Debug信息。"
+msgstr ""
+"The verbosity level of console output. 0 outputs all information, 1 omits "
+"debug information."
+
+#: ../../source/getting_started/simulation_config_detail.rst:111
+msgid "**verbose_debug : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:113
+msgid "是否输出以 ``_debug`` 结尾的标签。关闭此参数可省略一部分的输出信息。"
+msgstr ""
+"Whether to output labels ending with ``_debug``. Disabling this parameter "
+"can omit part of the output information."
+
+#: ../../source/getting_started/simulation_config_detail.rst:115
+msgid "**colored : boolean**"
+msgstr ""
+
+#: ../../source/getting_started/simulation_config_detail.rst:117
+msgid "是否在控制台输出中显示颜色。"
+msgstr "Whether to display colors in the console output."

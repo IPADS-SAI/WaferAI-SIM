@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/simulator_validation.rst:4
+msgid "仿真器验证与仿真耗时"
+msgstr "Simulation Verification and Simulation Time Consumption"
+
+#: ../../source/getting_started/simulator_validation.rst:6
+msgid ""
+"图中左侧对比了在 **NPU-SIM** 上运行的 **Qwen3_4B** 模型与在 **Ascend-NPU-910B** "
+"硬件上运行时的端到端延迟。实验在不同的解码序列长度（128 和 256）以及批大小（8 到 64）下进行。在相同的硬件配置条件下， **NPU-"
+"SIM** 的模拟运行时间与真实硬件的执行时间高度一致。尽管真实执行会受到硬件资源利用率和软件优化等因素影响， **NPU-SIM** "
+"仍然能够保持与实际性能趋势的一致性。"
+msgstr ""
+"The left side of the figure compares the end-to-end latency of the "
+"**Qwen3_4B** model running on **NPU-SIM** versus on actual **Ascend-"
+"NPU-910B** hardware. The experiments were conducted with different decoding "
+"sequence lengths (128 and 256) and batch sizes (8 to 64). Under the same "
+"hardware configuration, the simulation runtime of **NPU-SIM** closely "
+"matches the execution time on the actual hardware. Although real execution "
+"can be affected by factors such as hardware resource utilization and "
+"software optimization, **NPU-SIM** still maintains consistency with the "
+"actual performance trend."
+
+#: ../../source/getting_started/simulator_validation.rst:8
+msgid "TODO：验证图片"
+msgstr "TODO: Verify Image"
+
+#: ../../source/getting_started/simulator_validation.rst:10
+msgid ""
+"在 **NPU-SIM** "
+"中，各个组件均可独立配置不同的仿真模式，主要分为两种：时钟精确级，即在每一个硬件的时钟周期进行一次组件的状态计算和更新。此仿真模式具有较高的仿真精确度，但仿真耗时较高；另一种行为级仿真，则是采用了"
+" **屋檐模型** ，可以跳过重复的周期仿真，将硬件组件的行为用模型近似，在丢失较少仿真精度的情况下，大幅加快仿真速度。"
+msgstr ""
+"In **NPU-SIM**, each component can be independently configured with "
+"different simulation modes, primarily divided into two types: cycle-"
+"accurate, which performs state calculation and updates for the component at "
+"each hardware clock cycle. This simulation mode offers high accuracy but "
+"requires longer simulation time; the other is behavioral-level simulation, "
+"which uses the **eave model**, allowing it to skip repetitive cycle "
+"simulations and approximate the behavior of hardware components with models,"
+" significantly accelerating simulation speed while sacrificing minimal "
+"accuracy."
+
+#: ../../source/getting_started/simulator_validation.rst:12
+msgid ""
+"图中右侧展示了两种仿真模式对运行效率和准确性的影响。我们在 **Qwen3_4B** 的不同工作负载下进行测试，其中前三个（C1 到 "
+"C3）代表内存密集型场景，其余则代表计算密集型场景。结果表明，在内存密集型场景中，基于性能模型的仿真可以将实时执行开销降低 4.93 倍到 11.27 "
+"倍，但会带来最高达 38.56% 的误差；而在计算密集型场景中，由于计算过程是确定性的，准确性可以保持在 3% 以内。"
+msgstr ""
+"The right side of the figure illustrates the impact of two simulation modes "
+"on runtime efficiency and accuracy. We tested under different workloads of "
+"**Qwen3_4B**, where the first three (C1 to C3) represent memory-intensive "
+"scenarios, and the rest represent compute-intensive scenarios. The results "
+"show that in memory-intensive scenarios, performance model-based simulation "
+"can reduce real-time execution overhead by 4.93x to 11.27x, but introduces "
+"an error of up to 38.56%; whereas in compute-intensive scenarios, since the "
+"computation process is deterministic, accuracy can be maintained within 3%."

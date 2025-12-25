@@ -1,0 +1,28 @@
+{
+    "ttf_file": "../font/NotoSansDisplay-Bold.ttf",
+    "operand": {
+        "use_perf_gemm": false,
+        "load_static_as_tile": "partial"
+    },
+    "memory": {
+        "use_beha_sram": true,
+        "use_beha_dram": true,
+        "use_dramsys": true
+    },
+    "noc": {
+        "use_beha_noc": true,
+        "router_pipe": false,
+        "fast_warmup": true,
+        "send_recv_parallel": false
+    },
+    "gpu": {
+        "use_inner_mm": true,
+        "cache_log": false,
+        "dram_config_file": "../DRAMSys/configs/hbm3-example.json"
+    },
+    "log": {
+        "log_level": 0,
+        "verbose_debug": true,
+        "colored": false
+    }
+}

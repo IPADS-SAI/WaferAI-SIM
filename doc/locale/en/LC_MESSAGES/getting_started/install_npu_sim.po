@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/install_npu_sim.rst:4
+msgid "安装 NPU-SIM"
+msgstr "Install NPU-SIM"
+
+#: ../../source/getting_started/install_npu_sim.rst:6
+msgid ""
+"NPU-SIM 是一个基于 **SystemC** 编写的轻量级众核仿真器，能够灵活适配多种众核模式（包括 **SIMD** 与 "
+"**DataFlow**）， 并支持 **LLM Serving** 等场景的仿真。"
+msgstr ""
+"NPU-SIM is a lightweight many-core simulator based on **SystemC**, capable "
+"of flexibly adapting to various many-core modes (including **SIMD** and "
+"**DataFlow**), and supports simulations for scenarios such as **LLM "
+"Serving**."
+
+#: ../../source/getting_started/install_npu_sim.rst:10
+msgid "环境要求"
+msgstr "System Requirements"
+
+#: ../../source/getting_started/install_npu_sim.rst:12
+msgid "**操作系统**：Linux"
+msgstr "**Operating System**: Linux"
+
+#: ../../source/getting_started/install_npu_sim.rst:13
+msgid "**SystemC**：2.3.3"
+msgstr "**SystemC**: 2.3.3"
+
+#: ../../source/getting_started/install_npu_sim.rst:14
+msgid "**CMake**：3.31.3"
+msgstr "**CMake**: 3.31.3"
+
+#: ../../source/getting_started/install_npu_sim.rst:15
+msgid "**G++**：9.4.0"
+msgstr "G++: 9.4.0"
+
+#: ../../source/getting_started/install_npu_sim.rst:18
+msgid "安装方式"
+msgstr "Installation method"
+
+#: ../../source/getting_started/install_npu_sim.rst:23
+msgid "方法一：通过 Dockerfile 安装（推荐）"
+msgstr "Method 1: Installation via Dockerfile (Recommended)"
+
+#: ../../source/getting_started/install_npu_sim.rst:25
+msgid "使用 Dockerfile 构建镜像，构建过程大约耗时 **3 分钟**。"
+msgstr "Building images using Dockerfile takes approximately **3 minutes**."
+
+#: ../../source/getting_started/install_npu_sim.rst:31
+msgid "构建完成后，运行容器："
+msgstr "After the build is complete, run the container:"
+
+#: ../../source/getting_started/install_npu_sim.rst:37
+msgid "进入容器后，可在当前目录下找到可执行文件 **npusim**。"
+msgstr ""
+"After entering the container, you can find the executable file **npusim** in"
+" the current directory."
+
+#: ../../source/getting_started/install_npu_sim.rst:42
+msgid "方法二：通过源码安装"
+msgstr "Method 2: Install from Source Code"
+
+#: ../../source/getting_started/install_npu_sim.rst:44
+msgid "以下步骤展示如何从源码编译安装 NPU-SIM。"
+msgstr ""
+"The following steps demonstrate how to compile and install NPU-SIM from "
+"source code."
+
+#: ../../source/getting_started/install_npu_sim.rst:47
+msgid "安装 SystemC"
+msgstr "Installing SystemC"
+
+#: ../../source/getting_started/install_npu_sim.rst:61
+msgid "若需要使用 GDB 调试 SystemC，可在配置时加上以下参数："
+msgstr ""
+"To debug SystemC with GDB, you can add the following parameters during "
+"configuration:"
+
+#: ../../source/getting_started/install_npu_sim.rst:69
+msgid "安装 CMake 3.31.3"
+msgstr "Install CMake 3.31.3"
+
+#: ../../source/getting_started/install_npu_sim.rst:78
+msgid "安装 JSON 库"
+msgstr "Install JSON library"
+
+#: ../../source/getting_started/install_npu_sim.rst:90
+msgid "安装多媒体与显示库"
+msgstr "Install Multimedia and Display Libraries"
+
+#: ../../source/getting_started/install_npu_sim.rst:111
+msgid "配置环境变量"
+msgstr "Setting environment variables"
+
+#: ../../source/getting_started/install_npu_sim.rst:121
+msgid "下载并编译 NPU-SIM"
+msgstr "Download and compile NPU-SIM"
+
+#: ../../source/getting_started/install_npu_sim.rst:137
+msgid "仅测试了 **SystemC 2.3.3** 版本，其他版本可能存在不兼容问题。"
+msgstr ""
+"Only tested with **SystemC 2.3.3**; other versions may have compatibility "
+"issues."

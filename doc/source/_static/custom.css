@@ -1,0 +1,54 @@
+/* 一级缩进块 */
+section  blockquote {
+    background-color: #f8f9ff;      /* 浅蓝紫 */
+    border-left: 4px solid #a2b4ff;
+    padding: 0.6em 1em;
+    border-radius: 8px;
+    margin: 0.8em 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: background-color 0.3s ease;
+}
+
+/* 二级缩进块 */
+section  blockquote  blockquote {
+    background-color: #f0f2ff;      /* 稍深蓝紫 */
+    border-left: 4px solid #889cff;
+}
+
+/* 三级缩进块 */
+section  blockquote  blockquote  blockquote {
+    background-color: #e9ecff;      /* 再深一点 */
+    border-left: 4px solid #7085f9;
+}
+
+/* 四级及更深缩进块 */
+section  blockquote  blockquote  blockquote  blockquote {
+    background-color: #e2e6ff;      /* 最深蓝紫 */
+    border-left: 4px solid #5a6be8;
+}
+
+/* 缩进的视觉位移，让层次更明显 */
+section  blockquote  blockquote { margin-left: 0.6em; }
+section  blockquote  blockquote  blockquote { margin-left: 0.9em; }
+section  blockquote  blockquote  blockquote  blockquote { margin-left: 1.2em; }
+
+/* 内部段落微调 */
+section  blockquote p {
+    margin: 0.3em 0;
+}
+
+/* 暗色模式支持（可选） */
+@media (prefers-color-scheme: dark) {
+  section  blockquote {
+      background-color: #1f2334;
+      border-left: 4px solid #6c7fff;
+  }
+  section  blockquote  blockquote {
+      background-color: #181b2a;
+      border-left: 4px solid #8a96ff;
+  }
+  section  blockquote  blockquote  blockquote {
+      background-color: #12121c;
+      border-left: 4px solid #a3adff;
+  }
+}

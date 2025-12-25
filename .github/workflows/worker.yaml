@@ -1,0 +1,128 @@
+name: CI Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      SYSTEMC_HOME: ${{ github.workspace }}/systemc-2.3.3
+      LD_LIBRARY_PATH: ${{ github.workspace }}/systemc-2.3.3/lib-linux64:$LD_LIBRARY_PATH
+      CPLUS_INCLUDE_PATH: ${{ github.workspace }}/systemc-2.3.3/include:$CPLUS_INCLUDE_PATH
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++ make unzip wget libsfml-dev libcairo2-dev xorg cmake
+
+      - name: Cache SystemC
+        id: cache-systemc
+        uses: actions/cache@v4
+        with:
+          path: systemc-2.3.3
+          key: systemc-2.3.3-${{ runner.os }}-install
+          restore-keys: |
+            systemc-2.3.3-
+
+      - name: Install SystemC 2.3.3
+        if: steps.cache-systemc.outputs.cache-hit != 'true'
+        run: |
+          wget https://accellera.org/images/downloads/standards/systemc/systemc-2.3.3.zip
+          unzip systemc-2.3.3.zip
+          cd systemc-2.3.3
+          mkdir -p build && cd build
+          cmake .. -DCMAKE_INSTALL_PREFIX=$PWD/.. \
+                   -DCMAKE_INSTALL_LIBDIR=lib-linux64 \
+                   -DCMAKE_CXX_STANDARD=17
+          make -j$(nproc)
+          make install
+
+      - name: Cache DRAMsys build
+        id: cache-dramsys
+        uses: actions/cache@v4
+        with:
+          path: DRAMSys/src
+          key: dramsys-build-${{ runner.os }}
+
+      - name: Cache project build
+        id: cache-project
+        uses: actions/cache@v4
+        with:
+          path: build
+          key: project-build-${{ runner.os }}-${{ hashFiles('**/CMakeLists.txt') }}
+
+      - name: Configure and build repository
+        run: |
+          set -e
+          if [ ! -f build/Makefile ]; then
+            mkdir -p build && cd build
+            cmake .. -DSYSTEMC_HOME=${SYSTEMC_HOME}
+          else
+            cd build
+          fi
+          cmake --build . -- -j$(nproc)
+
+      - name: Test all chores JSON files
+        run: |
+          set -euo pipefail
+          export LD_LIBRARY_PATH=$SYSTEMC_HOME/lib-linux64:$LD_LIBRARY_PATH
+          export CPLUS_INCLUDE_PATH=$SYSTEMC_HOME/include:$CPLUS_INCLUDE_PATH
+
+          CHORES_DIR="./llm/test/chores"
+          HW_CONFIG="$CHORES_DIR/hw_config.json"
+          SIM_CONFIG="./llm/test/simulation_config/default_spec.json"
+          TIMEOUT_SEC=120
+          FAIL=0
+
+          mkdir -p test_logs
+
+          for CONFIG in "$CHORES_DIR"/*.json; do
+            if [[ "$CONFIG" == "$HW_CONFIG" ]]; then
+              continue
+            fi
+            BASENAME=$(basename "$CONFIG" .json)
+            LOGFILE="$(pwd)/test_logs/${BASENAME}.log"
+
+            echo "========================================"
+            echo "Testing $CONFIG, writing into $LOGFILE"
+
+            cd build
+            if ! timeout $TIMEOUT_SEC ./npusim \
+              --workload-config "../$CONFIG" \
+              --hardware-config "../$HW_CONFIG" \
+              --simulation-config "../$SIM_CONFIG" \
+              &> "$LOGFILE"; then
+              echo "Crash or timeout for $CONFIG"
+              FAIL=1
+              cd ..
+              continue
+            fi
+            cd ..
+
+            if grep -q "\[ERROR\]" "$LOGFILE"; then
+              echo "Found [ERROR] in $CONFIG"
+              FAIL=1
+            elif grep -q "\[CATCH_TEST\]" "$LOGFILE"; then
+              echo "PASS: $CONFIG"
+            else
+              echo "No [CATCH_TEST] found in $CONFIG"
+              FAIL=1
+            fi
+          done
+
+          if [[ $FAIL -ne 0 ]]; then
+            echo "Some tests failed — logs will be uploaded."
+            exit 1
+          else
+            echo "All tests passed."
+          fi
+
+      - name: Upload npusim logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npusim-logs
+          path: test_logs/

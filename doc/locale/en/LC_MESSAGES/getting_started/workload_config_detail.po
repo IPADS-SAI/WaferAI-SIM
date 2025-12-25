@@ -1,0 +1,107 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/workload_config_detail.rst:4
+msgid "工作负载配置"
+msgstr "Workload Configuration"
+
+#: ../../source/getting_started/workload_config_detail.rst:6
+msgid ""
+"工作负载配置用于定义 **NPU-SIM** 在仿真过程中所需的数据流图（Dataflow Graph），以 **JSON** "
+"格式保存。它主要描述了模型结构、模型参数、计算原语（primitive）所对应的工作负载、以及各工作核之间的通信流程等内容。"
+msgstr ""
+"Workload configuration is used to define the dataflow graph required by "
+"**NPU-SIM** during simulation, saved in **JSON** format. It primarily "
+"describes the model structure, model parameters, workloads corresponding to "
+"computational primitives, and communication flows between processing cores."
+
+#: ../../source/getting_started/workload_config_detail.rst:8
+msgid "我们提供了若干示例配置文件，与论文中的各类实验场景相对应。这些示例配置位于以下目录中："
+msgstr ""
+"We provide several example configuration files corresponding to various "
+"experimental scenarios in the paper. These example configurations are "
+"located in the following directory:"
+
+#: ../../source/getting_started/workload_config_detail.rst:14
+msgid "详细的字段说明可参阅：:doc:`workload_config_syntax`"
+msgstr ""
+"For detailed field descriptions, refer to: :doc:`workload_config_syntax`"
+
+#: ../../source/getting_started/workload_config_detail.rst:16
+msgid "进阶原语配置说明可参阅： :doc:`advanced_primitive_detail`"
+msgstr ""
+"For advanced primitive configuration instructions, refer to: "
+":doc:`advanced_primitive_detail`"
+
+#: ../../source/getting_started/workload_config_detail.rst:19
+msgid "生成配置"
+msgstr "Generate configuration"
+
+#: ../../source/getting_started/workload_config_detail.rst:22
+msgid "方法一：使用 Python 脚本自动生成"
+msgstr "Method 1: Automatically generate using a Python script"
+
+#: ../../source/getting_started/workload_config_detail.rst:24
+msgid ""
+"使用官方提供的 **Python** 脚本，可以快速生成指定模型结构（如 **GPT**、**Qwen** "
+"等）的工作负载配置。该方法支持自定义模型参数与并行策略，适用于常规模型的仿真任务，开箱即用。"
+msgstr ""
+"Using the officially provided **Python** script, you can quickly generate "
+"workload configurations for specified model architectures (such as **GPT**, "
+"**Qwen**, etc.). This method supports customizing model parameters and "
+"parallel strategies, is suitable for simulation tasks of conventional "
+"models, and works out-of-the-box."
+
+#: ../../source/getting_started/workload_config_detail.rst:26
+msgid ""
+"需要注意的是，该方法 **不支持对模型结构进行自定义修改** 。如需了解使用方式，请参阅：:doc:`workload_config_script`"
+msgstr ""
+"Please note that this method **does not support custom modifications to the "
+"model structure**. For usage instructions, please refer to: "
+":doc:`workload_config_script`"
+
+#: ../../source/getting_started/workload_config_detail.rst:29
+msgid "方法二：手动编写配置文件"
+msgstr "Method 2: Manually Write Configuration Files"
+
+#: ../../source/getting_started/workload_config_detail.rst:31
+msgid "如果用户希望自定义模型结构，或专注于探索片上核间通信范式，可以选择 **手动编写工作负载配置文件** 。"
+msgstr ""
+"If users wish to customize the model structure or focus on exploring on-chip"
+" inter-core communication paradigms, they can choose to **manually write the"
+" workload configuration file**."
+
+#: ../../source/getting_started/workload_config_detail.rst:33
+msgid "**NPU-SIM** 的工作负载配置文件采用一套可读性强、语义清晰的自定义语法，支持灵活描述算子与通信关系，便于研究与验证不同架构设计。"
+msgstr ""
+"The workload configuration file for **NPU-SIM** employs a custom syntax that"
+" is highly readable and semantically clear, supporting flexible descriptions"
+" of operator and communication relationships, which facilitates research and"
+" validation of different architecture designs."
+
+#: ../../source/getting_started/workload_config_detail.rst:35
+msgid "详细的配置语法说明，请参阅：:doc:`workload_config_syntax`"
+msgstr ""
+"For detailed configuration syntax, refer to :doc:`workload_config_syntax`"
+
+#: ../../source/getting_started/workload_config_detail.rst:38
+msgid "附属页面"
+msgstr "Affiliated Pages"

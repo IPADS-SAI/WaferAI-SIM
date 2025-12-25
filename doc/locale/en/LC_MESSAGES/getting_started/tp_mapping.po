@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/tp_mapping.rst:4
+msgid "模型并行与计算核映射"
+msgstr "Model Parallelism and Compute Kernel Mapping"
+
+#: ../../source/getting_started/tp_mapping.rst:6
+msgid "本页面将介绍三种优化后的模型并行（TP）策略，以及不同计算核放置策略所带来的模型执行效率提升。"
+msgstr ""
+"This page introduces three optimized model parallelism (TP) strategies and "
+"the resulting improvements in model execution efficiency from different "
+"computational kernel placement strategies."
+
+#: ../../source/getting_started/tp_mapping.rst:9
+msgid "模型并行策略"
+msgstr "Model Parallelism Strategy"
+
+#: ../../source/getting_started/tp_mapping.rst:11
+msgid "下图简单表示了三种优化后的模型并行策略。与传统的TP不同，此处的TP会同时切割输入与权重。"
+msgstr ""
+"The following diagram simply illustrates three optimized model parallel "
+"strategies. Unlike traditional TP, the TP here simultaneously partitions "
+"both the input and the weights."
+
+#: ../../source/getting_started/tp_mapping.rst:13
+msgid "TODO：TP图片"
+msgstr "TODO: TP Image"
+
+#: ../../source/getting_started/tp_mapping.rst:16
+msgid "M/N 维度切分"
+msgstr "M/N Dimension Sharding"
+
+#: ../../source/getting_started/tp_mapping.rst:18
+msgid ""
+"将输入沿行方向切割，将权重按列方向切割。计算时保持输入不动，在经过一轮矩阵乘计算后，通过 All Gather "
+"操作轮转所有TP核心上的权重，直至每一块切分后的权重均被所有核接收过至少一次。"
+msgstr ""
+"Split the input along the row dimension and the weights along the column "
+"dimension. During computation, the input remains stationary. After one round"
+" of matrix multiplication, rotate the weights across all TP cores via an All"
+" Gather operation until each partitioned weight block has been received by "
+"every core at least once."
+
+#: ../../source/getting_started/tp_mapping.rst:20
+msgid ""
+"在计算过程中，每一个核心最多在本地存放一个权重块。在最终对输出进行 All Gather 操作之前，每一个核心最多仅存放总输出大小的 ``1/TP`` "
+"。"
+msgstr ""
+"During computation, each core stores at most one weight block locally. "
+"Before the final All Gather operation on the output, each core stores at "
+"most ``1/TP`` of the total output size."
+
+#: ../../source/getting_started/tp_mapping.rst:23
+msgid "K 维度切分"
+msgstr "K-dimensional partitioning"
+
+#: ../../source/getting_started/tp_mapping.rst:25
+msgid "将输入沿列方向切割，将权重按行方向切割。计算时所有数据均保持静止，仅对输出结果进行 All Reduce 操作。"
+msgstr ""
+"Split the input along the column dimension and split the weights along the "
+"row dimension. During computation, all data remains stationary, and only the"
+" output results undergo an All Reduce operation."
+
+#: ../../source/getting_started/tp_mapping.rst:27
+msgid ""
+"在计算过程中，每一个核心始终需要维护一块大小等同于最终输出的数据块，且最后的输出结果在送往下一步计算前，需要强制进行 All Reduce 操作。"
+msgstr ""
+"During the computation process, each core must continuously maintain a data "
+"block equal in size to the final output, and the final output result must "
+"undergo a mandatory All Reduce operation before being sent to the next "
+"computation step."
+
+#: ../../source/getting_started/tp_mapping.rst:30
+msgid "二维 MN/K 切分"
+msgstr "Two-dimensional MN/K partitioning"
+
+#: ../../source/getting_started/tp_mapping.rst:32
+msgid ""
+"是前两种TP策略的融合。输入与权重在行和列方向均进行切割。具有较为复杂的通信逻辑。在进行一轮矩阵乘法之后，首先进行 K 方向上的 All Reduce "
+"操作，将每一行核心的输出数据进行整合。随后进行 MN 方向上的 All Gather 操作，将权重搬运到同一列上的其他核心。将一次完整的行 All "
+"Reduce 和一轮列 All Gather 流转标记为一次循环。该循环需要重复执行数次，数量等同于权重在列方向上被切分的数量。"
+msgstr ""
+"It is a fusion of the first two TP strategies. Both inputs and weights are "
+"partitioned along the row and column dimensions. It involves relatively "
+"complex communication logic. After performing one round of matrix "
+"multiplication, an All Reduce operation is first conducted along the K "
+"dimension to integrate the output data from each row of cores. Subsequently,"
+" an All Gather operation is performed along the MN dimension to transfer "
+"weights to other cores within the same column. One complete cycle consists "
+"of a full row All Reduce followed by one round of column All Gather flow. "
+"This cycle needs to be repeated multiple times, with the number of "
+"repetitions equal to the number of partitions along the column dimension of "
+"the weights."
+
+#: ../../source/getting_started/tp_mapping.rst:35
+msgid "模型并行测试"
+msgstr "Model Parallelism Testing"
+
+#: ../../source/getting_started/tp_mapping.rst:37
+msgid "下图展示了不同规模的模型，在不同TP策略下的端到端执行时延。"
+msgstr ""
+"The following diagram illustrates the end-to-end execution latency of models"
+" of different scales under various TP strategies."
+
+#: ../../source/getting_started/tp_mapping.rst:39
+msgid "TODO：TP结果图"
+msgstr "TODO: TP Result Diagram"
+
+#: ../../source/getting_started/tp_mapping.rst:41
+msgid ""
+"当输入序列长度小于模型的隐藏维度时，沿 K 维度的划分具有更好的性能。例如，在 Qwen3_4B 且序列长度为 256 的情况下，K 维度划分的速度比 "
+"MN 维度划分快 6.03 倍。然而，一旦序列长度超过隐藏维度，K 维度划分的性能会急剧下降。相比于一维 MN 划分，二维 MN/K "
+"划分表现出更优的性能，平均可获得 1.44 倍的加速。"
+msgstr ""
+"When the input sequence length is smaller than the model's hidden dimension,"
+" partitioning along the K dimension yields better performance. For example, "
+"with Qwen3_4B and a sequence length of 256, K dimension partitioning is 6.03"
+" times faster than MN dimension partitioning. However, once the sequence "
+"length exceeds the hidden dimension, the performance of K dimension "
+"partitioning drops sharply. Compared to one-dimensional MN partitioning, "
+"two-dimensional MN/K partitioning demonstrates superior performance, "
+"achieving an average speedup of 1.44 times."
+
+#: ../../source/getting_started/tp_mapping.rst:44
+msgid "计算核放置策略"
+msgstr "Computing Core Placement Strategy"
+
+#: ../../source/getting_started/tp_mapping.rst:46
+msgid ""
+"除了张量划分之外，计算核放置策略也在多核 NPU 的性能中起着关键作用。我们首先将所有 NPU "
+"核心划分为多个流水线（pipeline），其中每条流水线负责处理模型的一层或多层。在每条流水线内部，我们采用张量划分，并结合不同的核心放置策略（如一维或二维、环形或顺序放置）。"
+msgstr ""
+"In addition to tensor partitioning, the computational kernel placement "
+"strategy also plays a key role in the performance of multi-core NPUs. We "
+"first divide all NPU cores into multiple pipelines, where each pipeline is "
+"responsible for processing one or more layers of the model. Within each "
+"pipeline, we employ tensor partitioning and combine it with different core "
+"placement strategies (such as one-dimensional or two-dimensional, ring or "
+"sequential placement)."
+
+#: ../../source/getting_started/tp_mapping.rst:48
+msgid "TODO：放置图片"
+msgstr "TODO: Place image"
+
+#: ../../source/getting_started/tp_mapping.rst:51
+msgid "放置策略性能对比"
+msgstr "Placement Strategy Performance Comparison"
+
+#: ../../source/getting_started/tp_mapping.rst:53
+msgid ""
+"对于 TP=4，linear-interleave 和 linear-seq 的性能相近，而 mesh 和 ring 拓扑分别可获得约 1.17× "
+"的加速。在较小的 TP 规模下，替代拓扑带来的性能提升并不显著。当 TP 扩展至 16 时，优化核心放置策略带来的收益更加明显。相较于 linear-"
+"interleave，linear-seq、mesh 和 ring 策略分别可带来最高 1.18×、1.25× 和 1.32× 的加速。虽然 "
+"Wafer-LLM 在 Cerebras 上的实验得出 linear-interleave "
+"是最优方案，但这种效果在不同平台上可能有所差异。在我们的实现中，为了确保核间通信无死锁，我们引入了通道锁机制，这反而削弱了交错式通信的性能。相比之下，mesh"
+" 和 ring 映射在我们的硬件上表现得更为高效。"
+msgstr ""
+"For TP=4, linear-interleave and linear-seq exhibit similar performance, "
+"while mesh and ring topologies achieve approximately 1.17× speedup "
+"respectively. At smaller TP scales, the performance gains from alternative "
+"topologies are not significant. When TP is scaled to 16, the benefits of "
+"optimizing core placement strategies become more pronounced. Compared to "
+"linear-interleave, linear-seq, mesh, and ring strategies can achieve up to "
+"1.18×, 1.25×, and 1.32× speedup respectively. Although Wafer-LLM experiments"
+" on Cerebras concluded that linear-interleave is the optimal solution, this "
+"effect may vary across different platforms. In our implementation, to ensure"
+" deadlock-free inter-core communication, we introduced a channel lock "
+"mechanism, which conversely weakened the performance of interleaved "
+"communication. In contrast, mesh and ring mappings perform more efficiently "
+"on our hardware."

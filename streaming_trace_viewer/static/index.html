@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>NPU Trace Viewer · npusim</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0f0c29;
+      --bg-secondary: #1a172a;
+      --bg-panel: #24243e;
+      --text-primary: #e0e0ff;
+      --text-secondary: #a0a0d0;
+      --accent: #00f0ff;
+      --accent-hover: #00c0cc;
+      --danger: #ff4d94;
+      --success: #00ffaa;
+      --border: #3a3a5a;
+      --input-bg: #1e1b33;
+      --button-bg: #302b63;
+      --button-hover: #4a448a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), #24243e);
+      color: var(--text-primary);
+      font-family: 'Roboto Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      background: rgba(10, 8, 20, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+    }
+
+    header img {
+      height: 36px;
+      filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5));
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: 1px;
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+    }
+
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    #controls input[type="text"] {
+      padding: 8px 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 14px;
+      width: 240px;
+      outline: none;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    #controls input[type="text"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+    }
+
+    #controls button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: var(--button-bg);
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #controls button:hover {
+      background: var(--button-hover);
+      transform: translateY(-1px);
+    }
+
+    #controls button:active {
+      transform: translateY(0);
+    }
+
+    #controls label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    #controls input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+    }
+
+    .sim-panel {
+      background: rgba(30, 27, 51, 0.6);
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      border: 1px solid var(--border);
+      min-width: 500px;
+    }
+
+    .sim-panel strong {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      font-size: 15px;
+    }
+
+    #timeline {
+      padding: 20px;
+      background: var(--bg-panel);
+      margin: 20px auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 1640px; /* 1600 + 20*2 */
+      max-width: none; /* 取消 max-width 限制 */
+      box-sizing: border-box;
+      overflow: hidden; /* 防止意外溢出 */
+    }
+
+    canvas {
+      /* 淡色科技背景：微青白，呼应霓虹主色 */
+      background:#0a0815;
+      border: 1px solid var(--border); /* 可选：加边框提升层次 */
+      border-radius: 6px;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); /* 可选：轻微阴影 */
+    }
+
+    /* Log Panel */
+    #logPanel {
+      margin: 0 auto 30px;
+      max-width: 1600px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    #logHeader {
+      padding: 12px 16px;
+      background: rgba(10, 8, 20, 0.6);
+      border-bottom: 1px solid var(--border);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--accent);
+    }
+
+    #logContent {
+      padding: 12px;
+      height: 200px;
+      overflow-y: auto;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      background: #0a0815;
+      color: #00ffcc;
+      border-top: 1px solid var(--border);
+    }
+
+    #clearLogBtn {
+      padding: 6px 12px;
+      background: #5a3a7a;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+    }
+
+    #clearLogBtn:hover {
+      background: #7a5a9a;
+    }
+
+    #simStatus {
+      font-size: 13px;
+      min-width: 180px;
+      margin-left: 8px;
+      font-family: 'Roboto Mono', monospace;
+      color: var(--text-secondary);
+    }
+
+    #simStatus.success { color: var(--success); }
+    #simStatus.error { color: var(--danger); }
+    #simStatus.running { color: var(--accent); }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--button-bg);
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--button-hover);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="/static/npusim.svg" alt="NPU Simulator Logo">
+    <h1>NPU TRACE VIEWER</h1>
+  </header>
+
+  <div id="controls">
+    <input type="text" id="searchInput" placeholder="Search event name..." oninput="filterEvents()">
+    <button onclick="resetZoom()">🔄 Reset Zoom</button>
+    <button onclick="clearTrace()">🗑️ Clear Trace</button>
+    <label>
+      <input type="checkbox" id="autoReload" onchange="toggleAutoReload()">
+      Auto Reload
+    </label>
+    <label>
+      <input type="checkbox" id="hideLog" checked onchange="toggleLogVisibility()">
+      Hide Log
+    </label>
+
+    <div class="sim-panel">
+      <strong>RUN SIMULATION</strong>
+      <input type="text" id="configFile" list="configFileOptions" value="../llm/test/gpt2_small/original.json" />
+      <datalist id="configFileOptions">
+        <option value="../llm/test/workload_config/gpt2_small/original.json">
+        <option value="../llm/test/workload_config/gpt2_small/original2.json">
+        <option value="../llm/test/workload_config/gpt2_small/original3.json">
+        <option value="../llm/test/workload_config/gpt2_small/original4.json">
+        <option value="../llm/test/chores/dataflow_tp.json">
+        <option value="../llm/test/chores/gpu_basic.json">
+        <option value="../llm/test/chores/pd_fuse.json">
+        <option value="../llm/test/chores/pd_split.json">   
+        <option value="../llm/test/workload_config/gpt2_small/pd_split/pd_split_49_14_100_100.json">
+      </datalist>
+      <input type="text" id="coreConfigFile" list="HWConfigFileOptions" value="../llm/test/hardware_config/core_4x4.json" />
+      <datalist id="HWConfigFileOptions">
+        <option value="../llm/test/hardware_config/core_4x4.json">
+        <option value="../llm/test/chores/hw_config.json">
+        <option value="../llm/test/temp_config.json">
+      </datalist>
+      <button onclick="runSimulation()">▶️ Start</button>
+      <div id="simStatus"></div>
+    </div>
+  </div>
+
+  <!-- ✅ LOG PANEL MOVED HERE — ABOVE TIMELINE -->
+  <div id="logPanel">
+    <div id="logHeader">
+      <span>SIMULATION LOG</span>
+      <button id="clearLogBtn" onclick="clearLog()">CLEAR</button>
+    </div>
+    <div id="logContent"></div>
+  </div>
+
+  <!-- TIMELINE BELOW LOG -->
+  <div id="timeline">
+    <canvas id="traceCanvas" width="1600" height="1000"></canvas>
+  </div>
+
+  <script src="/static/timeline.js"></script>
+</body>

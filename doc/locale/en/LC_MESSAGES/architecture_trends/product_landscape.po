@@ -1,0 +1,909 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/architecture_trends/product_landscape.rst:2
+msgid "主流架构分析"
+msgstr "Analysis of Mainstream Architectures"
+
+#: ../../source/architecture_trends/product_landscape.rst:4
+msgid "导读"
+msgstr "Introduction"
+
+#: ../../source/architecture_trends/product_landscape.rst:6
+msgid ""
+"本章节将深入剖析主流AI芯片的技术架构，涵盖 NVIDIA GPU、Google TPU、Graphcore IPU、SambaNova RDU 及 "
+"Cerebras WSE 等。我们将详细阐述各自的架构特色、技术演进脉络，并重点分析其与数据流思想的异同。"
+msgstr ""
+"This chapter will provide an in-depth analysis of the technical "
+"architectures of mainstream AI chips, covering NVIDIA GPUs, Google TPUs, "
+"Graphcore IPUs, SambaNova RDUs, and Cerebras WSE. We will elaborate on their"
+" respective architectural characteristics, the evolution of their "
+"technologies, and focus on analyzing their similarities and differences with"
+" the dataflow concept."
+
+#: ../../source/architecture_trends/product_landscape.rst:9
+msgid "NVIDIA GPU"
+msgstr "NVIDIA GPU"
+
+#: ../../source/architecture_trends/product_landscape.rst:11
+msgid ""
+"**核心思想演进**：NVIDIA GPU 的基石是 **SIMT (单指令多线程)** "
+"控制流模型，通过上万线程的并发执行隐藏数据访问延迟。然而，面对AI负载中日益增长的“内存墙”问题，其架构正清晰地向“通用控制流+专用数据流”的混合模式演进。GPU不再仅仅依赖线程并发，而是引入了越来越多数据流风格的专用硬件与显式数据搬运机制。"
+msgstr ""
+"Core Idea Evolution: The foundation of NVIDIA GPUs is the **SIMT (Single "
+"Instruction, Multiple Threads)** control flow model, which hides data access"
+" latency through the concurrent execution of tens of thousands of threads. "
+"However, facing the increasingly prominent \"memory wall\" problem in AI "
+"workloads, its architecture is clearly evolving towards a hybrid model of "
+"\"general control flow + specialized data flow\". GPUs no longer rely solely"
+" on thread concurrency but are increasingly incorporating specialized "
+"dataflow-style hardware and explicit data movement mechanisms."
+
+#: ../../source/architecture_trends/product_landscape.rst:13
+msgid "**架构演变脉络**："
+msgstr "**Architecture Evolution Path**:"
+
+#: ../../source/architecture_trends/product_landscape.rst:15
+msgid ""
+"**Tesla - 控制流范式的奠基**：Tesla架构是NVIDIA发展史的分水岭。它首次引入 "
+"**统一渲染架构**，将过去分离的、专用的顶点和像素处理单元，统一为通用的 **CUDA核心**。更重要的是，它确立了 **SIMT "
+"(单指令多线程)** 的执行模型。这套组合拳将GPU从一个固定功能的图形管线，彻底转变为一个高度灵活的、由指令驱动的并行 "
+"**控制流计算引擎**，为GPGPU时代奠定了基石。"
+msgstr ""
+"**Tesla - The Foundation of Control Flow Paradigm**: The Tesla architecture "
+"was a watershed moment in NVIDIA's history. It introduced the **unified "
+"shader architecture** for the first time, unifying the previously separate, "
+"dedicated vertex and pixel processing units into general-purpose **CUDA "
+"cores**. More importantly, it established the **SIMT (Single Instruction, "
+"Multiple Threads)** execution model. This combination fundamentally "
+"transformed the GPU from a fixed-function graphics pipeline into a highly "
+"flexible, instruction-driven parallel **control flow computation engine**, "
+"laying the foundation for the GPGPU era."
+
+#: ../../source/architecture_trends/product_landscape.rst:16
+msgid ""
+"**Fermi - 硬件缓存的引入**：Fermi架构首次为GPU引入了类似CPU的 "
+"**L1/L2缓存**。这是典型的控制流解决“内存墙”的思路——通过硬件管理的缓存来隐藏访存延迟。同时，它引入的 **GPUDirect** "
+"技术，首次允许GPU在不经过CPU的情况下直接通信，这是优化系统级 **数据流动** 效率的早期尝试，为后来更高效的多卡互联技术埋下了伏笔。"
+msgstr ""
+"Fermi - Introduction of Hardware Cache: The Fermi architecture first "
+"introduced CPU-like **L1/L2 caches** to the GPU. This is a typical control-"
+"flow approach to solving the \"memory wall\"—hiding memory access latency "
+"through hardware-managed caches. Meanwhile, the **GPUDirect** technology it "
+"introduced for the first time allowed GPUs to communicate directly without "
+"going through the CPU. This was an early attempt to optimize system-level "
+"**data movement** efficiency, laying the groundwork for later, more "
+"efficient multi-GPU interconnection technologies."
+
+#: ../../source/architecture_trends/product_landscape.rst:17
+msgid ""
+"**Volta - 专用数据流引擎的引入**：首次引入 **Tensor Core**。这是GPU架构演进的里程碑。Tensor Core "
+"是一个专为矩阵乘加（GEMM：D=A×B+C）设计的 **专用数据流引擎**，它以固定流水线高效处理数据，是数据流思想在GPU内部的首次硬件化实现。"
+msgstr ""
+"**Volta - Introduction of a Dedicated Dataflow Engine**: First introduced "
+"**Tensor Core**. This was a milestone in GPU architecture evolution. The "
+"Tensor Core is a **dedicated dataflow engine** specifically designed for "
+"matrix multiply-accumulate (GEMM: D=A×B+C). It efficiently processes data "
+"using a fixed pipeline, representing the first hardware implementation of "
+"the dataflow concept within a GPU."
+
+#: ../../source/architecture_trends/product_landscape.rst:19
+msgid "**Tensor Core工作原理**："
+msgstr "Tensor Core Working Principle"
+
+#: ../../source/architecture_trends/product_landscape.rst:21
+msgid ""
+"**微型数据流处理器**: Tensor Core 本质上是一个 **高度特化、不可编程的微型数据流处理器**。与执行单一指令的CUDA "
+"Core不同，Tensor Core由一条上层指令触发后，会在内部自动执行一个固定的、由硬件定义的矩阵乘加数据流图。"
+msgstr ""
+"**Micro Dataflow Processor**: Tensor Cores are essentially **highly "
+"specialized, non-programmable micro dataflow processors**. Unlike CUDA Cores"
+" which execute single instructions, a Tensor Core, once triggered by a "
+"higher-level instruction, internally executes a fixed, hardware-defined "
+"dataflow graph for matrix multiply-accumulate operations."
+
+#: ../../source/architecture_trends/product_landscape.rst:22
+msgid ""
+"**局部数据复用**: "
+"输入的矩阵块被加载到其专用的内部寄存器后，数据会在其内部的乘法器和加法器阵列中流动和复用，一次性完成整个块的计算。中间的部分和过程结果始终保持在Core内部，直到最终结果累加完成。这完美体现了数据流架构“最大化片上复用，最小化数据搬运”的核心思想。"
+msgstr ""
+"**Local Data Reuse**: After the input matrix block is loaded into its "
+"dedicated internal registers, the data flows and is reused within its "
+"internal multiplier and adder arrays, completing the entire block's "
+"computation in one go. Intermediate partial sum results remain within the "
+"Core until the final result accumulation is complete. This perfectly "
+"embodies the core concept of dataflow architecture: \"maximize on-chip "
+"reuse, minimize data movement.\""
+
+#: ../../source/architecture_trends/product_landscape.rst:23
+msgid ""
+"**混合精度计算**: 其广泛采用的 **混合精度计算** "
+"模式（例如，FP16输入相乘，FP32累加）是支撑这种高吞吐量数据流设计的关键技术，它在保证数值精度的同时，大幅降低了对内存带宽的需求。"
+msgstr ""
+"**Mixed-Precision Computing**: The widely adopted **mixed-precision "
+"computing** mode (e.g., FP16 for multiplication, FP32 for accumulation) is a"
+" key technology supporting this high-throughput data flow design. It "
+"significantly reduces the demand for memory bandwidth while ensuring "
+"numerical accuracy."
+
+#: ../../source/architecture_trends/product_landscape.rst
+msgid "NVIDIA Tensor Core 混合精度矩阵乘加示意图"
+msgstr "NVIDIA Tensor Core Mixed-Precision Matrix Multiply-Accumulate Diagram"
+
+#: ../../source/architecture_trends/product_landscape.rst:29
+msgid ""
+"上图示意了Tensor "
+"Core在执行混合精度矩阵乘加时的典型数据流：低精度输入（如FP16）被加载到本地寄存器和专用乘加阵列中，以高度流水化的方式完成大规模乘法运算，而累加过程则在更高精度（如FP32）的累加寄存器中进行。通过在硬件中固化这种“低精度乘法"
+" + 高精度累加”的模式，能显著提升单位带宽的算力。"
+msgstr ""
+"The diagram illustrates the typical data flow when a Tensor Core performs "
+"mixed-precision matrix multiplication and accumulation: low-precision inputs"
+" (such as FP16) are loaded into local registers and dedicated multiply-"
+"accumulate arrays, where large-scale multiplication operations are completed"
+" in a highly pipelined manner, while the accumulation process occurs in "
+"higher-precision (such as FP32) accumulator registers. By hardwiring this "
+"pattern of \"low-precision multiplication + high-precision accumulation\" in"
+" hardware, the computational power per unit bandwidth is significantly "
+"increased."
+
+#: ../../source/architecture_trends/product_landscape.rst:31
+msgid "**引入Tensor Core的意义**:"
+msgstr "Significance of Tensor Core Introduction:"
+
+#: ../../source/architecture_trends/product_landscape.rst:33
+msgid ""
+"**效率提升**: 其数量级的效率提升，根源于这种数据流设计。它将通用CUDA "
+"Core需要执行的数十条独立的加载、乘法、加法、存储指令，聚合为硬件内部的一次自动化数据流动过程，极大地减少了指令调度、寄存器文件访问和数据移动的开销。"
+msgstr ""
+"**Efficiency Improvement**: The orders-of-magnitude efficiency gain stems "
+"from this dataflow design. It consolidates the dozens of separate load, "
+"multiply, add, and store instructions a general-purpose CUDA Core would need"
+" to execute into a single, automated dataflow process within the hardware, "
+"dramatically reducing the overhead of instruction scheduling, register file "
+"access, and data movement."
+
+#: ../../source/architecture_trends/product_landscape.rst:34
+msgid ""
+"**架构的决定性转变**: 这一设计标志着GPU从纯粹的通用SIMT（单指令多线程）架构，向 **“通用SIMT + 专用数据流引擎”** "
+"的混合架构演进。GPU不再只依赖于“更多、更快的通用核心”，而是通过嵌入专用数据流硬件来加速AI等领域的核心计算负载。"
+msgstr ""
+"**A Definitive Architectural Shift**: This design marks the GPU's evolution "
+"from a purely general-purpose SIMT (Single Instruction, Multiple Threads) "
+"architecture towards a hybrid architecture of **\"General-Purpose SIMT + "
+"Specialized Dataflow Engines\"**. GPUs no longer rely solely on \"more and "
+"faster general-purpose cores\" but instead accelerate core computational "
+"workloads in fields like AI by embedding specialized dataflow hardware."
+
+#: ../../source/architecture_trends/product_landscape.rst:36
+msgid ""
+"**Hopper (数据流思想的深化) - 显式数据移动与领域专用数据流**：Hopper架构将数据流思想的融合推向了新的高度。 1. "
+"**Transformer 引擎：软硬协同的专用数据流系统**"
+msgstr ""
+"**Hopper (Deepening the Dataflow Concept) - Explicit Data Movement and "
+"Domain-Specific Dataflow**: The Hopper architecture elevates the integration"
+" of dataflow concepts to new heights. 1. **Transformer Engine: A Domain-"
+"Specific Dataflow System with Hardware-Software Co-design**"
+
+#: ../../source/architecture_trends/product_landscape.rst:39
+msgid ""
+"**硬件层面**：Hopper 在 Tensor Core 及其周边控制逻辑中集成了针对 Transformer 工作负载优化的 "
+"**数据流执行路径**，原生支持FP8/BF16等混合精度格式以及缩放因子管理等机制，用以高效完成Attention和MLP等关键算子。"
+msgstr ""
+"**Hardware Level**: Hopper integrates a **dataflow execution path** "
+"optimized for Transformer workloads within the Tensor Cores and their "
+"surrounding control logic. It natively supports mixed-precision formats like"
+" FP8/BF16 and mechanisms such as scale factor management to efficiently "
+"execute key operators like Attention and MLP."
+
+#: ../../source/architecture_trends/product_landscape.rst:40
+msgid ""
+"**软件层面与数据流关系**： **Transformer Engine (TE) 软件库** 则是这套软硬协同方案的 "
+"**编程接口与训练优化库**。运行时，它将底层Tensor Core对FP8的支持与上层应用（如PyTorch）连接起来，其数据流体现在："
+msgstr ""
+"**Software Layer and Data Flow Relationship**: **Transformer Engine (TE) "
+"software library** serves as the **programming interface and training "
+"optimization library** for this hardware-software co-design solution. During"
+" runtime, it connects the underlying Tensor Core's support for FP8 with "
+"upper-layer applications (such as PyTorch), and its data flow is reflected "
+"in:"
+
+#: ../../source/architecture_trends/product_landscape.rst:42
+msgid ""
+"**显式的数据流区域定义**: 当开发者使用 `with te.fp8_autocast(...)` 这样的API时，他们实际上是在代码中 "
+"**显式地声明了一个计算区域**。TE库会捕获这个区域内的所有计算，并将其作为一个整体的 **子图 (Subgraph)**。"
+msgstr ""
+"Explicit Data Flow Region Definition: When developers use an API like `with "
+"te.fp8_autocast(...)`, they are essentially **explicitly declaring a "
+"computation region** in the code. The TE library captures all computations "
+"within this region and treats them as a unified **subgraph**."
+
+#: ../../source/architecture_trends/product_landscape.rst:43
+msgid ""
+"**自动映射到硬件数据流**：可以直观地理解为把PyTorch 代码翻译成 Hopper 硬件能直接高效执行的形式。TE "
+"库会负责把这个子图铺到芯片内部的数据流通路上，同时自动选择合适的 FP8 缩放因子并调用最合适的融合 Kernel，这些底层细节都对开发者透明。"
+msgstr ""
+"**Automatic Mapping to Hardware Dataflow**: It can be intuitively understood"
+" as translating PyTorch code into a form that the Hopper hardware can "
+"execute directly and efficiently. The TE library is responsible for mapping "
+"this subgraph onto the chip's internal data path, while automatically "
+"selecting the appropriate FP8 scaling factors and invoking the most suitable"
+" fused kernels. All these low-level details are transparent to the "
+"developer."
+
+#: ../../source/architecture_trends/product_landscape.rst:44
+msgid ""
+"**抽象与自动化**: 这个过程将原本需要开发者手动管理的数十个底层操作（精度转换、数值缩放、矩阵乘、非线性激活等），**抽象并自动化** "
+"为一个单一的、高效的硬件执行流程。这正是“图算融合”和数据流思想的精髓——将一个计算图优化并执行在最适合它的专用硬件上，对用户隐藏底层复杂性。"
+msgstr ""
+"**Abstraction and Automation**: This process abstracts and automates dozens "
+"of underlying operations (precision conversion, numerical scaling, matrix "
+"multiplication, nonlinear activation, etc.) that originally required manual "
+"management by developers into a single, efficient hardware execution flow. "
+"This embodies the essence of \"graph operator fusion\" and the dataflow "
+"concept—optimizing a computational graph and executing it on the specialized"
+" hardware best suited for it, hiding the underlying complexity from users."
+
+#: ../../source/architecture_trends/product_landscape.rst:46
+msgid "下面是一个PyTorch中的代码示例，直观地展示了开发者如何定义一个FP8计算区域："
+msgstr ""
+"The following is a code example in PyTorch that visually demonstrates how "
+"developers can define an FP8 computation region:"
+
+#: ../../source/architecture_trends/product_landscape.rst:66
+msgid ""
+"在这个例子中， ``with te.fp8_autocast(...)`` "
+"上下文管理器所包裹的代码块，就是被TE库识别并整体调度到专用硬件数据流引擎上执行的计算子图。"
+msgstr ""
+"In this example, the code block wrapped by the ``with te.fp8_autocast(...)``"
+" context manager is the computational subgraph identified by the TE library "
+"and scheduled as a whole for execution on the dedicated hardware dataflow "
+"engine."
+
+#: ../../source/architecture_trends/product_landscape.rst:68
+msgid ""
+"**Tensor Memory Accelerator (TMA)**：TMA允许在共享内存和全局内存之间进行 "
+"**异步、显式的块数据传输**。TMA像一条可编程的数据通路，把这些块沿着预先规划好的路径推送到指定位置。从数据流的角度看，TMA "
+"把原来由缓存自动完成的数据转移变成了可见、可调度的 "
+"**块级数据流**，计算线程只消费本地缓冲中的数据，数据在片上以流水线方式不断前推，这极大地提升了对片上数据流水的规划能力与效率。"
+msgstr ""
+"**Tensor Memory Accelerator (TMA)**: TMA enables **asynchronous, explicit "
+"block data transfer** between shared memory and global memory. TMA acts like"
+" a programmable data pathway, pushing these blocks along pre-planned routes "
+"to specified locations. From a data flow perspective, TMA transforms the "
+"data movement previously handled automatically by the cache into a visible, "
+"schedulable **block-level data flow**. Compute threads only consume data "
+"from local buffers, while data continuously advances on-chip in a pipelined "
+"manner. This significantly enhances the capability and efficiency of "
+"planning on-chip data flow."
+
+#: ../../source/architecture_trends/product_landscape.rst:69
+msgid ""
+"**后续演进 "
+"(Blackwell等)**：延续并强化了“通用控制+专用数据流”的混合架构路线。**以Blackwell架构为例，其搭载的第二代Transformer引擎进一步增强了对FP4/FP6等微精度格式的支持，并引入了专门的片上网络交换结构，再次印证了通过专用数据流硬件加速关键工作负载，并赋予软件更大控制权限的演进趋势。**"
+msgstr ""
+"**Future Evolution (Blackwell and Beyond)**: Continues and strengthens the "
+"hybrid architecture path of \"general-purpose control + specialized data "
+"streams.\" **Taking the Blackwell architecture as an example, its second-"
+"generation Transformer Engine further enhances support for micro-precision "
+"formats like FP4/FP6 and introduces a specialized on-chip network switching "
+"fabric, reaffirming the evolutionary trend of accelerating critical "
+"workloads via specialized data flow hardware while granting software greater"
+" control authority.**"
+
+#: ../../source/architecture_trends/product_landscape.rst:71
+msgid "**与纯数据流架构的同异**："
+msgstr "Similarities and Differences with Pure Dataflow Architecture:"
+
+#: ../../source/architecture_trends/product_landscape.rst:73
+msgid ""
+"**异**：GPU 的根基仍是SIMT控制流，保留了极高的编程灵活性和通用性；而纯数据流架构（如SambaNova "
+"RDU）则完全由数据的可用性驱动计算。GPU是“指令驱动+数据流辅助”，后者是“数据完全驱动”。因此，GPU存在“图算分离”问题：计算图的调度依赖CPU和驱动，每个算子（Kernel）作为一个独立的控制流单元被启动，算子间的衔接（数据回写和再读取）会产生大量开销。"
+msgstr ""
+"**Difference**: The foundation of GPU remains SIMT control flow, preserving "
+"extremely high programming flexibility and versatility; whereas pure "
+"dataflow architectures (such as SambaNova RDU) are entirely driven by data "
+"availability for computation. GPU is \"instruction-driven + dataflow-"
+"assisted,\" while the latter is \"completely data-driven.\" Consequently, "
+"GPUs face the \"graph-computation separation\" problem: the scheduling of "
+"the computation graph relies on the CPU and drivers, each operator (kernel) "
+"is launched as an independent control flow unit, and the handover between "
+"operators (data write-back and re-read) incurs significant overhead."
+
+#: ../../source/architecture_trends/product_landscape.rst:74
+msgid ""
+"**同**：两者都致力于解决“内存墙”问题。GPU通过引入Tensor "
+"Core、TMA等来最大化片上计算和数据复用，这与数据流架构的核心目标——“最大化本地性”是完全一致的。"
+msgstr ""
+"**Same**: Both are dedicated to solving the \"memory wall\" problem. GPUs "
+"maximize on-chip computation and data reuse by introducing Tensor Cores, "
+"TMA, etc., which is entirely consistent with the core objective of the "
+"dataflow architecture—\"maximizing locality\"."
+
+#: ../../source/architecture_trends/product_landscape.rst:76
+msgid ""
+"**趋势**：GPU沿着“**通用可编程性 + "
+"专用数据流加速**”的混合路线演进。一方面，CUDA核心将继续为通用和非主流算子提供灵活性；另一方面，更多针对主流模型（如LLM、MoE）的专用数据流硬件将被集成，同时软件层面（如CUDA"
+" Graph, Triton）将提供更多显式控制数据流动的能力，让编译器和开发者能更深地参与到性能优化中。"
+msgstr ""
+"**Trend**: GPUs are evolving along a hybrid path of **\"general-purpose "
+"programmability + specialized dataflow acceleration\"**. On one hand, CUDA "
+"cores will continue to provide flexibility for general-purpose and non-"
+"mainstream operators; on the other hand, more specialized dataflow hardware "
+"targeting mainstream models (such as LLMs, MoE) will be integrated. "
+"Simultaneously, at the software level (e.g., CUDA Graph, Triton), more "
+"capabilities for explicit control of data movement will be provided, "
+"enabling compilers and developers to participate more deeply in performance "
+"optimization."
+
+#: ../../source/architecture_trends/product_landscape.rst:79
+msgid "Google TPU"
+msgstr "Google TPU"
+
+#: ../../source/architecture_trends/product_landscape.rst:81
+msgid ""
+"**核心思想**：TPU是一种 **领域专用架构 (DSA)**，其核心是硬件化的数据流计算模式。但它并非理论上的“纯”数据流机器，而是一个由 "
+"**指令驱动的、静态调度的混合架构**。"
+msgstr ""
+"**Core Idea**: The TPU is a **Domain-Specific Architecture (DSA)**, whose "
+"core is a hardware-accelerated dataflow computing model. However, it is not "
+"a theoretical \"pure\" dataflow machine, but rather a **hybrid architecture "
+"that is instruction-driven and statically scheduled**."
+
+#: ../../source/architecture_trends/product_landscape.rst:83
+msgid "**混合架构的本质**："
+msgstr "The Essence of Hybrid Architecture:"
+
+#: ../../source/architecture_trends/product_landscape.rst:85
+msgid ""
+"**数据流核心（MXU）**：其脉动阵列(Systolic "
+"Array)设计是数据流思想的极致体现。数据在阵列中规律地流动和计算，实现了极高的数据复用和计算效率。"
+msgstr ""
+"**Dataflow Core (MXU)**: Its systolic array design is the ultimate "
+"embodiment of dataflow principles. Data flows and computes regularly within "
+"the array, achieving extremely high data reuse and computational efficiency."
+
+#: ../../source/architecture_trends/product_landscape.rst:86
+msgid ""
+"**控制流驱动**：然而，整个TPU的运作是由宿主CPU（Host）启动，并由其片上控制器执行一个预先编译好的、VLIW风格的指令序列来精确协调其内部的各个单元。因此，是“指令”在宏观上调度“数据流”，而非数据自发驱动计算。"
+msgstr ""
+"**Control-Flow Driven**: However, the entire TPU's operation is initiated by"
+" the host CPU, and its on-chip controller executes a pre-compiled, VLIW-"
+"style instruction sequence to precisely coordinate its internal units. "
+"Therefore, it is the \"instructions\" that, at the macro level, schedule the"
+" \"data flow,\" rather than data spontaneously driving computation."
+
+#: ../../source/architecture_trends/product_landscape.rst:-1
+msgid "Google TPU 脉动阵列（Systolic Array）矩阵乘加数据流示意"
+msgstr ""
+"Google TPU Systolic Array Matrix Multiplication and Accumulation Data Flow "
+"Diagram"
+
+#: ../../source/architecture_trends/product_landscape.rst:92
+msgid ""
+"上图展示了TPU中典型的脉动阵列结构：输入矩阵A和B的元素分别沿着阵列的行与列方向在MAC单元阵列中“脉动”传输，每个乘加单元在接收到来自上游和左侧的数据后立即执行乘加运算，并将部分和沿着阵列方向继续传递。通过这种方式，同一行/列的数据会在阵列内部被多次复用，大量乘加操作得以高度流水化地并行展开，极大减少了对片外内存的访问需求，充分体现了数据流架构中“让数据在阵列中流动、让计算紧随数据而动”的设计思想。"
+msgstr ""
+"The diagram illustrates the typical systolic array structure in a TPU: "
+"elements of input matrices A and B \"systolically\" traverse the MAC unit "
+"array along its rows and columns respectively. Each multiply-accumulate unit"
+" performs computations immediately upon receiving data from its upstream and"
+" left-side neighbors, then forwards the partial sums along the array "
+"directions. This approach enables repeated reuse of data within the same "
+"row/column across the array, allowing massive multiply-accumulate operations"
+" to be highly pipelined and parallelized. It significantly reduces off-chip "
+"memory access demands and fully embodies the design philosophy of dataflow "
+"architecture: \"let data flow through the array and let computation follow "
+"the data.\""
+
+#: ../../source/architecture_trends/product_landscape.rst:94
+msgid "**架构演进与关键模块**："
+msgstr "**Architecture Evolution and Key Modules**:"
+
+#: ../../source/architecture_trends/product_landscape.rst:96
+msgid ""
+"**TPUv1 (奠基)**：作为推理加速器，确立了 **MXU + 片上统一缓冲 (Unified Buffer)** "
+"的基本模式，采用INT8精度，由CPU通过PCIe接口下发指令。"
+msgstr ""
+"**TPUv1 (Foundation)**: As an inference accelerator, it established the "
+"fundamental pattern of **MXU + on-chip Unified Buffer**, employing INT8 "
+"precision, with instructions issued by the CPU via the PCIe interface."
+
+#: ../../source/architecture_trends/product_landscape.rst:97
+msgid ""
+"**TPUv2/v3 (迈向训练与系统级数据流)**：这是决定性的一步。引入了 **HBM高带宽内存** 和 **BF16/FP32** "
+"浮点计算能力以支持模型训练。最关键的创新是引入了 **ICI (Inter-Chip Interconnect)** "
+"高速片间互联网络。ICI将数十上百个TPU芯片连接成一个 **TPU Pod**，形成一个巨大的、分布式的 "
+"**系统级数据流机器**。数据可以在不同芯片的计算核心间高效流动，摆脱了单芯片的限制。"
+msgstr ""
+"TPUv2/v3 (Advancing Towards Training and System-Level Dataflow): This was a "
+"decisive step. It introduced **HBM (High Bandwidth Memory)** and "
+"**BF16/FP32** floating-point computing capabilities to support model "
+"training. The most critical innovation was the introduction of the high-"
+"speed **ICI (Inter-Chip Interconnect)** network. ICI connects dozens or even"
+" hundreds of TPU chips into a **TPU Pod**, forming a massive, distributed "
+"**system-level dataflow machine**. Data can flow efficiently between the "
+"computing cores of different chips, breaking free from the limitations of a "
+"single chip."
+
+#: ../../source/architecture_trends/product_landscape.rst:98
+msgid ""
+"**TPUv4及后续 "
+"(性能与灵活性的深化)**：持续提升MXU算力、内存带宽和ICI网络速度。**TPUv4i和最新的TPUv5p等型号，不仅在峰值性能上大幅超越前代，也持续优化ICI网络拓扑与带宽，并增强了周边向量与标量单元的可编程性**，以处理日益复杂的非矩阵运算。这标志着TPU从一个相对固化的ASIC，演变为一个算力强大且灵活性不断增强的"
+" **可扩展计算集群**。"
+msgstr ""
+"**TPUv4 and Beyond (Deepening Performance and Flexibility)**: Continuously "
+"enhances MXU computational power, memory bandwidth, and ICI network speed. "
+"**Models like TPUv4i and the latest TPUv5p not only significantly surpass "
+"previous generations in peak performance but also continuously optimize ICI "
+"network topology and bandwidth, while enhancing the programmability of "
+"peripheral vector and scalar units** to handle increasingly complex non-"
+"matrix operations. This marks the evolution of TPUs from a relatively rigid "
+"ASIC into a powerful and increasingly flexible **scalable computing "
+"cluster**."
+
+#: ../../source/architecture_trends/product_landscape.rst:100
+msgid ""
+"**编译器(XLA + MLIR)**：TPU的强大高度依赖 **XLA (Accelerated Linear Algebra)** "
+"编译器。XLA将高层计算图（如TensorFlow/PyTorch图）完整地编译成底层的、静态的指令序列，精确规划好每一个周期的数据流向和计算任务，实现了极致的"
+" "
+"**“图算一体”**，最大化硬件效率。**值得注意的是，XLA正越来越多地采用MLIR作为其中间表示（IR），利用MLIR的方言（Dialect）机制来更好地表示和优化高层计算图，然后再降级到TPU专属的底层表示。**"
+msgstr ""
+"(XLA + MLIR): The power of TPUs relies heavily on the **XLA (Accelerated "
+"Linear Algebra)** compiler. XLA compiles high-level computational graphs "
+"(such as TensorFlow/PyTorch graphs) entirely into low-level, static "
+"instruction sequences, precisely planning the data flow and computational "
+"tasks for each cycle, achieving ultimate **\"graph-computation "
+"integration\"** and maximizing hardware efficiency. **It is noteworthy that "
+"XLA is increasingly adopting MLIR as its intermediate representation (IR), "
+"utilizing MLIR's dialect mechanism to better represent and optimize high-"
+"level computational graphs before lowering them to TPU-specific low-level "
+"representations.**"
+
+#: ../../source/architecture_trends/product_landscape.rst:102
+msgid ""
+"**趋势总结**：TPU的演进路线，是从一个单芯片的、以数据流为核心的推理引擎，发展成为一个由控制流指令静态调度的、通过高速网络将众多数据流核心连接起来的"
+" **大规模、可编程、系统级的数据流计算平台**。"
+msgstr ""
+"**Trend Summary**: The evolution of TPU has progressed from a single-chip, "
+"dataflow-centric inference engine to a **large-scale, programmable, system-"
+"level dataflow computing platform** that statically schedules numerous "
+"dataflow cores interconnected via high-speed networks through control flow "
+"instructions."
+
+#: ../../source/architecture_trends/product_landscape.rst:105
+msgid "IPU (Graphcore)"
+msgstr "IPU (Graphcore)"
+
+#: ../../source/architecture_trends/product_landscape.rst:107
+msgid ""
+"**核心思想**：**MIMD (多指令多数据流) + 分布式片上内存**。IPU "
+"将芯片划分为上千个独立的处理器核心（Tile），每个Tile拥有自己的本地SRAM和计算单元，并能执行独立的指令流。它彻底抛弃了GPU的硬件缓存一致性，强调"
+" **数据的显式放置和通信**。"
+msgstr ""
+"**Core Idea**: **MIMD (Multiple Instruction, Multiple Data) + Distributed "
+"On-Chip Memory**. The IPU divides the chip into thousands of independent "
+"processor cores (Tiles). Each Tile has its own local SRAM and computing unit"
+" and can execute independent instruction streams. It completely abandons the"
+" GPU's hardware cache coherency, emphasizing **explicit data placement and "
+"communication**."
+
+#: ../../source/architecture_trends/product_landscape.rst:109
+#: ../../source/architecture_trends/product_landscape.rst:137
+#: ../../source/architecture_trends/product_landscape.rst:179
+msgid "**架构要点**："
+msgstr "**Architecture Key Points**:"
+
+#: ../../source/architecture_trends/product_landscape.rst:111
+msgid "**大规模Tile**：上千个核心，每个都能独立工作，非常适合处理具有不规则并行性的任务（如图神经网络、稀疏计算）。"
+msgstr ""
+"**Massive Tiles**: Thousands of cores, each capable of operating "
+"independently, making them exceptionally well-suited for tasks with "
+"irregular parallelism (such as graph neural networks, sparse computations)."
+
+#: ../../source/architecture_trends/product_landscape.rst:112
+msgid ""
+"**完全分布式的SRAM**：数据被编译器显式地划分并放置到每个Tile的本地内存中，计算也只在本地内存上进行。这最大化了数据局部性，实现了超高片上带宽和极低功耗。"
+msgstr ""
+"**Fully Distributed SRAM**: The compiler explicitly partitions and places "
+"data into the local memory of each Tile, and computation is performed "
+"exclusively on the local memory. This maximizes data locality, achieving "
+"ultra-high on-chip bandwidth and extremely low power consumption."
+
+#: ../../source/architecture_trends/product_landscape.rst:113
+msgid ""
+"**显式通信**：当核心间需要数据交换时，必须通过 **BSP (块同步并行)** "
+"模型由编译器在软件（Poplar）中进行显式、可预测的数据同步与搬移。这避免了硬件缓存一致性的开销和不确定性。"
+msgstr ""
+"**Explicit Communication**: When data exchange between cores is required, "
+"the compiler must perform explicit and predictable data synchronization and "
+"movement in software (Poplar) through the **BSP (Bulk Synchronous "
+"Parallel)** model. This avoids the overhead and unpredictability of hardware"
+" cache coherence."
+
+#: ../../source/architecture_trends/product_landscape.rst:115
+msgid "从程序执行的角度看，BSP在IPU上的作用可以理解为 **计算-通信-同步** 三个阶段："
+msgstr ""
+"From the perspective of program execution, the role of BSP on the IPU can be"
+" understood as three stages: **compute-communicate-synchronize**:"
+
+#: ../../source/architecture_trends/product_landscape.rst:117
+msgid ""
+"**本地计算 "
+"(Compute)**：在一个阶段内部，每个Tile只访问自己的本地SRAM，执行分配给自己的指令流和数据片段。由于不需要访问共享缓存或远端内存，这一阶段可以以极高带宽、极低延迟运行，是IPU能效优势的来源之一。"
+msgstr ""
+"**Local Compute**: Within a stage, each Tile only accesses its own local "
+"SRAM, executing its assigned instruction stream and data segment. Since "
+"accessing shared cache or remote memory is unnecessary, this stage can run "
+"with extremely high bandwidth and low latency, which is one source of the "
+"IPU's energy efficiency advantage."
+
+#: ../../source/architecture_trends/product_landscape.rst:118
+msgid ""
+"**数据交换 "
+"(Exchange)**：当本地计算阶段结束，某些Tile需要其它Tile的中间结果时，程序进入显式通信阶段。Poplar会根据预先编译好的计划，通过片上网络在指定Tile之间搬运数据，数据路径和数据量在编译期就已确定。"
+msgstr ""
+"**Data Exchange**: When the local computation phase ends and certain tiles "
+"require intermediate results from other tiles, the program enters an "
+"explicit communication phase. Poplar will transfer data between specified "
+"tiles via the on-chip network according to a pre-compiled plan. The data "
+"paths and data volume are determined at compile time."
+
+#: ../../source/architecture_trends/product_landscape.rst:119
+msgid ""
+"**全局同步 "
+"(Barrier)**：所有数据交换完成后，进入同步点。只有当所有Tile都到达这一屏障时，下一轮本地计算才会开始。这使整个系统的执行顺序在时间上高度可预测，便于性能分析和调优。"
+msgstr ""
+"Global Synchronization (Barrier): All data exchanges are completed, entering"
+" the synchronization point. The next round of local computation will only "
+"begin once all Tiles have reached this barrier. This makes the execution "
+"sequence of the entire system highly predictable in time, facilitating "
+"performance analysis and optimization."
+
+#: ../../source/architecture_trends/product_landscape.rst:121
+msgid ""
+"对开发者而言，这种BSP模型带来了两点直接收益：一是编程负担降低——不需要像在GPU上那样管理成千上万线程的细粒度同步，而是以“轮”为单位思考算法结构；二是跨芯片扩展更加自然——当多个IPU通过高速互联组成大集群时，同样可以按BSP节拍在不同芯片之间进行批量数据交换，把“单芯片多Tile”的编程模型平滑地扩展到“多芯片多Tile”的系统级数据流执行。"
+msgstr ""
+"For developers, this BSP model brings two direct benefits: first, "
+"programming burden is reduced—there's no need to manage fine-grained "
+"synchronization of thousands of threads like on GPUs, instead, one thinks "
+"about algorithm structure in terms of \"rounds\"; second, cross-chip scaling"
+" becomes more natural—when multiple IPUs form a large cluster through high-"
+"speed interconnects, batch data exchange can also be performed between "
+"different chips according to the BSP rhythm, seamlessly extending the "
+"\"multi-Tile per chip\" programming model to a system-level dataflow "
+"execution of \"multi-Tile across multiple chips.\""
+
+#: ../../source/architecture_trends/product_landscape.rst:122
+msgid "**MIMD**：与GPU的SIMD不同，MIMD允许每个核心执行不同的程序，处理复杂的分支和不规则任务时效率更高。"
+msgstr ""
+"**MIMD**: Unlike the SIMD architecture of GPUs, MIMD allows each core to "
+"execute different programs, resulting in higher efficiency when handling "
+"complex branches and irregular tasks."
+
+#: ../../source/architecture_trends/product_landscape.rst:-1
+msgid "Graphcore IPU Tile 网格与显式数据放置示意"
+msgstr "Graphcore IPU Tile Grid and Explicit Data Placement Diagram"
+
+#: ../../source/architecture_trends/product_landscape.rst:128
+msgid ""
+"上图以网格化的方式展示了Graphcore "
+"IPU内部由大量Tile构成的计算与存储结构：每个小方块代表一个带本地SRAM的Tile，它们通过片上网络彼此相连。编译器会把计算图拆分成许多小片段，并将每个片段及其数据显式地“放置”到某些Tile上；当需要跨Tile通信时，则通过BSP模型在特定的同步点统一交换数据。与依赖硬件缓存透明搬运数据的GPU不同，这种显式划分与通信让开发者和编译器能够像规划一张数据流图那样，精确控制数据在芯片上的分布和流动路径。"
+msgstr ""
+"The diagram illustrates the computational and storage structure of the "
+"Graphcore IPU in a gridded manner: each small square represents a Tile with "
+"local SRAM, interconnected via an on-chip network. The compiler splits the "
+"computation graph into many small fragments and explicitly \"places\" each "
+"fragment and its data onto specific Tiles; when cross-Tile communication is "
+"required, data is exchanged uniformly at specific synchronization points "
+"through the BSP model. Unlike GPUs, which rely on hardware caches to "
+"transparently move data, this explicit partitioning and communication "
+"enables developers and compilers to precisely control the distribution and "
+"flow of data across the chip, much like planning a dataflow graph."
+
+#: ../../source/architecture_trends/product_landscape.rst:130
+msgid ""
+"**数据流特征**：IPU的数据放置和通信具有强烈的数据流特征。开发者不再依赖硬件缓存，而是像规划数据流图一样，思考数据如何在众核间分布和流动。"
+msgstr ""
+"**Dataflow Characteristics**: IPU data placement and communication exhibit "
+"strong dataflow characteristics. Developers no longer rely on hardware "
+"caches, but instead think about how data is distributed and flows across "
+"multiple cores as if planning a dataflow graph."
+
+#: ../../source/architecture_trends/product_landscape.rst:133
+msgid "SambaNova (RDU)"
+msgstr "SambaNova (RDU)"
+
+#: ../../source/architecture_trends/product_landscape.rst:135
+msgid ""
+"**核心思想**： **可重构数据流架构 (RDU)**。SambaNova是纯粹数据流路线的典型代表，其核心理念是通过编译器将AI模型的高层计算图 "
+"**直接映射** 为芯片底层的硬件数据通路配置，为每个模型“生成”一个专用的ASIC。"
+msgstr ""
+"Core Idea: Reconfigurable Dataflow Architecture (RDU). SambaNova is a "
+"typical representative of the pure dataflow approach. Its core concept is to"
+" use a compiler to directly map the high-level computational graph of an AI "
+"model to the configuration of the underlying hardware data path on the chip,"
+" effectively \"generating\" a dedicated ASIC for each model."
+
+#: ../../source/architecture_trends/product_landscape.rst:139
+msgid "**可重构数据流单元 (RDU)**：由大量模式计算单元（PCU）、模式存储单元（PMU）和交换网络组成。"
+msgstr ""
+"**Reconfigurable Dataflow Unit (RDU)**: Composed of a large number of "
+"Pattern Computing Units (PCUs), Pattern Memory Units (PMUs), and an exchange"
+" network."
+
+#: ../../source/architecture_trends/product_landscape.rst:140
+msgid ""
+"**编译器定义硬件**：编译器分析计算图后，会决定如何将算子映射到PCU，数据存放于哪个PMU，以及它们之间如何通过片上网络连接。硬件配置是动态的、模型专用的。"
+msgstr ""
+"**Compiler-Defined Hardware**: After analyzing the computation graph, the "
+"compiler determines how to map operators to PCUs, where to place data in "
+"PMUs, and how they connect via the on-chip network. The hardware "
+"configuration is dynamic and model-specific."
+
+#: ../../source/architecture_trends/product_landscape.rst:141
+msgid "**图算融合**：实现了极致的“图算融合”，消除了GPU“图算分离”带来的Kernel启动和数据回写开销。"
+msgstr ""
+"**Graph-Operator Fusion**: Achieves ultimate \"graph-operator fusion,\" "
+"eliminating the kernel launch and data write-back overhead caused by GPU "
+"\"graph-operator separation.\""
+
+#: ../../source/architecture_trends/product_landscape.rst:142
+msgid ""
+"**三层内存系统 (SN40L)**：为了解决大模型时代的“内存墙”，SN40L采用了 **片上SRAM + HBM + DDR** "
+"的三层内存架构，并由软件系统智能管理，实现了高带宽和大容量的兼得，尤其适合专家混合（CoE）等模型。"
+msgstr ""
+"**Three-Tier Memory System (SN40L)**: To address the \"memory wall\" in the "
+"era of large models, SN40L adopts a **three-tier memory architecture of on-"
+"chip SRAM + HBM + DDR**, intelligently managed by a software system. This "
+"achieves both high bandwidth and large capacity, making it particularly "
+"suitable for models such as Mixture of Experts (MoE)."
+
+#: ../../source/architecture_trends/product_landscape.rst:-1
+msgid "SambaNova RDU 可重构数据流架构示意"
+msgstr "SambaNova RDU Reconfigurable Dataflow Architecture Diagram"
+
+#: ../../source/architecture_trends/product_landscape.rst:148
+msgid ""
+"上图示意了SambaNova "
+"RDU的整体数据流架构：上层编译器首先对AI模型的计算图进行分析和划分，然后将算子映射到片上的模式计算单元（PCU），将中间数据与权重放置在模式存储单元（PMU）中，并通过可重构的交换网络在PCU/PMU之间建立专用的数据通路。对每一个模型而言，RDU内部的连接关系和数据流路径都可以被重新配置，相当于为该模型“定制”了一块专用加速芯片，从而在保持通用编程接口的同时获得接近专用ASIC的效率。"
+msgstr ""
+"The diagram illustrates the overall dataflow architecture of the SambaNova "
+"RDU: the upper-level compiler first analyzes and partitions the "
+"computational graph of the AI model, then maps the operators to the on-chip "
+"Pattern Compute Units (PCUs), places intermediate data and weights in the "
+"Pattern Memory Units (PMUs), and establishes dedicated data pathways between"
+" PCUs/PMUs through a reconfigurable switching network. For each model, the "
+"internal connectivity and dataflow paths of the RDU can be reconfigured, "
+"effectively \"customizing\" a dedicated accelerator chip for that specific "
+"model. This approach achieves efficiency close to that of a dedicated ASIC "
+"while maintaining a general-purpose programming interface."
+
+#: ../../source/architecture_trends/product_landscape.rst:150
+msgid "从工程实现角度看，RDU 的“可重构”并不是硬件层面的变化，而是通过可编程的片上交换网络和配置寄存器，在较粗粒度上重组算子单元与存储单元："
+msgstr ""
+"From an engineering implementation perspective, the \"reconfigurability\" of"
+" the RDU does not involve changes at the hardware level. Instead, it "
+"reorganizes arithmetic units and storage units at a coarse granularity "
+"through a programmable on-chip switching network and configuration "
+"registers:"
+
+#: ../../source/architecture_trends/product_landscape.rst:152
+msgid ""
+"在网络层面，PCU/PMU "
+"的输入输出全部挂在一张可编程交换网络上，编译器生成的配置比特决定了“谁和谁相连、数据沿哪条路径流动”，从而为不同模型“重新布线”，把逻辑上的计算图固化为物理上的数据流路径。"
+msgstr ""
+"At the network level, the inputs and outputs of PCUs/PMUs are all connected "
+"to a programmable switching network. The configuration bits generated by the"
+" compiler determine \"who is connected to whom and along which path data "
+"flows,\" thereby \"rewiring\" for different models, solidifying the logical "
+"computation graph into physical data flow paths."
+
+#: ../../source/architecture_trends/product_landscape.rst:153
+msgid ""
+"在单元层面，PCU "
+"内部实现了一套支持矩阵乘、卷积、向量运算等模式的专用运算结构，不同模型通过写入不同的配置寄存器或微指令序列，就能把同一块硬件单元用作不同算子的流水线，而PMU则可在权重缓冲、激活缓存、流控FIFO等角色之间切换。"
+msgstr ""
+"At the unit level, the PCU internally implements a dedicated computing "
+"structure that supports matrix multiplication, convolution, vector "
+"operations, and other modes. By writing different configuration registers or"
+" microinstruction sequences, the same hardware unit can be utilized as a "
+"pipeline for different operators, while the PMU can switch between roles "
+"such as weight buffering, activation caching, and flow control FIFO."
+
+#: ../../source/architecture_trends/product_landscape.rst:155
+msgid ""
+"因此，虽然硅片上的 "
+"PCU/PMU/片上网络结构本身是固定的，但它们的“角色分工”和“连接方式”可以随着模型重新分配，使得同一块RDU在不同时刻表现为针对不同网络结构优化的“专用加速器”，这就是其“可重构数据流架构”的真正含义。"
+msgstr ""
+"Therefore, although the PCU/PMU/on-chip network structure on the silicon "
+"chip is inherently fixed, their \"role assignments\" and \"connection "
+"methods\" can be reassigned along with the model, enabling the same RDU to "
+"function as a \"specialized accelerator\" optimized for different network "
+"structures at different times. This is the true meaning of its "
+"\"reconfigurable dataflow architecture.\""
+
+#: ../../source/architecture_trends/product_landscape.rst:158
+msgid "Tenstorrent"
+msgstr "Tenstorrent"
+
+#: ../../source/architecture_trends/product_landscape.rst:160
+msgid ""
+"**核心思想**：**通用可编程核 + 专用张量单元 + 片上/片间数据流网络**。Tenstorrent 的芯片（如 "
+"Grayskull、Wormhole）并不只是一个“算力黑盒”，而是由大量具备路由能力的计算核心组成，每个核心既能作为通用处理器执行复杂控制流，又能驱动本地张量单元完成高吞吐的矩阵计算，并通过高速NoC和以太网在芯片内外路由数据流。"
+msgstr ""
+"**Core Idea**: **General-purpose programmable cores + dedicated tensor units"
+" + on-chip/inter-chip dataflow networks**. Tenstorrent's chips (such as "
+"Grayskull and Wormhole) are not merely \"computing black boxes\"; instead, "
+"they consist of numerous computing cores with routing capabilities. Each "
+"core can function both as a general-purpose processor executing complex "
+"control flows and drive its local tensor unit to perform high-throughput "
+"matrix computations, while routing data flows internally and externally via "
+"high-speed NoC and Ethernet."
+
+#: ../../source/architecture_trends/product_landscape.rst:162
+msgid "**架构要点（以 Wormhole 为例）**："
+msgstr "**Architecture Highlights (Using Wormhole as an Example)**:"
+
+#: ../../source/architecture_trends/product_landscape.rst:164
+msgid ""
+"**Worker Core = 张量单元 + RISC-V/ARC 核心**：每个计算核心内部包含专用的张量计算单元和多核RISC-V/ARC "
+"CPU。典型用法是：将标准张量算子（如GEMM、卷积）下放到张量单元，而将不规则控制流、稀疏操作、通信协议栈等逻辑交给通用CPU执行。"
+msgstr ""
+"**Worker Core = Tensor Unit + RISC-V/ARC Core**: Each compute core "
+"internally contains a dedicated tensor compute unit and a multi-core "
+"RISC-V/ARC CPU. The typical usage is: offload standard tensor operations "
+"(such as GEMM, convolution) to the tensor unit, while delegating logic like "
+"irregular control flow, sparse operations, and communication protocol stacks"
+" to the general-purpose CPU."
+
+#: ../../source/architecture_trends/product_landscape.rst:165
+msgid ""
+"**高带宽外设与存储**：Wormhole 芯片集成了 **16 路 100G 以太网、6 通道 GDDR6、PCIe Gen4 "
+"x16**，既能作为独立加速卡挂在主机上，又能通过以太网直接组网，构建大规模、去中心化的AI计算集群。"
+msgstr ""
+"**High-Bandwidth Peripherals and Storage**: The Wormhole chip integrates "
+"**16 lanes of 100G Ethernet, 6 channels of GDDR6, and PCIe Gen4 x16**. It "
+"can function both as a standalone accelerator card installed in a host and "
+"form large-scale, decentralized AI computing clusters directly via Ethernet "
+"networking."
+
+#: ../../source/architecture_trends/product_landscape.rst:166
+msgid ""
+"**片上网络即路由结构**：芯片内部的核心通过NoC连接，每个核心都具备路由能力，可以将其他核心甚至其他芯片的流量“转发”到目的地。整个系统可以被视为一个由计算+路由节点构成的分布式数据流图。"
+msgstr ""
+"**On-Chip Network as Routing Structure**: The cores within the chip are "
+"connected via NoC, with each core possessing routing capability, enabling it"
+" to \"forward\" traffic from other cores or even other chips to the "
+"destination. The entire system can be viewed as a distributed dataflow graph"
+" composed of computing + routing nodes."
+
+#: ../../source/architecture_trends/product_landscape.rst:-1
+msgid "Tenstorrent Wormhole 芯片平面与接口示意"
+msgstr "Tenstorrent Wormhole Chip Floor Plan and Interface Diagram"
+
+#: ../../source/architecture_trends/product_landscape.rst:172
+msgid ""
+"上图展示了Wormhole芯片的平面结构：中间的大规模计算核心阵列周围环绕着GDDR6内存控制器、PCIe和多路100G以太网接口。每个 `T` "
+"形标记代表一个具备张量计算和路由能力的核心，芯片边缘的以太网接口使得多个芯片可以像交换机一样直接互联，构成一个既负责计算又负责数据转发的“AI路由网络”。这种设计与传统“单卡算力堆叠”的GPU路线不同，更强调在系统层面通过数据流图和路由策略来组织大规模分布式训练与推理。"
+msgstr ""
+"The diagram above illustrates the planar structure of the Wormhole chip: a "
+"large-scale computing core array in the center is surrounded by GDDR6 memory"
+" controllers, PCIe, and multiple 100G Ethernet interfaces. Each T-shaped "
+"marker represents a core with both tensor computing and routing "
+"capabilities. The Ethernet interfaces located at the chip's edge allow "
+"multiple chips to be directly interconnected like a switch, forming an \"AI "
+"routing network\" that handles both computation and data forwarding. This "
+"design differs from the traditional GPU approach of \"stacking single-card "
+"compute power,\" instead emphasizing the organization of large-scale "
+"distributed training and inference at the system level through data flow "
+"graphs and routing strategies."
+
+#: ../../source/architecture_trends/product_landscape.rst:175
+msgid "Cerebras (WSE)"
+msgstr "Cerebras (WSE)"
+
+#: ../../source/architecture_trends/product_landscape.rst:177
+msgid ""
+"**核心思想**： **晶圆级引擎 (Wafer-Scale Engine, "
+"WSE)和数据流架构**。Cerebras通过将一整块晶圆打造成一颗芯片（**最新已达WSE-3**），实现了前所未有的计算核心数量（**WSE-3已达90万核**）和片上网络带宽，其执行模型是纯粹的数据流。"
+msgstr ""
+"Core Idea: Wafer-Scale Engine (WSE) and Dataflow Architecture. Cerebras "
+"creates a single chip from an entire wafer (the latest being WSE-3), "
+"achieving an unprecedented number of compute cores (WSE-3 has reached "
+"900,000 cores) and on-chip network bandwidth. Its execution model is purely "
+"dataflow."
+
+#: ../../source/architecture_trends/product_landscape.rst:181
+msgid "**海量核心与本地内存**：数十万个可编程核心，每个核心都有自己的本地SRAM，指令和数据都存储在本地。"
+msgstr ""
+"**Massive Cores and Local Memory**: Hundreds of thousands of programmable "
+"cores, each with its own local SRAM, store both instructions and data "
+"locally."
+
+#: ../../source/architecture_trends/product_landscape.rst:182
+msgid "**数据触发执行**：计算完全由数据的到达来触发。片上网络（Fabric）直接在硬件中传输数据，数据一旦到达核心，立即触发相应的计算。"
+msgstr ""
+"Data-driven Execution: Computation is entirely triggered by the arrival of "
+"data. The on-chip network (Fabric) transmits data directly in hardware; once"
+" data arrives at the core, it immediately triggers the corresponding "
+"computation."
+
+#: ../../source/architecture_trends/product_landscape.rst:183
+msgid "**稀疏计算亲和性**：网络硬件可以在发送端过滤掉零值数据，因此计算核心只处理非零数据，天然地实现了稀疏计算加速。"
+msgstr ""
+"**Sparse Computing Affinity**: The network hardware can filter out zero-"
+"value data at the sender, so the computing cores only process non-zero data,"
+" naturally achieving sparse computing acceleration."
+
+#: ../../source/architecture_trends/product_landscape.rst:184
+msgid "**内存设计**：将内存完全分布在计算单元旁边，使得内存带宽与核心的数据通路带宽相匹配，从物理上解决了内存瓶颈。"
+msgstr ""
+"**Memory Design**: By distributing memory entirely alongside the computing "
+"units, the memory bandwidth is matched to the core's data path bandwidth, "
+"physically resolving the memory bottleneck."
+
+#: ../../source/architecture_trends/product_landscape.rst:186
+msgid "**晶圆级方案的优势与意义**："
+msgstr "**Advantages and Significance of Wafer-Level Solutions**:"
+
+#: ../../source/architecture_trends/product_landscape.rst:188
+msgid ""
+"**超大单芯片算力，减少“多卡拼接”的复杂度**：传统路线需要依赖几十上百块GPU/TPU再通过NVLink、以太网等互联来拼出足够的算力和存储，跨芯片的同步和通信往往成为性能瓶颈。WSE则在一块物理连续的晶圆上集成了海量核心和片上存储，将资源浓缩成一个单设备节点，使得大模型可以尽量在单芯片内部完成训练/推理，显著降低了分布式并行的切分和协调复杂度。"
+msgstr ""
+"**Massive single-chip computing power reduces the complexity of \"multi-card"
+" splicing\"**: Traditional approaches require dozens or even hundreds of "
+"GPUs/TPUs interconnected via NVLink, Ethernet, etc., to achieve sufficient "
+"computing power and storage. Cross-chip synchronization and communication "
+"often become performance bottlenecks. In contrast, WSE integrates a massive "
+"number of cores and on-chip memory on a single, physically continuous wafer,"
+" condensing resources into a single device node. This enables large models "
+"to be trained/inferred primarily within a single chip, significantly "
+"reducing the complexity of distributed parallel partitioning and "
+"coordination."
+
+#: ../../source/architecture_trends/product_landscape.rst:189
+msgid ""
+"**极致的片上带宽与数据本地性**：WSE采用“核心+本地SRAM+片上网络”的模式，大部分中间激活、权重切片和KV-"
+"Cache都可以在晶圆内部高复用，数据在邻近核心之间以短距离流动，极少出片访问外部DRAM。这不仅规避了“内存墙”的带宽与能耗瓶颈，也减少了因等待远程数据而产生的计算空转，从而在大模型工作负载下获得更高的有效利用率和能效。"
+msgstr ""
+"**Extreme On-Chip Bandwidth and Data Locality**: The WSE employs a \"core + "
+"local SRAM + on-chip network\" architecture, enabling high reuse of most "
+"intermediate activations, weight slices, and KV-Cache within the wafer. Data"
+" flows over short distances between neighboring cores, with minimal off-chip"
+" access to external DRAM. This not only bypasses the bandwidth and energy "
+"consumption bottlenecks of the \"memory wall\" but also reduces "
+"computational idling caused by waiting for remote data, thereby achieving "
+"higher effective utilization and energy efficiency under large model "
+"workloads."
+
+#: ../../source/architecture_trends/product_landscape.rst:190
+msgid ""
+"**对数据流/图执行天然友好**：WSE内部呈现出一块规则的大规模核心网格，与数据流编译器的视角高度契合。编译器可以将计算图节点均匀铺展到核心阵列上，将依赖边映射为核心之间的点对点数据通路，在编译期完成大部分调度与路由规划。相较于拓扑层次复杂的多芯片系统，这种“晶圆级大网格”更容易实现图算一体的全局优化，使得Cerebras在超大规模AI模型上能够以更简单的软件抽象换取更高的系统整体效率。"
+msgstr ""
+"**Naturally Optimized for Dataflow/Graph Execution**: The WSE internally "
+"presents a large-scale, regular core grid that aligns well with the "
+"perspective of dataflow compilers. The compiler can evenly distribute "
+"computation graph nodes across the core array, mapping dependency edges into"
+" point-to-point data paths between cores, and complete most scheduling and "
+"routing planning at compile time. Compared to multi-chip systems with "
+"complex topological hierarchies, this \"wafer-scale large grid\" facilitates"
+" global optimization that integrates graph and computation, enabling "
+"Cerebras to achieve higher overall system efficiency with simpler software "
+"abstractions for extremely large AI models."

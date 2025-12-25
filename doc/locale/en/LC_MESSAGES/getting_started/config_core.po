@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/config_core.rst:2
+msgid "配置说明文档"
+msgstr "Configuration Documentation"
+
+#: ../../source/getting_started/config_core.rst:4
+msgid "本配置文件用于定义硬件加速器或处理器核心的架构参数。以下是对各字段的详细说明。"
+msgstr ""
+"This configuration file is used to define the architectural parameters of a "
+"hardware accelerator or processor core. The following is a detailed "
+"explanation of each field."
+
+#: ../../source/getting_started/config_core.rst:7
+msgid "顶层参数"
+msgstr "Top-level parameters"
+
+#: ../../source/getting_started/config_core.rst:9
+msgid "**x** (整数)"
+msgstr "**x** (integer)"
+
+#: ../../source/getting_started/config_core.rst:11
+msgid "表示 2D Mesh 阵列在 X 维度上的数量，例如 x = 8, 表示 8 * 8 的阵列。"
+msgstr ""
+"Specifies the number of 2D Mesh arrays in the X dimension, for example, x = "
+"8 indicates an 8 * 8 array."
+
+#: ../../source/getting_started/config_core.rst:13
+msgid "**comm_acc** (整数)"
+msgstr "**comm_acc** (integer)"
+
+#: ../../source/getting_started/config_core.rst:15
+msgid "表示一个时钟周期可以发送多少个通信数据包。例如 comm_acc = 256, 表示一次时钟周期可以发送 256 个通信数据包。"
+msgstr ""
+"Indicates how many communication data packets can be sent per clock cycle. "
+"For example, comm_acc = 256 indicates that 256 communication data packets "
+"can be sent in one clock cycle."
+
+#: ../../source/getting_started/config_core.rst:18
+msgid "核心配置（cores）"
+msgstr "Core Configuration (cores)"
+
+#: ../../source/getting_started/config_core.rst:20
+msgid ""
+"按照id区间配置多个处理核，每个核包含执行单元、特殊功能单元和本地 SRAM。如果配置了id = 0, 9, 15。则表示id = 0 - 8 的 "
+"的处理核按照 id = 0 的配置。id = 9 - 14 的处理核按照 id = 9 的配置。id = 15 以后的处理核 id = 15 的配置。"
+msgstr ""
+"Multiple processing cores are configured according to ID ranges, each "
+"containing execution units, special function units, and local SRAM. If IDs "
+"0, 9, and 15 are configured, processing cores with IDs 0-8 follow the "
+"configuration of ID 0. Processing cores with IDs 9-14 follow the "
+"configuration of ID 9. Processing cores with ID 15 and beyond follow the "
+"configuration of ID 15."
+
+#: ../../source/getting_started/config_core.rst:24
+msgid "核心 0（id: 0）"
+msgstr "Core 0 (id: 0)"
+
+#: ../../source/getting_started/config_core.rst:26
+msgid "**id** (整数)"
+msgstr "**id** (integer)"
+
+#: ../../source/getting_started/config_core.rst:28
+msgid "核心的唯一标识符。此处为 0。"
+msgstr "The unique identifier of the core. Here it is 0."
+
+#: ../../source/getting_started/config_core.rst:30
+msgid "**exu_x** (整数)"
+msgstr "**exu_x** (integer)"
+
+#: ../../source/getting_started/config_core.rst:32
+msgid "脉动阵列（Execution Unit）在 X 方向的数量的维度。"
+msgstr ""
+"Number of dimensions in the X direction of the systolic array (Execution "
+"Unit)."
+
+#: ../../source/getting_started/config_core.rst:34
+msgid "**exu_y** (整数)"
+msgstr "exu_y (integer)"
+
+#: ../../source/getting_started/config_core.rst:36
+msgid "脉动阵列（Execution Unit）在 Y 方向的数量的维度。"
+msgstr ""
+"The dimension of the number of systolic arrays (Execution Unit) in the Y "
+"direction."
+
+#: ../../source/getting_started/config_core.rst:38
+msgid "**sfu_x** (整数)"
+msgstr "**sfu_x** (integer)"
+
+#: ../../source/getting_started/config_core.rst:40
+msgid ""
+"特殊功能单元（Special Function Unit, SFU）规模数量，通常用于浮点运算、超越函数（如 sin、log）等高性能计算任务。"
+msgstr ""
+"Special Function Unit (SFU) scale and quantity are typically used for high-"
+"performance computing tasks such as floating-point operations and "
+"transcendental functions (e.g., sin, log)."
+
+#: ../../source/getting_started/config_core.rst:42
+msgid "**sram_bitwidth** (整数)"
+msgstr "**sram_bitwidth** (integer)"
+
+#: ../../source/getting_started/config_core.rst:44
+msgid "本地 SRAM 的位宽（bit width）。值为 64，表示每次可读写 64 位（8 字节）数据。"
+msgstr ""
+"The bit width of the local SRAM. A value of 64 indicates that 64 bits (8 "
+"bytes) of data can be read or written at a time."
+
+#: ../../source/getting_started/config_core.rst:47
+msgid "示例配置摘要"
+msgstr "Example Configuration Summary"
+
+#: ../../source/getting_started/config_core.rst:49
+msgid "系统横向规模：8"
+msgstr "System horizontal scale: 8"
+
+#: ../../source/getting_started/config_core.rst:50
+msgid "通信加速器容量：256"
+msgstr "Communication accelerator capacity: 256"
+
+#: ../../source/getting_started/config_core.rst:51
+msgid "核心数量：1（ID 为 0） - 执行单元阵列：64 × 64 - 特殊功能单元规模：2048 - 本地 SRAM 位宽：64 位"
+msgstr ""
+"Number of Cores: 1 (ID 0) - Execution Unit Array: 64 × 64 - Special Function"
+" Unit Size: 2048 - Local SRAM Bit Width: 64-bit"
+
+#: ../../source/getting_started/config_core.rst:58
+msgid "配置示例（JSON 格式）"
+msgstr "Configuration Example (JSON Format)"
+
+#: ../../source/getting_started/config_core.rst:60
+msgid ""
+"以下是一个与上述说明对应的完整 JSON 配置示例： > **注意**：具体单位和语义可能依赖于目标硬件架构，请结合硬件设计文档理解上述参数的实际含义。"
+msgstr ""
+"The following is a complete JSON configuration example corresponding to the "
+"above description: > **Note**: Specific units and semantics may depend on "
+"the target hardware architecture. Please refer to the hardware design "
+"documentation to understand the actual meaning of the above parameters."

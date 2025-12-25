@@ -1,0 +1,15 @@
+{
+    "simulation": {
+        "addressmapping": "am_hbm2_gpu.json",
+        "mcconfig": "fr_fcfs.json",
+        "memspec": "HBM2_GPU.json",
+        "simconfig": "example.json",
+        "simulationid": "hbm3-example",
+        "tracesetup": [
+            {
+                "clkMhz": 1000,
+                "name": "example.stl"
+            }
+        ]
+    }
+}

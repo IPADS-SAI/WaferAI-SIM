@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:4
+msgid "进阶原语书写方法"
+msgstr "Advanced Primitive Writing Methods"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:6
+msgid "本页面将介绍 **NPU-SIM** 中的三个工具原语，在熟悉基本的原语书写方法后，可灵活运用以下三个原语进行更复杂计算流的配置。"
+msgstr ""
+"This page introduces the three tool primitives in **NPU-SIM**. After "
+"becoming familiar with the basic methods for writing primitives, you can "
+"flexibly use the following three primitives to configure more complex "
+"computational flows."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:9
+msgid "switch_data"
+msgstr "Switch Data"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:11
+msgid "可以将一块输入数据的大小变为指定的输出大小。该原语会引入额外的存储开销，在此忽略不计。"
+msgstr ""
+"It can resize a block of input data to the specified output size. This "
+"primitive introduces additional storage overhead, which is negligible here."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:15
+#: ../../source/getting_started/advanced_primitive_detail.rst:44
+#: ../../source/getting_started/advanced_primitive_detail.rst:70
+msgid "**参数**"
+msgstr "**Parameters**"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:14
+msgid "``IN`` 输入大小"
+msgstr "Input size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:15
+msgid "``OUT`` 输出大小"
+msgstr "OUT Output Size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:19
+#: ../../source/getting_started/advanced_primitive_detail.rst:48
+#: ../../source/getting_started/advanced_primitive_detail.rst:74
+msgid "**SRAM地址**"
+msgstr "**SRAM Address**"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:18
+msgid "``indata`` 输入标签"
+msgstr "indata"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:19
+msgid "``outdata`` 输出标签"
+msgstr "``outdata`` output label"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:21
+msgid "以下的示例将大小为1024的输入数据变为512的输出数据，并存储在了一个名为 ``output_label`` 的新标签中。"
+msgstr ""
+"The following example transforms input data of size 1024 into output data of"
+" size 512 and stores it in a new label named ``output_label``."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:23
+#: ../../source/getting_started/advanced_primitive_detail.rst:50
+#: ../../source/getting_started/advanced_primitive_detail.rst:76
+msgid "示例"
+msgstr "Example"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:39
+msgid "parse_input"
+msgstr ""
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:41
+msgid ""
+"在多工作核之间的复杂连续通信中，前一次的 ``input_label`` 可能还未来得及被使用，就被后续的 ``input_label`` "
+"覆盖。此时可通过此原语将 ``input_label`` 指代的数据块重命名，以备后续使用。"
+msgstr ""
+"In complex continuous communication between multiple worker cores, a "
+"previous ``input_label`` may be overwritten by a subsequent ``input_label`` "
+"before it has been used. At this point, this primitive can be used to rename"
+" the data block referred to by the ``input_label`` for subsequent use."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:44
+msgid "``size`` 输入数据块大小"
+msgstr "``size`` Input data block size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:47
+msgid "``indata`` 需要的标签名"
+msgstr "`indata` required tag name"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:48
+msgid "``outdata`` 保持与 ``indata`` 一致"
+msgstr "outdata remains consistent with indata"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:65
+msgid "parse_output"
+msgstr ""
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:67
+msgid ""
+"在 **NPU-SIM** 中，一个 ``worklist`` "
+"的输出大小等于其最后一个计算原语的输出大小。而该原语被视为一个计算原语，因此可以将它放在一个 ``worklist`` 的最后，从而调整一个 "
+"``worklist`` 的输出大小。"
+msgstr ""
+"In **NPU-SIM**, the output size of a ``worklist`` equals the output size of "
+"its last computational primitive. This primitive is considered a "
+"computational primitive, so it can be placed at the end of a ``worklist`` to"
+" adjust the output size of the ``worklist``."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:70
+msgid "``size`` 输出大小"
+msgstr "``size`` output size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:73
+msgid "``indata`` 保持与 ``outdata`` 一致"
+msgstr "`indata` remains consistent with `outdata`"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:74
+msgid "``outdata`` 需要作为输出数据的数据块标签，如果在输出完之后需要将该数据块删除，则在标签前加上 ``DEL_``。"
+msgstr ""
+"The `outdata` must be used as the data block label for the output data. If "
+"the data block needs to be deleted after output, prefix the label with "
+"`DEL_`."

@@ -1,0 +1,36 @@
+*.run
+*.txt
+*.pyc
+*.bin
+*.tsv
+*.out
+*.log
+*.vscode
+*.results
+*.data
+timeline copy.js
+timeline2.js
+batch.sh
+/test/
+aaa.cpp
+/build/*
+/doc/build
+/llm/include/unit_module/sram_manager/build/*
+/llm/include/unit_module/dram_kvtable/build/*
+/llm/config_generation/build/*
+/llm/test/workload_config/playground.json
+/streaming_trace_viewer/static/timeline2.js
+/DRAMSys/configs/addressmapping/am_ddr4_8x4Gbx8_df.json
+/DRAMSys/configs/memspec/JEDEC_4Gb_DDR4-1866_8bit_DF.json
+# /doc/make.bat
+# /doc/Makefile
+/doc/translate_openrouter.py
+/doc/translate.py
+
+!**/CMakeLists.txt
+!CMakeLists.txt
+!/doc/requirements.txt
+./DRAMSys/configs/memspec/JEDEC_4Gb_DDR4-1866_8bit_DF.json
+./DRAMSys/configs/addressmapping/am_ddr4_8x4Gbx8_df.json
+*/compile_commands.json
+doc/source/_build/

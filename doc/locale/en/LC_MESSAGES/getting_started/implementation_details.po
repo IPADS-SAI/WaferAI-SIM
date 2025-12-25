@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/implementation_details.rst:4
+msgid "NPU-SIM 实现细节与常见问题"
+msgstr "NPU-SIM Implementation Details and Common Issues"
+
+#: ../../source/getting_started/implementation_details.rst:6
+msgid "本页面将汇总 **NPU-SIM** 中有关架构设计与实现的细节与常见问题。"
+msgstr ""
+"This page summarizes the details and common questions regarding the "
+"architecture design and implementation in **NPU-SIM**."
+
+#: ../../source/getting_started/implementation_details.rst:9
+msgid "原语与工作核通信范式"
+msgstr "Primitives and Worker Core Communication Paradigm"
+
+#: ../../source/getting_started/implementation_details.rst:11
+msgid "详情请参阅：:doc:`primitive_detail`"
+msgstr "For details, see: :doc:`primitive_detail`"
+
+#: ../../source/getting_started/implementation_details.rst:15
+msgid "内存访问与标签管理范式"
+msgstr "Memory Access and Label Management Paradigm"
+
+#: ../../source/getting_started/implementation_details.rst:17
+msgid "详情请参阅：:doc:`memory_detail`"
+msgstr "For details, see: :doc:`memory_detail`"
+
+#: ../../source/getting_started/implementation_details.rst:21
+msgid "进阶原语书写方法"
+msgstr "Advanced Primitive Writing Methods"
+
+#: ../../source/getting_started/implementation_details.rst:23
+msgid "详情请参阅：:doc:`advanced_primitive_detail`"
+msgstr "For more details, see: :doc:`advanced_primitive_detail`"
+
+#: ../../source/getting_started/implementation_details.rst:27
+msgid "附属页面"
+msgstr "Subsidiary Page"

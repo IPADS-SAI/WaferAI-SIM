@@ -1,0 +1,308 @@
+{
+  "../llm/test/gpt2_small/pd_split/pd_split_42_21_100_100.json": {
+    "request_count": 200,
+    "token_count_per_request": 101,
+    "total_tokens": 20200,
+    "max_completion_time_ns": 22270673954000.0,
+    "throughput_tokens_per_second": 0.9070223937417893,
+    "ttft": {
+      "mean": 478647870790.0,
+      "median": 478645233000.0,
+      "min": 30972682000.0,
+      "max": 926572251000.0,
+      "std": 260586122302.46194
+    },
+    "tbt": {
+      "mean": 124851153711.2,
+      "median": 74103985000.0,
+      "min": 35204476000.0,
+      "max": 14046060075000.0,
+      "std": 708774167750.576
+    },
+    "latency": {
+      "mean": 12963763241910.0,
+      "median": 14647950341000.0,
+      "min": 6872460501000.0,
+      "max": 22270673954000.0,
+      "std": 5312384120559.368
+    },
+    "ttft_formatted": {
+      "mean": "478.648 s",
+      "median": "478.645 s",
+      "min": "30.973 s",
+      "max": "926.572 s",
+      "std": "260.586 s"
+    },
+    "tbt_formatted": {
+      "mean": "124.851 s",
+      "median": "74.104 s",
+      "min": "35.204 s",
+      "max": "14046.060 s",
+      "std": "708.774 s"
+    },
+    "latency_formatted": {
+      "mean": "12963.763 s",
+      "median": "14647.950 s",
+      "min": "6872.461 s",
+      "max": "22270.674 s",
+      "std": "5312.384 s"
+    },
+    "max_completion_time_formatted": "22270.674 s",
+    "throughput_formatted": "0.907 tokens/s"
+  },
+  "../llm/test/gpt2_small/pd_split/pd_split_42_21_100_200.json": {
+    "request_count": 200,
+    "token_count_per_request": 201,
+    "total_tokens": 40200,
+    "max_completion_time_ns": 68766100222000.0,
+    "throughput_tokens_per_second": 0.5845903704037445,
+    "ttft": {
+      "mean": 478648200210.0,
+      "median": 478645597000.0,
+      "min": 30972864000.0,
+      "max": 926572797000.0,
+      "std": 260586201546.16443
+    },
+    "tbt": {
+      "mean": 196808506366.35,
+      "median": 116929858000.0,
+      "min": 35204476000.0,
+      "max": 45037118542000.0,
+      "std": 1620007091613.8218
+    },
+    "latency": {
+      "mean": 39840349473480.0,
+      "median": 45415594609000.0,
+      "min": 21787551201000.0,
+      "max": 68766100222000.0,
+      "std": 16495364220045.88
+    },
+    "ttft_formatted": {
+      "mean": "478.648 s",
+      "median": "478.646 s",
+      "min": "30.973 s",
+      "max": "926.573 s",
+      "std": "260.586 s"
+    },
+    "tbt_formatted": {
+      "mean": "196.809 s",
+      "median": "116.930 s",
+      "min": "35.204 s",
+      "max": "45037.119 s",
+      "std": "1620.007 s"
+    },
+    "latency_formatted": {
+      "mean": "39840.349 s",
+      "median": "45415.595 s",
+      "min": "21787.551 s",
+      "max": "68766.100 s",
+      "std": "16495.364 s"
+    },
+    "max_completion_time_formatted": "68766.100 s",
+    "throughput_formatted": "0.585 tokens/s"
+  },
+  "../llm/test/gpt2_small/pd_split/pd_split_42_21_200_100.json": {
+    "request_count": 200,
+    "token_count_per_request": 101,
+    "total_tokens": 20200,
+    "max_completion_time_ns": 22412554829000.0,
+    "throughput_tokens_per_second": 0.9012805614584761,
+    "ttft": {
+      "mean": 466062744640.0,
+      "median": 466006774500.0,
+      "min": 31207016000.0,
+      "max": 901978681000.0,
+      "std": 253465083556.16583
+    },
+    "tbt": {
+      "mean": 125532506611.85,
+      "median": 75009908000.0,
+      "min": 35283324000.0,
+      "max": 14131540029000.0,
+      "std": 713003842158.5215
+    },
+    "latency": {
+      "mean": 13019313405825.0,
+      "median": 14708294280000.0,
+      "min": 6905868640000.0,
+      "max": 22412554829000.0,
+      "std": 5356371015458.007
+    },
+    "ttft_formatted": {
+      "mean": "466.063 s",
+      "median": "466.007 s",
+      "min": "31.207 s",
+      "max": "901.979 s",
+      "std": "253.465 s"
+    },
+    "tbt_formatted": {
+      "mean": "125.533 s",
+      "median": "75.010 s",
+      "min": "35.283 s",
+      "max": "14131.540 s",
+      "std": "713.004 s"
+    },
+    "latency_formatted": {
+      "mean": "13019.313 s",
+      "median": "14708.294 s",
+      "min": "6905.869 s",
+      "max": "22412.555 s",
+      "std": "5356.371 s"
+    },
+    "max_completion_time_formatted": "22412.555 s",
+    "throughput_formatted": "0.901 tokens/s"
+  },
+  "../llm/test/gpt2_small/pd_split/pd_split_42_21_200_200.json": {
+    "request_count": 200,
+    "token_count_per_request": 201,
+    "total_tokens": 40200,
+    "max_completion_time_ns": 68799016882000.0,
+    "throughput_tokens_per_second": 0.5843106750921843,
+    "ttft": {
+      "mean": 466062744640.0,
+      "median": 466006774500.0,
+      "min": 31207016000.0,
+      "max": 901978681000.0,
+      "std": 253465083556.16583
+    },
+    "tbt": {
+      "mean": 197107541641.525,
+      "median": 117190762000.0,
+      "min": 35283324000.0,
+      "max": 45119303934000.0,
+      "std": 1623801307040.393
+    },
+    "latency": {
+      "mean": 39887571072945.0,
+      "median": 45472643378000.0,
+      "min": 21858039716000.0,
+      "max": 68799016882000.0,
+      "std": 16499510168055.379
+    },
+    "ttft_formatted": {
+      "mean": "466.063 s",
+      "median": "466.007 s",
+      "min": "31.207 s",
+      "max": "901.979 s",
+      "std": "253.465 s"
+    },
+    "tbt_formatted": {
+      "mean": "197.108 s",
+      "median": "117.191 s",
+      "min": "35.283 s",
+      "max": "45119.304 s",
+      "std": "1623.801 s"
+    },
+    "latency_formatted": {
+      "mean": "39887.571 s",
+      "median": "45472.643 s",
+      "min": "21858.040 s",
+      "max": "68799.017 s",
+      "std": "16499.510 s"
+    },
+    "max_completion_time_formatted": "68799.017 s",
+    "throughput_formatted": "0.584 tokens/s"
+  },
+  "../llm/test/gpt2_small/pd_split/pd_split_42_21_400_100.json": {
+    "request_count": 200,
+    "token_count_per_request": 101,
+    "total_tokens": 20200,
+    "max_completion_time_ns": 22613212921000.0,
+    "throughput_tokens_per_second": 0.8932830584742363,
+    "ttft": {
+      "mean": 506092119450.0,
+      "median": 507209746000.0,
+      "min": 32367974000.0,
+      "max": 976367742000.0,
+      "std": 274583988145.00534
+    },
+    "tbt": {
+      "mean": 126548528900.5,
+      "median": 75329622000.0,
+      "min": 35430268000.0,
+      "max": 14220954355000.0,
+      "std": 717143451730.7963
+    },
+    "latency": {
+      "mean": 13160945009500.0,
+      "median": 14855245216000.0,
+      "min": 6958320880000.0,
+      "max": 22613212921000.0,
+      "std": 5396012458582.82
+    },
+    "ttft_formatted": {
+      "mean": "506.092 s",
+      "median": "507.210 s",
+      "min": "32.368 s",
+      "max": "976.368 s",
+      "std": "274.584 s"
+    },
+    "tbt_formatted": {
+      "mean": "126.549 s",
+      "median": "75.330 s",
+      "min": "35.430 s",
+      "max": "14220.954 s",
+      "std": "717.143 s"
+    },
+    "latency_formatted": {
+      "mean": "13160.945 s",
+      "median": "14855.245 s",
+      "min": "6958.321 s",
+      "max": "22613.213 s",
+      "std": "5396.012 s"
+    },
+    "max_completion_time_formatted": "22613.213 s",
+    "throughput_formatted": "0.893 tokens/s"
+  },
+  "../llm/test/gpt2_small/pd_split/pd_split_42_21_100_400.json": {
+    "request_count": 200,
+    "token_count_per_request": 201,
+    "total_tokens": 40200,
+    "max_completion_time_ns": 68429809103000.0,
+    "throughput_tokens_per_second": 0.5874632784594106,
+    "ttft": {
+      "mean": 464352229995.0,
+      "median": 464987380000.0,
+      "min": 30936026000.0,
+      "max": 894385054000.0,
+      "std": 250811147486.66788
+    },
+    "tbt": {
+      "mean": 196162316889.375,
+      "median": 116571166000.0,
+      "min": 35168636000.0,
+      "max": 44896244471000.0,
+      "std": 1616275679122.7617
+    },
+    "latency": {
+      "mean": 39696815607870.0,
+      "median": 45243893734000.0,
+      "min": 21767785243000.0,
+      "max": 68429809103000.0,
+      "std": 16399553332393.545
+    },
+    "ttft_formatted": {
+      "mean": "464.352 s",
+      "median": "464.987 s",
+      "min": "30.936 s",
+      "max": "894.385 s",
+      "std": "250.811 s"
+    },
+    "tbt_formatted": {
+      "mean": "196.162 s",
+      "median": "116.571 s",
+      "min": "35.169 s",
+      "max": "44896.244 s",
+      "std": "1616.276 s"
+    },
+    "latency_formatted": {
+      "mean": "39696.816 s",
+      "median": "45243.894 s",
+      "min": "21767.785 s",
+      "max": "68429.809 s",
+      "std": "16399.553 s"
+    },
+    "max_completion_time_formatted": "68429.809 s",
+    "throughput_formatted": "0.587 tokens/s"
+  }
+}

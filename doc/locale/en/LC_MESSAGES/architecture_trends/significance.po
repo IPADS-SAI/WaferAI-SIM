@@ -1,0 +1,871 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/architecture_trends/significance.rst:2
+msgid "众核数据流架构"
+msgstr "Many-core Dataflow Architecture"
+
+#: ../../source/architecture_trends/significance.rst:5
+msgid ""
+"在深入探讨众核数据流架构之前，我们先回顾一下当前占据统治地位的两种计算架构——CPU与GPU，这将有助于我们理解数据流架构诞生的背景与独特价值。"
+msgstr ""
+"Before delving into the architecture of many-core dataflow, let us first "
+"review the two dominant computing architectures of today—CPU and GPU. This "
+"will help us understand the background and unique value of the dataflow "
+"architecture's emergence."
+
+#: ../../source/architecture_trends/significance.rst:7
+msgid ""
+"**CPU (Central Processing Unit)**：作为通用计算的基石，CPU 遵循经典的 "
+"**冯·诺依曼架构**。其核心设计目标是处理极其复杂的控制逻辑（分支预测、乱序执行等）。"
+msgstr ""
+"**CPU (Central Processing Unit)**: As the cornerstone of general-purpose "
+"computing, the CPU follows the classic **von Neumann architecture**. Its "
+"core design objective is to handle extremely complex control logic (branch "
+"prediction, out-of-order execution, etc.)."
+
+#: ../../source/architecture_trends/significance.rst:9
+msgid ""
+"**复杂的内存设计与控制单元**：CPU "
+"的晶体管预算大量投入到了巨大的缓存（Cache）和复杂的控制单元上。它的设计目标是尽快完成一个串行任务。因此，它拥有强大的分支预测能力来减少跳转等待，以及乱序执行来填补流水线空闲。"
+msgstr ""
+"**Complex Memory Design and Control Unit**: A significant portion of the "
+"CPU's transistor budget is allocated to large caches and complex control "
+"units. Its design goal is to complete a serial task as quickly as possible. "
+"Consequently, it possesses powerful branch prediction capabilities to reduce"
+" jump latency and employs out-of-order execution to fill pipeline idle time."
+
+#: ../../source/architecture_trends/significance.rst:10
+msgid "**计算单元占比低**：相比于控制逻辑和缓存，真正的算术逻辑单元（ALU）在 CPU 芯片面积中的占比其实很小。"
+msgstr ""
+"**Low Proportion of Compute Units**: Compared to control logic and cache, "
+"the actual Arithmetic Logic Unit (ALU) occupies a very small proportion of "
+"the CPU chip area."
+
+#: ../../source/architecture_trends/significance.rst:11
+msgid ""
+"**共享内存与缓存一致性**：为了简化多核编程，CPU 在硬件层面实现了复杂的 **缓存一致性协议 (如 "
+"MESI)**。这意味着所有核心看到的内存视图必须时刻保持一致。这种“强中心化”的设计虽然方便了软件开发，但在核心数量增加时，维护一致性的广播与同步开销会急剧上升，限制了大规模并行扩展能力。"
+msgstr ""
+"Shared Memory and Cache Coherence: To simplify multi-core programming, CPUs "
+"implement complex cache coherence protocols (such as MESI) at the hardware "
+"level. This means the memory view seen by all cores must remain consistent "
+"at all times. While this \"strongly centralized\" design facilitates "
+"software development, the broadcast and synchronization overhead required to"
+" maintain coherence increases dramatically as the number of cores grows, "
+"limiting large-scale parallel scalability."
+
+#: ../../source/architecture_trends/significance.rst:12
+msgid ""
+"**控制流模式**：程序计数器（PC）指引 CPU 逐条读取指令，指令再指挥数据进行移动和计算。这种模式虽然赋予了 CPU "
+"处理复杂计算任务的强大能力，但在面对海量重复的计算任务时，其复杂的控制逻辑反而成为了负担。"
+msgstr ""
+"**Control Flow Model**: The program counter (PC) guides the CPU to read "
+"instructions one by one, and these instructions then direct data to move and"
+" compute. While this model endows the CPU with powerful capabilities for "
+"handling complex computational tasks, it becomes a burden when faced with "
+"massive repetitive computational tasks due to its complex control logic."
+
+#: ../../source/architecture_trends/significance.rst:14
+msgid "**GPU (Graphics Processing Unit)**：为了解决图形渲染中大规模并行计算的需求，GPU 应运而生。"
+msgstr ""
+"**GPU (Graphics Processing Unit)**: To meet the demands of large-scale "
+"parallel computing in graphics rendering, the GPU emerged."
+
+#: ../../source/architecture_trends/significance.rst:16
+msgid ""
+"**大规模计算核心**：GPU 将晶体管预算主要投入到了海量的计算核心（ALU）上，以此换取极致的并行吞吐量。它大大简化了控制逻辑和缓存层级。"
+msgstr ""
+"**Massive Computing Cores**: GPUs allocate the majority of their transistor "
+"budget to vast numbers of computing cores (ALUs), trading this for extreme "
+"parallel throughput. They significantly simplify control logic and cache "
+"hierarchy."
+
+#: ../../source/architecture_trends/significance.rst:17
+msgid ""
+"**SIMT (单指令多线程)**：GPU 采用 SIMT "
+"模型，一个指令流同时控制成千上万个线程。这种方式非常适合处理图形像素或矩阵运算这种整齐规律的任务。同时，GPU "
+"靠切换线程来降低延迟。当一组线程在等待内存数据时，GPU 会迅速切换到另一组就绪的线程继续计算，从而保持流水线繁忙。"
+msgstr ""
+"**SIMT (Single Instruction, Multiple Threads)**: GPUs employ the SIMT model,"
+" where a single instruction stream simultaneously controls thousands of "
+"threads. This approach is exceptionally well-suited for processing regular, "
+"structured tasks like graphics pixels or matrix operations. Concurrently, "
+"GPUs reduce latency by switching between threads. When one group of threads "
+"is waiting for memory data, the GPU rapidly switches to another group of "
+"ready threads to continue computation, thereby keeping the pipeline busy."
+
+#: ../../source/architecture_trends/significance.rst:18
+msgid ""
+"**中心化的控制模式**：虽然 GPU 拥有海量核心，但它们通常通过共享的 L2 缓存或全局显存（Global "
+"Memory）交换数据。更重要的是，GPU 的执行高度依赖 Host CPU "
+"的指令调度。这种中心化的存储与控制模式，在面对极大规模分布式计算时，依然存在同步与通信的瓶颈。"
+msgstr ""
+"**Centralized Control Model**: Although GPUs have massive cores, they "
+"typically exchange data through shared L2 cache or global memory. More "
+"importantly, GPU execution heavily relies on instruction scheduling from the"
+" host CPU. This centralized storage and control model still faces "
+"synchronization and communication bottlenecks when dealing with extremely "
+"large-scale distributed computing."
+
+#: ../../source/architecture_trends/significance.rst:19
+msgid ""
+"**局限性**：尽管并行度极高，GPU 本质上仍未脱离 **“指令驱动”** "
+"的范式。数据必须等待指令下达后才能被处理，且数据在内存层级间的移动仍受指令控制。Host CPU 仍需不断通过总线向 GPU "
+"发送指令，这引入了额外的开销。"
+msgstr ""
+"**Limitations**: Despite the extremely high parallelism, GPUs fundamentally "
+"remain within the **\"instruction-driven\"** paradigm. Data must wait for "
+"instructions to be issued before it can be processed, and the movement of "
+"data between memory hierarchy levels is still controlled by instructions. "
+"The host CPU still needs to continuously send instructions to the GPU via "
+"the bus, which introduces additional overhead."
+
+#: ../../source/architecture_trends/significance.rst:21
+msgid ""
+"然而，随着 AI 模型参数量与计算量的指数级增长，这种“指令控制数据”的模式日益显现出瓶颈：指令解码的开销、线程同步的等待、以及最致命的“内存墙”问题。"
+msgstr ""
+"However, with the exponential growth in the number of parameters and "
+"computational requirements of AI models, the limitations of this "
+"\"instruction-controlled data\" model are becoming increasingly apparent: "
+"the overhead of instruction decoding, the wait for thread synchronization, "
+"and the most critical issue—the \"memory wall.\""
+
+#: ../../source/architecture_trends/significance.rst:23
+msgid ""
+"正是在这种背景下，**数据流架构 (Dataflow Architecture)** "
+"作为一种“回归计算本质”的范式成为了新的选择。它不再由指令流控制执行顺序，而是 "
+"**由数据的可用性直接驱动计算**。这种范式与传统冯·诺依曼架构截然不同，为解决大规模 AI 计算难题提供了全新的思路。"
+msgstr ""
+"It is in this context that **Dataflow Architecture** has emerged as a new "
+"alternative, embodying a paradigm that \"returns to the essence of "
+"computation.\" Instead of being controlled by the flow of instructions, "
+"**computation is directly driven by data availability**. This paradigm "
+"fundamentally differs from the traditional von Neumann architecture, "
+"offering a novel approach to solving the challenges of large-scale AI "
+"computing."
+
+#: ../../source/architecture_trends/significance.rst:26
+msgid "数据驱动的执行模式"
+msgstr "Data-driven execution mode"
+
+#: ../../source/architecture_trends/significance.rst:28
+msgid ""
+"计算操作（如数据流图中的节点）的执行，不是由传统的程序计数器（PC）按顺序取指令决定，而是由其所有依赖的输入数据是否准备好来决定。这与GPU的“控制流”模式截然不同。GPU依赖于CPU发来的指令流，按顺序启动一个个计算核（Kernel），即使数据早已在显存中准备就绪，也必须等待指令到达才能执行。数据流架构则消除了这种“指令等待数据”的延迟，计算单元在数据到达的那一刻就可以立即开始工作，实现了真正的“数据驱动计算”。"
+msgstr ""
+"The execution of computational operations (such as nodes in a dataflow "
+"graph) is not determined by a traditional program counter (PC) sequentially "
+"fetching instructions, but rather by whether all its dependent input data is"
+" ready. This is fundamentally different from the \"control flow\" model of a"
+" GPU. A GPU relies on an instruction stream sent by the CPU to launch "
+"computational kernels sequentially. Even if the data is already prepared in "
+"the GPU memory, execution must wait for the instructions to arrive. The "
+"dataflow architecture eliminates this latency of \"instructions waiting for "
+"data.\" Computational units can begin work immediately the moment data "
+"arrives, achieving true \"data-driven computation.\""
+
+#: ../../source/architecture_trends/significance.rst:31
+msgid "图算结合"
+msgstr "Graph Computing Integration"
+
+#: ../../source/architecture_trends/significance.rst:33
+msgid ""
+"数据流架构具有良好的图适应性，程序被编译成一个数据流图（Dataflow Graph），节点是算子（Operator），边代表数据依赖和流动方向。 "
+"这是数据流架构的灵魂所在，编译器精确地知道A计算单元何时完成计算，以及B计算单元何时需要这个结果。因此，它可以生成指令，让数据在精确的时间点，通过NoC从A直接发送到B。"
+" "
+"也就是说我们可以通过在软件编译层面的设计，来减少硬件通信方面的开销。相较于GPU的图算分离，数据流架构与传统的图计算框架（如TensorFlow、PyTorch）具备较好的相性。"
+msgstr ""
+"The dataflow architecture is well-suited for graphs. Programs are compiled "
+"into a dataflow graph, where nodes are operators and edges represent data "
+"dependencies and flow directions. This is the core of the dataflow "
+"architecture. The compiler precisely knows when computing unit A finishes "
+"its calculation and when computing unit B requires this result. Therefore, "
+"it can generate instructions to send data directly from A to B via the NoC "
+"at the exact moment. This means we can reduce hardware communication "
+"overhead through design at the software compilation level. Compared to the "
+"graph-operator separation in GPUs, the dataflow architecture has good "
+"compatibility with traditional graph computation frameworks like TensorFlow "
+"and PyTorch."
+
+#: ../../source/architecture_trends/significance.rst:-1
+msgid "数据流图中算子节点与数据依赖边的示意"
+msgstr ""
+"Schematic of operator nodes and data dependency edges in a data flow graph"
+
+#: ../../source/architecture_trends/significance.rst:41
+msgid ""
+"上图以图形化方式展示了一个典型的数据流图：每个圆圈或方块代表一个算子节点，连线则表示前后算子之间的数据依赖和张量流向。编译器正是基于这样的图结构来规划哪些算子可以并行执行、哪些中间结果可以直接在片上转发，从而在硬件层面构建出与计算图高度一致的数据流执行路径。"
+msgstr ""
+"The above diagram visually presents a typical dataflow graph: each circle or"
+" block represents an operator node, while the connecting lines indicate data"
+" dependencies and tensor flow between preceding and subsequent operators. "
+"Based on such graph structures, the compiler plans which operators can "
+"execute in parallel and which intermediate results can be directly forwarded"
+" on-chip, thereby constructing hardware-level dataflow execution paths that "
+"closely align with the computational graph."
+
+#: ../../source/architecture_trends/significance.rst:44
+msgid "编程范式对比实例：Kernel 模式 vs 图模式"
+msgstr "Programming Paradigm Comparison Example: Kernel Mode vs. Graph Mode"
+
+#: ../../source/architecture_trends/significance.rst:46
+msgid ""
+"为了更直观地理解这两种架构的差异，我们可以通过一个简单的“向量加法后乘法”（ :math:`D = (B + C) \\times E` "
+"）的计算任务，来对比它们在编程模型上的根本不同。"
+msgstr ""
+"To more intuitively understand the differences between these two "
+"architectures, we can use a simple computational task of \"vector addition "
+"followed by multiplication\" (:math:`D = (B + C) \\times E`) to compare "
+"their fundamental differences in programming models."
+
+#: ../../source/architecture_trends/significance.rst:48
+msgid "**1. GPU 的编程模型：以 Kernel 为中心的指令驱动**"
+msgstr "1. GPU Programming Model: Kernel-Centric Instruction-Driven"
+
+#: ../../source/architecture_trends/significance.rst:50
+msgid ""
+"在 GPU 开发（如 CUDA）中，开发者往往需要将计算任务拆解为一个个独立的 **Kernel（内核）**。每个 Kernel "
+"完成一个简单的步骤，中间结果必须写回全局显存（Global Memory），下一个 Kernel 再从显存中读取。Host CPU "
+"像一个指挥官，不断下达指令启动 Kernel。"
+msgstr ""
+"In GPU development (such as CUDA), developers often need to break down "
+"computing tasks into individual **Kernels**. Each Kernel completes a simple "
+"step, with intermediate results written back to Global Memory, and the next "
+"Kernel reads from memory again. The host CPU acts like a commander, "
+"continuously issuing instructions to launch Kernels."
+
+#: ../../source/architecture_trends/significance.rst:52
+msgid "GPU 编程模式"
+msgstr "GPU Programming Model"
+
+#: ../../source/architecture_trends/significance.rst:92
+msgid ""
+"**问题所在**：即使 `add_kernel` 和 `mul_kernel` 只是简单的操作，中间数据 `A` 也必须经历“写回显存 -> "
+"读取显存”的过程。对于 GPU 而言，两个 Kernel 之间是隔离的，必须通过中心化的显存来传递状态，且需要 Host CPU 的介入来协调顺序。"
+msgstr ""
+"**Issue**: Even though `add_kernel` and `mul_kernel` are simple operations, "
+"the intermediate data `A` must go through a \"write back to VRAM -> read "
+"from VRAM\" process. For the GPU, kernels are isolated from each other and "
+"must pass state through centralized VRAM, requiring Host CPU intervention to"
+" coordinate the sequence."
+
+#: ../../source/architecture_trends/significance.rst:94
+msgid "**2. 数据流架构的编程模型：以图为中心的流式计算**"
+msgstr ""
+"**2. Programming Model for Dataflow Architecture: Graph-Centric Stream "
+"Computing**"
+
+#: ../../source/architecture_trends/significance.rst:96
+msgid ""
+"在数据流架构中，开发者关注的是 "
+"**定义计算图**。算子被映射到芯片上不同的计算单元，数据像流水线一样在单元之间直接流动，**中间结果不写回外部内存**。"
+msgstr ""
+"In a dataflow architecture, developers focus on **defining the computation "
+"graph**. Operators are mapped to different computing units on the chip, and "
+"data flows directly between units like a pipeline, **with intermediate "
+"results not written back to external memory**."
+
+#: ../../source/architecture_trends/significance.rst:98
+msgid "数据流编程模式"
+msgstr "Data Stream Programming Pattern"
+
+#: ../../source/architecture_trends/significance.rst:122
+msgid ""
+"**优势**：这种模式下，`Op.add` 和 `Op.mul` "
+"在空间上是并行的（Pipelined）。数据一生产出来就立即被消费，彻底消除了通过中心化显存交换数据的开销，也摆脱了 Host CPU 的频繁指令控制。"
+msgstr ""
+"**Advantages**: In this mode, `Op.add` and `Op.mul` are spatially pipelined."
+" Data is consumed immediately upon being produced, completely eliminating "
+"the overhead of exchanging data through centralized memory and freeing the "
+"system from frequent instruction control by the Host CPU."
+
+#: ../../source/architecture_trends/significance.rst:125
+msgid "GPU的困境：内存墙"
+msgstr "The GPU Dilemma: The Memory Wall"
+
+#: ../../source/architecture_trends/significance.rst:127
+msgid ""
+"而GPU的工作流程往往分为两个部分，CPU先构建并优化图，然后进行图的执行，它按照图中的依赖关系，依次遍历图的节点（算子）。 "
+"每当遇到一个算子，CPU就会向GPU下达一个指令：“启动执行器（CUDA Kernel），在XX内存地址上执行XX任务”。 "
+"GPU接到指令后，就调度其内部成千上万的计算核心（CUDA "
+"Cores）去执行这个Kernel。一个Kernel执行完毕后，通常会将结果写回到GPU的全局显存中。为此，GPU在数据传输上有大量开销，并且内存操作的速度远慢于计算操作的速度，这导致了GPU的计算能力无法得到充分利用，也就是常说的“内存墙问题”。"
+" "
+"GPU缓解“内存墙”问题的思路通常是疯狂提升带宽，每一代GPU都在追求更高的内存带宽（HBM），从几百GB/s到如今的几个TB/s，但仍然面临着下面的问题："
+msgstr ""
+"The workflow of a GPU is typically divided into two parts: the CPU first "
+"builds and optimizes the graph, then executes the graph by traversing the "
+"nodes (operators) sequentially according to their dependencies in the graph."
+" Each time an operator is encountered, the CPU sends an instruction to the "
+"GPU: \"Launch the executor (CUDA Kernel) to perform XX task at memory "
+"address XX.\" Upon receiving the instruction, the GPU schedules its "
+"thousands of computational cores (CUDA Cores) to execute this Kernel. After "
+"a Kernel completes execution, the results are usually written back to the "
+"GPU's global memory. This process incurs significant overhead in data "
+"transfer for the GPU, and the speed of memory operations is much slower than"
+" that of computational operations. As a result, the GPU's computational "
+"capacity cannot be fully utilized, which is commonly referred to as the "
+"\"memory wall problem.\" The approach to mitigating the \"memory wall\" "
+"problem in GPUs typically involves aggressively increasing bandwidth. Each "
+"generation of GPUs pursues higher memory bandwidth (HBM), ranging from "
+"hundreds of GB/s to several TB/s today, but they still face the following "
+"issues:"
+
+#: ../../source/architecture_trends/significance.rst:132
+msgid ""
+"算力增长远快于带宽增长：芯片上晶体管密度（以及由此带来的算力FLOPS）的增长速度，远远超过了芯片I/O接口（以及由此带来的带宽）的增长速度。"
+msgstr ""
+"Computing power grows much faster than bandwidth: the growth rate of "
+"transistor density on chips (and the resulting computing power in FLOPS) far"
+" exceeds the growth rate of chip I/O interfaces (and the resulting "
+"bandwidth)."
+
+#: ../../source/architecture_trends/significance.rst:133
+msgid ""
+"片外数据搬运存在大量能耗与延迟：将一个数据从DRAM搬到计算单元再写回去的能量开销，可能是执行一次计算本身的上百倍！即使拥有无限的带宽，可以让数据瞬间到达，每一次的访问也都在产生巨大的、不可避免的能量开销。对于需要海量数据吞吐的AI模型来说，这会导致芯片的功耗高得无法接受。"
+msgstr ""
+"Off-chip data movement incurs substantial energy consumption and latency: "
+"the energy cost of transferring a single data element from DRAM to the "
+"computing unit and writing it back can be hundreds of times greater than "
+"performing the computation itself! Even with infinite bandwidth enabling "
+"instantaneous data transfer, each access generates immense and unavoidable "
+"energy overhead. For AI models requiring massive data throughput, this "
+"results in unacceptably high chip power consumption."
+
+#: ../../source/architecture_trends/significance.rst:134
+msgid ""
+"带宽再高也存在传递的延迟：GPU的“图算分离”模式，每次调用一个Kernel，都需要一次完整的“CPU -> GPU驱动 -> Kernel启动 -> "
+"访问DRAM -> "
+"写回DRAM”的流程。这个流程本身就存在固有的延迟。虽然GPU通过海量线程（Warp调度）的方式可以隐藏一部分延迟（当一部分线程在等数据时，另一部分线程可以先计算），但延迟本身并没有消失。"
+msgstr ""
+"Even with high bandwidth, transmission latency persists: In GPU's \"compute-"
+"graph separation\" model, each kernel invocation requires a complete process"
+" of \"CPU -> GPU driver -> Kernel launch -> DRAM access -> Write back to "
+"DRAM.\" This process itself has inherent latency. Although GPUs can hide "
+"some of this latency through massive threading (Warp scheduling)—where one "
+"set of threads can compute while another waits for data—the latency itself "
+"does not disappear."
+
+#: ../../source/architecture_trends/significance.rst:136
+msgid "因此GPU的解决方法是一种“治标不治本”的策略，它能缓解问题，但无法从根本上解决问题。"
+msgstr ""
+"Therefore, the GPU solution is a \"temporary fix rather than a permanent "
+"cure\" strategy; it can alleviate the problem but cannot fundamentally "
+"resolve it."
+
+#: ../../source/architecture_trends/significance.rst:139
+msgid "数据流的“治本”之道"
+msgstr "The Fundamental Solution for Data Flow Management"
+
+#: ../../source/architecture_trends/significance.rst:141
+msgid "而数据流架构，则是一种试图“治本”的全新思路。它不是去缓解内存墙，而是通过减少访存来试图绕开内存墙。"
+msgstr ""
+"The dataflow architecture, on the other hand, represents a fundamentally new"
+" approach that attempts to \"address the root cause.\" Instead of "
+"alleviating the memory wall, it seeks to bypass it by reducing memory "
+"access."
+
+#: ../../source/architecture_trends/significance.rst:143
+msgid "最大化的片上复用：通过编译器的全局规划，让数据尽可能地“定居”在芯片内部的SRAM中，被反复利用。这可以将访存的能耗降低百倍。"
+msgstr ""
+"Maximizing on-chip reuse: Through global planning by the compiler, data is "
+"kept in the on-chip SRAM as much as possible and reused repeatedly. This can"
+" reduce memory access energy consumption by a hundredfold."
+
+#: ../../source/architecture_trends/significance.rst:144
+msgid "显式通信：让数据在片上计算单元之间直接“串门”（通过NoC），而不是每次都要先回显存报个到。这极大地降低了中间结果的读写延迟和能耗。"
+msgstr ""
+"Explicit Communication: Allows data to directly \"visit\" other on-chip "
+"compute units (via NoC), rather than having to report back to main memory "
+"each time. This significantly reduces the read/write latency and energy "
+"consumption of intermediate results."
+
+#: ../../source/architecture_trends/significance.rst:147
+msgid "天然的并行性"
+msgstr "Natural parallelism"
+
+#: ../../source/architecture_trends/significance.rst:149
+msgid ""
+"由于执行仅依赖于数据，因此在数据流图中，任何两个没有直接数据依赖关系的节点，都可以在硬件资源允许的情况下同时执行。编译器可以轻易地从图中识别出所有潜在的并行机会，无论是算子内部的并行（如向量化），还是算子之间的并行（任务并行），都无需像GPU那样依赖复杂的运行时调度器去动态发掘。整个程序的并行性在编译阶段就可以被静态地、确定性地固定下来。"
+msgstr ""
+"Since execution depends solely on data, in the dataflow graph, any two nodes"
+" without a direct data dependency can execute simultaneously as long as "
+"hardware resources permit. The compiler can easily identify all potential "
+"parallel opportunities from the graph, whether it is parallelism within "
+"operators (such as vectorization) or parallelism between operators (task "
+"parallelism), without relying on complex runtime schedulers to dynamically "
+"discover them as GPUs do. The entire program's parallelism can be statically"
+" and deterministically fixed during the compilation stage."
+
+#: ../../source/architecture_trends/significance.rst:152
+msgid "良好的可拓展性"
+msgstr "Good scalability"
+
+#: ../../source/architecture_trends/significance.rst:155
+msgid ""
+"数据流架构的计算和通信模式是局部化的。每个计算单元主要与其邻近的单元通信。这种特性使得架构可以通过增加更多的计算单元来线性地扩展整个系统的计算能力，而无需担心像传统多核CPU/GPU那样，因共享内存和缓存一致性协议带来的全局通信瓶颈。只要编译器能够将一个更大的计算图映射到更多的硬件单元上，性能就能随之增长，这也是为什么Cerebras能够制造出晶圆级芯片的底层逻辑。"
+msgstr ""
+"The computational and communication patterns of the dataflow architecture "
+"are localized. Each computing unit primarily communicates with its "
+"neighboring units. This characteristic enables the architecture to linearly "
+"scale the computational power of the entire system by adding more computing "
+"units, without worrying about the global communication bottlenecks caused by"
+" shared memory and cache coherence protocols in traditional multi-core "
+"CPUs/GPUs. As long as the compiler can map a larger computation graph to "
+"more hardware units, performance can scale accordingly, which is the "
+"underlying logic behind Cerebras' ability to manufacture wafer-scale chips."
+
+#: ../../source/architecture_trends/significance.rst:158
+msgid "众核数据流架构的局限性"
+msgstr "Limitations of Many-Core Dataflow Architectures"
+
+#: ../../source/architecture_trends/significance.rst:160
+msgid "尽管数据流架构在AI计算领域展现出巨大的潜力，但其独特的特性也带来了一系列挑战，这也是其尚未取代传统GPU的原因。"
+msgstr ""
+"While dataflow architecture demonstrates immense potential in the field of "
+"AI computing, its unique characteristics also introduce a series of "
+"challenges, which is why it has not yet replaced traditional GPUs."
+
+#: ../../source/architecture_trends/significance.rst:162
+msgid ""
+"**编译器负担的上升** "
+"数据流架构将复杂的运行时调度转移到了编译期。这虽然简化了硬件，却极大地增加了编译器的负担。编译器不仅需要理解计算图的结构，还需要精确掌握底层硬件的拓扑、SRAM容量以及通信延迟，以求解一个极度复杂的优化问题。当模型结构变得动态（如MoE路由）时，静态编译很难生成最优的执行计划，导致运行时效率大幅下降。"
+msgstr ""
+"**The Increasing Burden on Compilers** Dataflow architectures shift complex "
+"runtime scheduling to compile time. While this simplifies hardware, it "
+"places a significantly greater burden on the compiler. The compiler must not"
+" only understand the computational graph's structure but also precisely "
+"grasp the underlying hardware's topology, SRAM capacity, and communication "
+"latency to solve an extremely complex optimization problem. When model "
+"structures become dynamic (such as MoE routing), static compilation "
+"struggles to generate an optimal execution plan, leading to a substantial "
+"drop in runtime efficiency."
+
+#: ../../source/architecture_trends/significance.rst:165
+msgid ""
+"**通用性不足与缺乏良好的生态** GPU之所以成功，很大程度上归功于CUDA生态的通用性。数据流架构通常需要专用的软件栈（如Graphcore "
+"Poplar, SambaNova "
+"SambaFlow），这些软件栈虽然在特定AI负载上表现优异，但缺乏对通用计算（如复杂的控制流、非张量运算）的广泛支持。这使得迁移现有的、依赖大量自定义算子的业务代码变得异常困难。"
+msgstr ""
+"**Lack of Versatility and a Robust Ecosystem** The success of GPUs is "
+"largely attributed to the versatility of the CUDA ecosystem. Dataflow "
+"architectures typically require specialized software stacks (such as "
+"Graphcore Poplar, SambaNova SambaFlow). While these software stacks excel at"
+" specific AI workloads, they lack broad support for general-purpose "
+"computing (such as complex control flows and non-tensor operations). This "
+"makes migrating existing business code that relies heavily on custom "
+"operators extremely difficult."
+
+#: ../../source/architecture_trends/significance.rst:168
+msgid ""
+"**片上内存容量的限制与高张量并行的副作用** "
+"为了追求极致带宽，数据流架构往往依赖昂贵的片上SRAM。然而，SRAM的容量远低于DRAM。面对参数量动辄数千亿的LLM，单核内存远远无法容纳模型权重，导致了下面的结果。"
+msgstr ""
+"**Limitations of On-Chip Memory Capacity and Side Effects of High Tensor "
+"Parallelism** To pursue extreme bandwidth, dataflow architectures often rely"
+" on expensive on-chip SRAM. However, the capacity of SRAM is far lower than "
+"that of DRAM. Faced with LLMs whose parameter counts easily reach hundreds "
+"of billions, the memory of a single core is far from sufficient to hold the "
+"model weights, leading to the following outcomes."
+
+#: ../../source/architecture_trends/significance.rst:171
+msgid ""
+"**高张量并行（Tensor "
+"Parallelism）**：为了存下巨大模型，必须将权重矩阵切分到成千上万个核心上。这意味着每一次矩阵乘法运算，都被拆解成了数千个微小的计算任务。"
+msgstr ""
+"**High Tensor Parallelism**: To accommodate enormous models, weight matrices"
+" must be partitioned across thousands of cores. This means every matrix "
+"multiplication operation is decomposed into thousands of tiny computational "
+"tasks."
+
+#: ../../source/architecture_trends/significance.rst:172
+msgid ""
+"**核间同步开销激增**：在Transformer架构中，每一层的计算结束都需要来汇总这些计算任务的和。当参与同步的核心数量激增到众核架构的数千个时，片上网络面临巨大的通信压力，通信延迟呈指数级上升。虽然计算被高度并行化了，但通信成为了新的串行瓶颈。大量的计算核心不得不频繁停下来等待邻居的数据，导致算力利用率大幅下降。"
+msgstr ""
+"**The Overhead of Inter-core Synchronization Soars**: In the Transformer "
+"architecture, the computation of each layer requires aggregating the results"
+" from these computational tasks. When the number of cores participating in "
+"synchronization surges to the thousands in a many-core architecture, the on-"
+"chip network faces immense communication pressure, and communication latency"
+" increases exponentially. Although the computation is highly parallelized, "
+"communication becomes the new serial bottleneck. A vast number of computing "
+"cores are forced to frequently pause and wait for data from neighboring "
+"cores, leading to a significant drop in computational efficiency."
+
+#: ../../source/architecture_trends/significance.rst:175
+msgid "技术实现"
+msgstr "Technical Implementation"
+
+#: ../../source/architecture_trends/significance.rst:176
+msgid "为了实现上述理想的设计理念，数据流面对着如下的问题："
+msgstr ""
+"To achieve the ideal design philosophy described above, the data flow faces "
+"the following issues:"
+
+#: ../../source/architecture_trends/significance.rst:179
+msgid "编译器的优化能力"
+msgstr "Compiler optimization capabilities"
+
+#: ../../source/architecture_trends/significance.rst:180
+msgid ""
+"数据流架构将大量的并行性与数据搬移控制交给软件，这要求编译器承担极具挑战性的工作：将高层计算图进行切分、将算子与数据合理映射到众多的处理单元上、规划通信路径与调度执行顺序。这比传统GPU的编译优化更为复杂。"
+msgstr ""
+"Dataflow architecture transfers massive parallelism and data movement "
+"control to software, requiring compilers to undertake highly challenging "
+"tasks: partitioning high-level computational graphs, properly mapping "
+"operators and data to numerous processing units, and planning communication "
+"paths while scheduling execution sequences. This is more complex than "
+"traditional GPU compilation optimization."
+
+#: ../../source/architecture_trends/significance.rst:183
+#: ../../source/architecture_trends/significance.rst:192
+#: ../../source/architecture_trends/significance.rst:201
+#: ../../source/architecture_trends/significance.rst:210
+#: ../../source/architecture_trends/significance.rst:218
+msgid "解决方案示例"
+msgstr "Solution Example"
+
+#: ../../source/architecture_trends/significance.rst:184
+msgid ""
+"**SambaNova** 的可重构数据流单元（RDU）依赖其独家开发的编译器栈，为每个AI模型自动探索并生成最优的硬件配置与数据流图映射方案。"
+msgstr ""
+"SambaNova's Reconfigurable Dataflow Unit (RDU) relies on its proprietary "
+"compiler stack to automatically explore and generate the optimal hardware "
+"configuration and dataflow graph mapping scheme for each AI model."
+
+#: ../../source/architecture_trends/significance.rst:185
+msgid ""
+"**Graphcore** 的Poplar软件栈则要求编译器显式地将计算图划分到上千个处理器核（Tile）上，并管理每个核本地内存（SRAM）中的数据。"
+msgstr ""
+"**Graphcore**'s Poplar software stack requires the compiler to explicitly "
+"partition the computation graph across thousands of processor cores (Tiles) "
+"and manage the data in each core's local memory (SRAM)."
+
+#: ../../source/architecture_trends/significance.rst:188
+msgid "片上网络（NoC）的设计"
+msgstr "Network-on-Chip (NoC) Design"
+
+#: ../../source/architecture_trends/significance.rst:189
+msgid ""
+"数据在处理单元之间的大量流动是数据流架构的常态。因此，片上网络必须提供极高的带宽与极低的延迟，以避免其成为性能瓶颈。网络拓扑、路由算法与流控机制的设计至关重要。"
+msgstr ""
+"The substantial flow of data between processing units is the norm in "
+"dataflow architecture. Therefore, the network-on-chip must provide extremely"
+" high bandwidth and very low latency to avoid becoming a performance "
+"bottleneck. The design of network topology, routing algorithms, and flow "
+"control mechanisms is crucial."
+
+#: ../../source/architecture_trends/significance.rst:193
+msgid ""
+"**Cerebras** 将整个晶圆刻蚀成一颗芯片，其核心是连接了数十万个处理核心的2D网格网络，提供了惊人的片上带宽，数据抵达后直接触发计算。"
+msgstr ""
+"**Cerebras** etches an entire wafer into a single chip, whose core is a 2D "
+"mesh network connecting hundreds of thousands of processing cores, "
+"delivering exceptional on-chip bandwidth. Computation is triggered directly "
+"upon data arrival."
+
+#: ../../source/architecture_trends/significance.rst:194
+msgid ""
+"**Tenstorrent** 的 Wormhole 芯片设计了高性能的NoC，通过多个64位处理器核心进行路由，从而在多个芯片之间实现低延迟扩展。"
+msgstr ""
+"**Tenstorrent**'s Wormhole chip features a high-performance NoC that routes "
+"through multiple 64-bit processor cores, enabling low-latency scaling across"
+" multiple chips."
+
+#: ../../source/architecture_trends/significance.rst:197
+msgid "对特定计算图的适应性"
+msgstr "Adaptability to Specific Computation Graphs"
+
+#: ../../source/architecture_trends/significance.rst:198
+msgid ""
+"静态的数据流硬件可能对某种特定结构（如规则的卷积网络）优化到极致，但在处理结构不规则、动态性强（如稀疏网络、Transformer）的模型时效率下降。"
+msgstr ""
+"Statically optimized dataflow hardware may achieve peak performance for "
+"specific structures (such as regular convolutional networks), but its "
+"efficiency declines when handling models with irregular structures and high "
+"dynamism (such as sparse networks or Transformers)."
+
+#: ../../source/architecture_trends/significance.rst:202
+msgid ""
+"**SambaNova RDU** 的“可重构”特性，使其能根据不同模型的计算图，动态调整芯片内部的数据通路，为每个模型定制专用的数据流路径。"
+msgstr ""
+"The \"reconfigurable\" feature of **SambaNova RDU** enables it to "
+"dynamically adjust the internal data pathways of the chip based on the "
+"computational graph of different models, creating customized data flow paths"
+" for each model."
+
+#: ../../source/architecture_trends/significance.rst:203
+msgid ""
+"**Graphcore IPU** "
+"采用MIMD（多指令多数据流）架构，每个核心都能执行不同的程序，相比GPU的SIMT架构，能更灵活地处理分支、稀疏计算等不规则任务。"
+msgstr ""
+"Graphcore IPUs use a MIMD (Multiple Instruction, Multiple Data) "
+"architecture, where each core can execute a different program. Compared to "
+"the SIMT architecture of GPUs, this allows for more flexible handling of "
+"irregular tasks such as branching and sparse computations."
+
+#: ../../source/architecture_trends/significance.rst:206
+msgid "缓存一致性"
+msgstr "Cache Consistency"
+
+#: ../../source/architecture_trends/significance.rst:207
+msgid ""
+"传统多核CPU/GPU依赖复杂的硬件缓存一致性协议来维护统一的内存视图，但这在扩展到数千核心时会带来巨大的开销与瓶颈。数据流架构通常会选择绕开这个问题。"
+msgstr ""
+"Traditional multi-core CPUs/GPUs rely on complex hardware cache coherence "
+"protocols to maintain a unified memory view, but this introduces significant"
+" overhead and bottlenecks when scaling to thousands of cores. Dataflow "
+"architectures typically choose to bypass this problem."
+
+#: ../../source/architecture_trends/significance.rst:211
+msgid ""
+"**Graphcore IPU** "
+"舍弃了硬件缓存一致性，每个核心只访问自己的本地SRAM。需要跨核通信时，由编译器在Poplar软件中进行显式的、可预测的数据同步与搬移，从而提升了能效与确定性。"
+msgstr ""
+"**Graphcore IPU** abandons hardware cache coherence, with each core "
+"accessing only its own local SRAM. When cross-core communication is "
+"required, the compiler performs explicit, predictable data synchronization "
+"and movement within the Poplar software, thereby improving energy efficiency"
+" and determinism."
+
+#: ../../source/architecture_trends/significance.rst:214
+msgid "保证可预测性与同步"
+msgstr "Ensure predictability and synchronization"
+
+#: ../../source/architecture_trends/significance.rst:215
+msgid "数据流架构的一个核心优势是通过编译期规划，将复杂的运行时调度与依赖判断转移至编译期完成，从而获得高度确定的性能。"
+msgstr ""
+"A core advantage of dataflow architecture is its ability to shift complex "
+"runtime scheduling and dependency resolution to compile-time planning, "
+"thereby achieving highly predictable performance."
+
+#: ../../source/architecture_trends/significance.rst:219
+msgid ""
+"**Graphcore IPU** 采用块同步并行（Bulk Synchronous Parallel, "
+"BSP）模型，将程序执行划分为“本地计算”和“全局同步”两个阶段，使得并行执行的逻辑大大简化，性能可预测。"
+msgstr ""
+"Graphcore IPU adopts the Bulk Synchronous Parallel (BSP) model, dividing "
+"program execution into two stages: \"local computation\" and \"global "
+"synchronization,\" which greatly simplifies parallel execution logic and "
+"ensures predictable performance."
+
+#: ../../source/architecture_trends/significance.rst:220
+msgid ""
+"**Google TPU** 也应用了数据流架构的思想，通过脉动阵列（Systolic "
+"Array）让数据在计算单元之间规律地流动和计算，执行效率极高且时序固定。"
+msgstr ""
+"**Google TPU** also applies the concept of dataflow architecture, utilizing "
+"a Systolic Array to allow data to flow and be computed regularly between "
+"computing units, achieving extremely high execution efficiency with fixed "
+"timing."
+
+#: ../../source/architecture_trends/significance.rst:224
+msgid "时代适应性"
+msgstr "Adaptability to the Times"
+
+#: ../../source/architecture_trends/significance.rst:227
+msgid "工作负载变化"
+msgstr "Workload variation"
+
+#: ../../source/architecture_trends/significance.rst:228
+msgid ""
+"**大语言模型（LLM）带来了参数量与序列长度的双重挑战**：LLM的推理过程是内存带宽密集型的。一方面，自回归生成涉及大量KV矩阵，**数据流架构利用片上大容量SRAM实现权重与KV-"
+"Cache的本地复用**，避免了反复搬运。另一方面，由于众核架构单核资源有限，大模型部署往往需要极高的张量并行度（Tensor "
+"Parallelism），导致核间同步开销激增。对此，数据流架构通过高带宽片上网络（NoC）支持**激活值与中间结果的高效流动**，缓解了由大规模切分带来的通信瓶颈。"
+msgstr ""
+"Large language models (LLMs) present dual challenges in both parameter count"
+" and sequence length: The inference process of LLMs is memory bandwidth "
+"intensive. On one hand, autoregressive generation involves a large number of"
+" KV matrices. **The dataflow architecture utilizes on-chip large-capacity "
+"SRAM to achieve local reuse of weights and KV-Cache**, avoiding repeated "
+"data movement. On the other hand, due to the limited resources of individual"
+" cores in many-core architectures, deploying large models often requires "
+"extremely high tensor parallelism, leading to a sharp increase in inter-core"
+" synchronization overhead. In this regard, the dataflow architecture "
+"supports **efficient flow of activations and intermediate results** through "
+"a high-bandwidth on-chip network (NoC), alleviating the communication "
+"bottleneck caused by large-scale partitioning."
+
+#: ../../source/architecture_trends/significance.rst:229
+msgid ""
+"**混合专家模型（MoE）带来了稀疏矩阵处理的问题**：MoE模型在每次前向传播时，仅激活一小部分“专家”网络，这是一种典型的动态稀疏计算。传统GPU的SIMT架构难以处理这种不规则的计算负载，容易导致大量核心空闲（GPU的A100引进了Sparse"
+" Tensorcore来缓解这个问题）。而数据流架构，特别是MIMD类型（如Graphcore "
+"IPU），可以灵活地将不同任务调度到不同核心，数据流驱动的执行方式天然契合稀疏计算，只在数据到达时才触发计算，能效更高。"
+msgstr ""
+"**Mixture of Experts (MoE) introduces the challenge of sparse matrix "
+"processing**: In each forward pass, an MoE model only activates a small "
+"subset of \"expert\" networks, which is a typical dynamic sparse "
+"computation. The traditional SIMT architecture of GPUs struggles to handle "
+"this irregular computational load, often leading to significant core idling "
+"(the A100 GPU introduced Sparse Tensor Cores to mitigate this issue). In "
+"contrast, dataflow architectures, particularly the MIMD type (such as "
+"Graphcore's IPU), can flexibly schedule different tasks to different cores. "
+"The dataflow-driven execution model inherently aligns with sparse "
+"computation, as computation is only triggered when data arrives, resulting "
+"in higher energy efficiency."
+
+#: ../../source/architecture_trends/significance.rst:232
+msgid "工艺与封装"
+msgstr "Process and Packaging"
+
+#: ../../source/architecture_trends/significance.rst:234
+msgid "**HBM + 先进封装：打破“内存墙”，实现存算一体**"
+msgstr ""
+"HBM + Advanced Packaging: Breaking the \"Memory Wall\" to Achieve Memory-"
+"Computing Integration"
+
+#: ../../source/architecture_trends/significance.rst:236
+msgid "数据流架构的核心思想是让数据“流动”起来，尽可能减少计算单元因等待数据而产生的空闲。"
+msgstr ""
+"The core idea of dataflow architecture is to make data \"flow,\" minimizing "
+"idle time in computational units caused by waiting for data."
+
+#: ../../source/architecture_trends/significance.rst:238
+msgid ""
+"**HBM (高带宽内存)**：它通过3D堆叠技术将多个DRAM "
+"die垂直堆叠起来，并通过极宽的接口（如1024-bit）与处理器通信。相比传统DDR内存几十GB/s的带宽，HBM可以轻松提供近1TB/s甚至更高的带宽。"
+msgstr ""
+"HBM (High Bandwidth Memory): It vertically stacks multiple DRAM dies using "
+"3D stacking technology and communicates with the processor through an "
+"extremely wide interface (e.g., 1024-bit). Compared to the tens of GB/s "
+"bandwidth of traditional DDR memory, HBM can easily provide nearly 1 TB/s or"
+" even higher bandwidth."
+
+#: ../../source/architecture_trends/significance.rst:239
+msgid ""
+"**2.5D/3D封装**：这项技术是实现HBM与处理器紧密集成的关键。它不是将处理器和HBM芯片并排放在一块PCB板上，而是将它们都放置在一块被称为“硅中介层（Silicon"
+" "
+"Interposer）”的基板上（2.5D），或者直接将它们堆叠在一起（3D）。这种方式极大地缩短了二者之间的物理距离，从而实现了超高的带宽和更低的功耗。"
+msgstr ""
+"2.5D/3D Packaging: This technology is key to achieving the tight integration"
+" of HBM and the processor. Instead of placing the processor and HBM chips "
+"side-by-side on a PCB, it places them both on a substrate called a silicon "
+"interposer (2.5D), or directly stacks them together (3D). This method "
+"significantly shortens the physical distance between the two, thereby "
+"achieving extremely high bandwidth and lower power consumption."
+
+#: ../../source/architecture_trends/significance.rst:241
+msgid ""
+"HBM和先进封装技术的结合，可以为数据流处理器配备了一个“贴身”的、容量和带宽都极高的内存资源，使得数据可以快速送达计算单元，物理上实现了“计算-"
+"存储”的紧耦合，这是数据流高效执行的基础。"
+msgstr ""
+"The combination of HBM and advanced packaging technology provides dataflow "
+"processors with an \"intimate,\" high-capacity, and high-bandwidth memory "
+"resource, enabling data to be rapidly delivered to computing units. This "
+"physically achieves tight coupling between computation and storage, which is"
+" the foundation for efficient execution of dataflow."
+
+#: ../../source/architecture_trends/significance.rst:243
+msgid "**Chiplet技术：构建超大规模AI芯片**"
+msgstr "Chiplet Technology: Building Ultra-Large-Scale AI Chips"
+
+#: ../../source/architecture_trends/significance.rst:245
+msgid ""
+"随着AI模型越来越大，单块芯片的面积和功耗都逼近物理极限，制造成本也成为巨大挑战。Chiplet技术是将一个巨大的单片芯片拆分成多个功能独立的、更小的“芯粒”，再将它们封装在一起，协同工作。"
+msgstr ""
+"As AI models grow larger, the area and power consumption of a single chip "
+"are approaching physical limits, and manufacturing costs have become a major"
+" challenge. Chiplet technology involves splitting a large monolithic chip "
+"into multiple functionally independent, smaller \"chiplets,\" which are then"
+" packaged together to work collaboratively."
+
+#: ../../source/architecture_trends/significance.rst:247
+msgid ""
+"**灵活性与成本效益**：不同的Chiplet可以用最适合它的工艺来制造。例如，计算单元可以用最先进的5nm/3nm工艺追求极致性能，而I/O接口则可以用成熟的16nm/22nm工艺来降低成本。这打破了单片芯片“一荣俱荣，一损俱损”的限制。"
+msgstr ""
+"**Flexibility and Cost-Effectiveness**: Different chiplets can be "
+"manufactured using the most suitable process for each. For example, "
+"computing units can utilize the most advanced 5nm/3nm process to pursue peak"
+" performance, while I/O interfaces can employ mature 16nm/22nm processes to "
+"reduce costs. This breaks the limitation of monolithic chips where \"all "
+"components thrive or suffer together.\""
+
+#: ../../source/architecture_trends/significance.rst:248
+msgid ""
+"**可扩展性 "
+"(Scalability)**：这是Chiplet对数据流架构最重要的贡献。数据流架构天然适合并行扩展。借助Chiplet，厂商可以轻松地“按需组合”计算Chiplet、内存Chiplet和互联Chiplet，构建出规模远超单片芯片极限的AI加速器。例如，可以通过增加计算Chiplet的数量来线性提升算力。"
+msgstr ""
+"**Scalability**: This is the most significant contribution of Chiplet to "
+"dataflow architecture. Dataflow architecture is inherently suitable for "
+"parallel scaling. With Chiplet, manufacturers can easily \"mix and match\" "
+"computing chiplets, memory chiplets, and interconnect chiplets on demand to "
+"build AI accelerators whose scale far exceeds the limits of monolithic "
+"chips. For example, computing power can be linearly increased by adding more"
+" computing chiplets."
+
+#: ../../source/architecture_trends/significance.rst:249
+msgid ""
+"**专用的片上网络 (NoC)**：Chiplet之间需要高效的通信网络。这催生了专门的Die-to-"
+"Die互联技术和高带宽的片上网络（NoC）。这与数据流架构中数据需要在不同处理单元间高效流动的需求不谋而合。Tenstorrent等公司正是利用了这一点，将每个Chiplet设计成一个独立的、带路由功能的节点，通过NoC将众多Chiplet连接成一个庞大的计算网络。"
+msgstr ""
+"**Dedicated Network-on-Chip (NoC)**: Chiplets require an efficient "
+"communication network. This has given rise to specialized Die-to-Die "
+"interconnect technologies and high-bandwidth Networks-on-Chip (NoC). This "
+"aligns with the requirement in dataflow architectures for data to flow "
+"efficiently between different processing units. Companies like Tenstorrent "
+"leverage this by designing each Chiplet as an independent, routing-capable "
+"node, connecting numerous Chiplets into a vast computing network via the "
+"NoC."
+
+#: ../../source/architecture_trends/significance.rst:251
+msgid ""
+"如果说HBM和先进封装解决了 **单个计算节点** 的内存带宽瓶颈，那么Chiplet技术则解决了 "
+"**如何将成百上千个这样的节点高效扩展、连接成一个系统** 的难题。两者共同为数据流架构在AI时代大放异彩提供了坚实的硬件基础。"
+msgstr ""
+"If HBM and advanced packaging solve the memory bandwidth bottleneck of a "
+"single computing node, then Chiplet technology addresses the challenge of "
+"how to efficiently scale and connect hundreds or thousands of such nodes "
+"into a system. Together, they provide a solid hardware foundation for "
+"dataflow architecture to shine in the AI era."
+
+#: ../../source/architecture_trends/significance.rst:254
+msgid "编译技术的发展"
+msgstr "The Development of Compilation Technology"
+
+#: ../../source/architecture_trends/significance.rst:255
+msgid ""
+"**图编译器（Graph Compiler）的成熟**：以 "
+"**MLIR**、XLA、TVM为代表的编译技术，能够将TensorFlow、PyTorch等框架定义的高层计算图，自动地、层次化地转换为底层的硬件指令。这使得数据流硬件复杂的映射、调度与优化过程可以由编译器自动完成，开发者无需直接面向底层硬件编程，极大地降低了数据流架构的使用门槛。"
+msgstr ""
+"Maturation of Graph Compilers: Compilation technologies represented by MLIR,"
+" XLA, and TVM can automatically and hierarchically transform high-level "
+"computational graphs defined by frameworks like TensorFlow and PyTorch into "
+"low-level hardware instructions. This enables the complex mapping, "
+"scheduling, and optimization processes for dataflow hardware to be "
+"automatically handled by the compiler. Developers no longer need to program "
+"directly for the underlying hardware, significantly lowering the barrier to "
+"using dataflow architectures."
+
+#: ../../source/architecture_trends/significance.rst:257
+msgid "下面的示例展示了如何将一个简单的PyTorch模型导出为计算图，并交给TVM这类图编译器进行优化和生成特定硬件的可执行模块："
+msgstr ""
+"The following example demonstrates how to export a simple PyTorch model as a"
+" computation graph and provide it to graph compilers like TVM for "
+"optimization and generating hardware-specific executable modules:"
+
+#: ../../source/architecture_trends/significance.rst:302
+msgid ""
+"在真实的数据流系统中，步骤 (1)～(4) "
+"由编译器和运行时自动完成，开发者只需要在高层框架中定义模型即可，充分体现了图编译器在“降低数据流硬件使用门槛”上的作用。"
+msgstr ""
+"In real dataflow systems, steps (1) to (4) are automatically completed by "
+"the compiler and runtime, allowing developers to simply define the model in "
+"a high-level framework, fully demonstrating the role of the graph compiler "
+"in \"lowering the barrier to using dataflow hardware.\""

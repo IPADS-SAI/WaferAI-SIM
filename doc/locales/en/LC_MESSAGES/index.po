@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-01 18:33+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../index.rst:37
+msgid "安装指南"
+msgstr "Installation Guide"
+
+#: ../../index.rst:37
+msgid "快速开始"
+msgstr "Quick Start"
+
+#: ../../index.rst:37
+msgid "实现细节"
+msgstr "Implementation Details"
+
+#: ../../index.rst:37
+msgid "测试分析"
+msgstr "Testing & Analysis"
+
+#: ../../index.rst:37
+msgid "快速入门"
+msgstr "Getting Started"
+
+#: ../../index.rst:46
+msgid "众核数据流架构"
+msgstr "Many-core Dataflow Architecture"
+
+#: ../../index.rst:46
+msgid "主流架构分析"
+msgstr "Mainstream Architecture Analysis"
+
+#: ../../index.rst:46
+msgid "架构发展趋势"
+msgstr "Architecture Trends"
+
+#: ../../index.rst:46
+msgid "背景知识"
+msgstr "Background Knowledge"
+
+#: ../../index.rst:8
+msgid "欢迎了解 NPU-SIM!"
+msgstr "Welcome to NPU-SIM!"
+
+#: ../../index.rst:-1
+msgid "NPUSIM"
+msgstr "NPU-SIM"
+
+#: ../../index.rst:35
+msgid "文档列表"
+msgstr "Documentation List"
+
+#: ../../index.rst:55
+msgid "Indices and tables"
+msgstr "Indices and Tables"
+
+#: ../../index.rst:57
+msgid ":ref:`genindex`"
+msgstr ":ref:`genindex`"
+
+#: ../../index.rst:58
+msgid ":ref:`modindex`"
+msgstr ":ref:`modindex`"
+
+#: ../../index.rst:59
+msgid ":ref:`search`"
+msgstr ":ref:`search`"
+

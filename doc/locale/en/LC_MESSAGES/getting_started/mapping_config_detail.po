@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/mapping_config_detail.rst:4
+msgid "映射配置"
+msgstr "Mapping Configuration"
+
+#: ../../source/getting_started/mapping_config_detail.rst:6
+msgid ""
+"为了进一步探索不同核心的任务映射与排布，对于模型部署的影响， **NPU-SIM** 支持在 :doc:`workload_config_detail`"
+" 的基础上进一步使用映射配置定义核心的重映射。"
+msgstr ""
+"To further explore the impact of task mapping and arrangement across "
+"different cores on model deployment, **NPU-SIM** supports the use of mapping"
+" configurations to define core remapping based on "
+":doc:`workload_config_detail`."
+
+#: ../../source/getting_started/mapping_config_detail.rst:8
+msgid "我们提供了示例配置文件，位于以下目录中："
+msgstr "We provide sample configuration files in the following directory:"
+
+#: ../../source/getting_started/mapping_config_detail.rst:15
+msgid "书写方法"
+msgstr "Writing Method"
+
+#: ../../source/getting_started/mapping_config_detail.rst:17
+msgid "每一行代表一个重映射规则，使用半角冒号分隔前后两个数字。`A:B`即代表将核心A映射至核心B。"
+msgstr ""
+"Each line represents a remapping rule, using a half-width colon to separate "
+"the two numbers. `A:B` means mapping core A to core B."
+
+#: ../../source/getting_started/mapping_config_detail.rst:21
+msgid "需保证若任意一个核心编号出现在配置中，那么该编号需在所有行的冒号左侧和右侧各出现、且仅出现一次。"
+msgstr ""
+"It must be ensured that if any core number appears in the configuration, "
+"then that number must appear exactly once on the left side and exactly once "
+"on the right side of the colon in all rows."

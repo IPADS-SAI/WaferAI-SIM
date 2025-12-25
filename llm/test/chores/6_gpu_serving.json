@@ -1,0 +1,190 @@
+{
+    "mode": "gpu_pd",
+    "requests": {
+        "count": 5,
+        "seq_len": 128,
+        "arrival": [
+            1
+        ],
+        "heads": 12,
+        "kv_heads": 12,
+        "eof_chance": 0.5,
+        "batch_size": 2,
+        "head_size": 64
+    },
+    "source": [
+        {
+            "label": "layernorm_1_in",
+            "size": "BTC"
+        }
+    ],
+    "chips": [
+        {
+            "chip_id": 0,
+            "streams": [
+                {
+                    "id": 0,
+                    "prims": [
+                        {
+                            "type": "Layernorm_f_gpu",
+                            "compose": {
+                                "grid_x": 4,
+                                "grid_y": 4,
+                                "block_x": 4,
+                                "block_y": 4,
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "C",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "layernorm_1_in",
+                                "outdata": "layernorm_1_out"
+                            }
+                        },
+                        {
+                            "type": "matmul_forward_gpu_pd",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "C",
+                            "OC": "3C",
+                            "R": "R",
+                            "NH": "NH",
+                            "DH": "DH",
+                            "job_type": 2,
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "layernorm_1_out",
+                                "outdata": "matmul_1_out"
+                            }
+                        },
+                        {
+                            "type": "attention_forward_gpu_pd",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "3C",
+                            "NH": "NH",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "matmul_1_out",
+                                "outdata": "attention_1_out"
+                            }
+                        },
+                        {
+                            "type": "Matmul_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "3C",
+                            "OC": "C",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "attention_1_out",
+                                "outdata": "matmul_2_out"
+                            }
+                        },
+                        {
+                            "type": "Residual_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "N": "BTC",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "layernorm_1_in matmul_2_out",
+                                "outdata": "residual_1_out"
+                            }
+                        },
+                        {
+                            "type": "Layernorm_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "C",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "residual_1_out",
+                                "outdata": "layernorm_2_out"
+                            }
+                        },
+                        {
+                            "type": "Matmul_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "C",
+                            "OC": "4C",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "layernorm_2_out",
+                                "outdata": "matmul_3_out"
+                            }
+                        },
+                        {
+                            "type": "Gelu_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "N": "4BTC",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "matmul_3_out",
+                                "outdata": "gelu_1_out"
+                            }
+                        },
+                        {
+                            "type": "Matmul_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "B": "B",
+                            "T": "T",
+                            "C": "4C",
+                            "OC": "C",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "gelu_1_out",
+                                "outdata": "matmul_4_out"
+                            }
+                        },
+                        {
+                            "type": "Residual_f_gpu",
+                            "compose": {
+                                "require_sm": 36
+                            },
+                            "N": "BTC",
+                            "slice_x": 6,
+                            "slice_y": 6,
+                            "address": {
+                                "indata": "residual_1_out matmul_4_out",
+                                "outdata": "layernorm_1_in"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

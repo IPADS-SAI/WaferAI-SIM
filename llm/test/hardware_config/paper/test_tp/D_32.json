@@ -1,0 +1,33 @@
+{
+    "x": 6,
+    "noc": {
+        "noc_payload_per_cycle": 20
+    },
+    "operand": {
+        "comp_util": 0.7,
+        "core_credit": 32,
+        "pd_ratio": 5
+    },
+    "memory": {
+        "beha_dram_util": 0.7,
+        "dram_default_bitwidth": 32,
+        "sram_size": 33554432
+    },
+    "gpu": {
+        "dram_bandwidth": 512,
+        "dram_burst_size": 2048,
+        "dram_aligned": 64
+    },
+    "cores": [
+        {
+            "id": 0,
+            "exu_x": 32,
+            "sfu_x": 1024,
+            "vec_x": 128,
+            "sa_cnt": 10,
+            "vec_cnt": 32,
+            "sram_bitwidth": 4096,
+            "dram_bw": 400
+        }   
+    ]
+}

@@ -1,0 +1,2641 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-02 17:28+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:4
+#: ../../source/getting_started/implementation_details.rst:21
+msgid "进阶原语书写方法"
+msgstr "Advanced Primitive Writing Methods"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:6
+msgid "本页面将介绍 **NPU-SIM** 中的三个工具原语，在熟悉基本的原语书写方法后，可灵活运用以下三个原语进行更复杂计算流的配置。"
+msgstr ""
+"This page introduces the three tool primitives in **NPU-SIM**. After "
+"becoming familiar with the basic methods for writing primitives, you can "
+"flexibly use the following three primitives to configure more complex "
+"computation flows."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:9
+msgid "switch_data"
+msgstr "switch_data"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:11
+msgid "可以将一块输入数据的大小变为指定的输出大小。该原语会引入额外的存储开销，在此忽略不计。"
+msgstr ""
+"It can resize a block of input data to the specified output size. This "
+"primitive introduces additional storage overhead, which is ignored here."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:15
+#: ../../source/getting_started/advanced_primitive_detail.rst:44
+#: ../../source/getting_started/advanced_primitive_detail.rst:70
+msgid "**参数**"
+msgstr "**Parameters**"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:14
+msgid "``IN`` 输入大小"
+msgstr "IN Input Size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:15
+msgid "``OUT`` 输出大小"
+msgstr "OUT Output Size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:19
+#: ../../source/getting_started/advanced_primitive_detail.rst:48
+#: ../../source/getting_started/advanced_primitive_detail.rst:74
+msgid "**SRAM地址**"
+msgstr "**SRAM Address**"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:18
+msgid "``indata`` 输入标签"
+msgstr "``indata`` Input Label"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:19
+msgid "``outdata`` 输出标签"
+msgstr "``outdata`` output label"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:21
+msgid "以下的示例将大小为1024的输入数据变为512的输出数据，并存储在了一个名为 ``output_label`` 的新标签中。"
+msgstr ""
+"The following example transforms input data of size 1024 into output data of"
+" size 512 and stores it in a new label named ``output_label``."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:23
+#: ../../source/getting_started/advanced_primitive_detail.rst:50
+#: ../../source/getting_started/advanced_primitive_detail.rst:76
+#: ../../source/getting_started/hardware_config_detail.rst:63
+#: ../../source/getting_started/memory_detail.rst:15
+#: ../../source/getting_started/workload_config_syntax.rst:38
+#: ../../source/getting_started/workload_config_syntax.rst:100
+msgid "示例"
+msgstr "Example"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:39
+msgid "parse_input"
+msgstr "parse_input"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:41
+msgid ""
+"在多工作核之间的复杂连续通信中，前一次的 ``input_label`` 可能还未来得及被使用，就被后续的 ``input_label`` "
+"覆盖。此时可通过此原语将 ``input_label`` 指代的数据块重命名，以备后续使用。"
+msgstr ""
+"In complex continuous communication between multiple worker cores, a "
+"previous ``input_label`` may be overwritten by a subsequent ``input_label`` "
+"before it has been used. At this point, this primitive can be used to rename"
+" the data block referred to by the ``input_label`` for subsequent use."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:44
+msgid "``size`` 输入数据块大小"
+msgstr "``size`` Input data block size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:47
+msgid "``indata`` 需要的标签名"
+msgstr "Required label name for ``indata``"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:48
+msgid "``outdata`` 保持与 ``indata`` 一致"
+msgstr "``outdata`` remains consistent with ``indata``"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:65
+msgid "parse_output"
+msgstr "解析输出"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:67
+msgid ""
+"在 **NPU-SIM** 中，一个 ``worklist`` "
+"的输出大小等于其最后一个计算原语的输出大小。而该原语被视为一个计算原语，因此可以将它放在一个 ``worklist`` 的最后，从而调整一个 "
+"``worklist`` 的输出大小。"
+msgstr ""
+"In **NPU-SIM**, the output size of a ``worklist`` equals the output size of "
+"its last computational primitive. This primitive is considered a "
+"computational primitive, so it can be placed at the end of a ``worklist`` to"
+" adjust the output size of the ``worklist``."
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:70
+msgid "``size`` 输出大小"
+msgstr "``size`` output size"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:73
+msgid "``indata`` 保持与 ``outdata`` 一致"
+msgstr "`indata` remains consistent with `outdata`"
+
+#: ../../source/getting_started/advanced_primitive_detail.rst:74
+msgid "``outdata`` 需要作为输出数据的数据块标签，如果在输出完之后需要将该数据块删除，则在标签前加上 ``DEL_``。"
+msgstr ""
+"The ``outdata`` must be the data block label used as output data. If the "
+"data block needs to be deleted after output, prefix the label with ``DEL_``."
+
+#: ../../source/getting_started/chip_design_lesson.rst:4
+msgid "芯片设计的总结与思考"
+msgstr "Summary and Reflections on Chip Design"
+
+#: ../../source/getting_started/config_core.rst:2
+msgid "配置说明文档"
+msgstr "Configuration Documentation"
+
+#: ../../source/getting_started/config_core.rst:4
+msgid "本配置文件用于定义硬件加速器或处理器核心的架构参数。以下是对各字段的详细说明。"
+msgstr ""
+"This configuration file is used to define the architectural parameters of "
+"hardware accelerators or processor cores. The following provides detailed "
+"explanations for each field."
+
+#: ../../source/getting_started/config_core.rst:7
+msgid "顶层参数"
+msgstr "Top-level parameters"
+
+#: ../../source/getting_started/config_core.rst:9
+msgid "**x** (整数)"
+msgstr "**x** (integer)"
+
+#: ../../source/getting_started/config_core.rst:11
+msgid "表示 2D Mesh 阵列在 X 维度上的数量，例如 x = 8, 表示 8 * 8 的阵列。"
+msgstr ""
+"Number of 2D Mesh arrays in the X dimension, for example, x = 8, represents "
+"an 8 * 8 array."
+
+#: ../../source/getting_started/config_core.rst:13
+msgid "**comm_acc** (整数)"
+msgstr "**comm_acc** (integer)"
+
+#: ../../source/getting_started/config_core.rst:15
+msgid "表示一个时钟周期可以发送多少个通信数据包。例如 comm_acc = 256, 表示一次时钟周期可以发送 256 个通信数据包。"
+msgstr ""
+"Indicates how many communication data packets can be sent in one clock "
+"cycle. For example, comm_acc = 256 indicates that 256 communication data "
+"packets can be sent in one clock cycle."
+
+#: ../../source/getting_started/config_core.rst:18
+msgid "核心配置（cores）"
+msgstr "Core Configuration (cores)"
+
+#: ../../source/getting_started/config_core.rst:20
+msgid ""
+"按照id区间配置多个处理核，每个核包含执行单元、特殊功能单元和本地 SRAM。如果配置了id = 0, 9, 15。则表示id = 0 - 8 的 "
+"的处理核按照 id = 0 的配置。id = 9 - 14 的处理核按照 id = 9 的配置。id = 15 以后的处理核 id = 15 的配置。"
+msgstr ""
+"Multiple processing cores are configured according to ID ranges. Each core "
+"contains execution units, special function units, and local SRAM. If the "
+"configuration specifies IDs = 0, 9, 15, then processing cores with IDs = 0 -"
+" 8 follow the configuration of ID = 0. Processing cores with IDs = 9 - 14 "
+"follow the configuration of ID = 9. Processing cores with ID = 15 and beyond"
+" follow the configuration of ID = 15."
+
+#: ../../source/getting_started/config_core.rst:24
+msgid "核心 0（id: 0）"
+msgstr "Core 0 (id: 0)"
+
+#: ../../source/getting_started/config_core.rst:26
+msgid "**id** (整数)"
+msgstr "**id** (integer)"
+
+#: ../../source/getting_started/config_core.rst:28
+msgid "核心的唯一标识符。此处为 0。"
+msgstr "The unique identifier of the core. Here it is 0."
+
+#: ../../source/getting_started/config_core.rst:30
+msgid "**exu_x** (整数)"
+msgstr "**exu_x** (integer)"
+
+#: ../../source/getting_started/config_core.rst:32
+msgid "脉动阵列（Execution Unit）在 X 方向的数量的维度。"
+msgstr ""
+"The dimension of the number of systolic arrays (Execution Unit) in the X "
+"direction."
+
+#: ../../source/getting_started/config_core.rst:34
+msgid "**exu_y** (整数)"
+msgstr "**exu_y** (integer)"
+
+#: ../../source/getting_started/config_core.rst:36
+msgid "脉动阵列（Execution Unit）在 Y 方向的数量的维度。"
+msgstr ""
+"The dimension of the number of systolic arrays (Execution Unit) in the Y "
+"direction."
+
+#: ../../source/getting_started/config_core.rst:38
+msgid "**sfu_x** (整数)"
+msgstr "**sfu_x** (integer)"
+
+#: ../../source/getting_started/config_core.rst:40
+msgid ""
+"特殊功能单元（Special Function Unit, SFU）规模数量，通常用于浮点运算、超越函数（如 sin、log）等高性能计算任务。"
+msgstr ""
+"Special Function Unit (SFU) count is typically used for high-performance "
+"computing tasks such as floating-point operations and transcendental "
+"functions (e.g., sin, log)."
+
+#: ../../source/getting_started/config_core.rst:42
+msgid "**sram_bitwidth** (整数)"
+msgstr "**sram_bitwidth** (integer)"
+
+#: ../../source/getting_started/config_core.rst:44
+msgid "本地 SRAM 的位宽（bit width）。值为 64，表示每次可读写 64 位（8 字节）数据。"
+msgstr ""
+"The bit width of the local SRAM. A value of 64 indicates that 64 bits (8 "
+"bytes) of data can be read or written at a time."
+
+#: ../../source/getting_started/config_core.rst:47
+msgid "示例配置摘要"
+msgstr "Example configuration summary"
+
+#: ../../source/getting_started/config_core.rst:49
+msgid "系统横向规模：8"
+msgstr "System horizontal scale: 8"
+
+#: ../../source/getting_started/config_core.rst:50
+msgid "通信加速器容量：256"
+msgstr "Communication accelerator capacity: 256"
+
+#: ../../source/getting_started/config_core.rst:51
+msgid "核心数量：1（ID 为 0） - 执行单元阵列：64 × 64 - 特殊功能单元规模：2048 - 本地 SRAM 位宽：64 位"
+msgstr ""
+"Core Count: 1 (ID is 0) - Execution Unit Array: 64 × 64 - Special Function "
+"Unit Size: 2048 - Local SRAM Bit Width: 64 bits"
+
+#: ../../source/getting_started/config_core.rst:58
+msgid "配置示例（JSON 格式）"
+msgstr "Configuration Example (JSON Format)"
+
+#: ../../source/getting_started/config_core.rst:60
+msgid ""
+"以下是一个与上述说明对应的完整 JSON 配置示例： > **注意**：具体单位和语义可能依赖于目标硬件架构，请结合硬件设计文档理解上述参数的实际含义。"
+msgstr ""
+"Here is a complete JSON configuration example corresponding to the above "
+"description: > **Note**: Specific units and semantics may depend on the "
+"target hardware architecture; please refer to the hardware design "
+"documentation to understand the actual meaning of the above parameters."
+
+#: ../../source/getting_started/experiment_analysis.rst:4
+msgid "测试分析"
+msgstr "Test Analysis"
+
+#: ../../source/getting_started/experiment_analysis.rst:6
+msgid "在论文中，我们使用 **NPU-SIM** 对众核AI加速器在多场景、多硬件配置下的表现进行了仿真和比较。"
+msgstr ""
+"In the paper, we used **NPU-SIM** to simulate and compare the performance of"
+" many-core AI accelerators across multiple scenarios and hardware "
+"configurations."
+
+#: ../../source/getting_started/experiment_analysis.rst:9
+#: ../../source/getting_started/simulation_config_detail.rst:4
+msgid "仿真配置"
+msgstr "Simulation Configuration"
+
+#: ../../source/getting_started/experiment_analysis.rst:11
+msgid ""
+"在测试中，我们主要采用两大类的芯片硬件配置：大核模式，即计算核总数相对较少，但每一个计算核具有较强的算力、内存等硬件配置；小核模式，与大核模式相反，包含较多且各硬件指标较低的计算核。具体的参数自由配置空间参见下表。"
+msgstr ""
+"In testing, we primarily use two major types of chip hardware "
+"configurations: the big-core mode, which has a relatively small total number"
+" of compute cores, but each core has strong computing power, memory, and "
+"other hardware resources; and the small-core mode, which is the opposite of "
+"the big-core mode, containing a larger number of compute cores, each with "
+"lower hardware specifications. For specific configurable parameter ranges, "
+"please refer to the table below."
+
+#: ../../source/getting_started/experiment_analysis.rst:13
+msgid "TODO：表格图片"
+msgstr "TODO: Table Image"
+
+#: ../../source/getting_started/experiment_analysis.rst:16
+#: ../../source/getting_started/simulator_validation.rst:4
+msgid "仿真器验证与仿真耗时"
+msgstr "Simulator Verification and Simulation Time Consumption"
+
+#: ../../source/getting_started/experiment_analysis.rst:18
+msgid ""
+"我们将 **NPU-SIM** 与真实硬件的运行结果进行比较，验证其仿真结果的精度，并分析了在采用混合仿真模式（Hybrid-"
+"mode）下的仿真耗时。具体结果请参阅 :doc:`simulator_validation`。"
+msgstr ""
+"We compare **NPU-SIM** with the results from actual hardware to validate the"
+" accuracy of its simulation results, and analyze the simulation time when "
+"using the hybrid mode. For specific results, please refer to "
+":doc:`simulator_validation`."
+
+#: ../../source/getting_started/experiment_analysis.rst:21
+msgid "多场景测试"
+msgstr "Multi-scenario testing"
+
+#: ../../source/getting_started/experiment_analysis.rst:23
+msgid "我们使用 **NPU-SIM** 模拟了AI众核芯片在多场景下的表现，并给出了对应场景下硬件设计的改进思路。"
+msgstr ""
+"We simulated the performance of the AI many-core chip in multiple scenarios "
+"using **NPU-SIM** and proposed corresponding improvement ideas for the "
+"hardware design in each scenario."
+
+#: ../../source/getting_started/experiment_analysis.rst:25
+msgid "**模型并行与计算核映射**"
+msgstr "Model Parallelism and Compute Kernel Mapping"
+
+#: ../../source/getting_started/experiment_analysis.rst:27
+msgid "请参阅 :doc:`tp_mapping`"
+msgstr "Please refer to :doc:`tp_mapping`"
+
+#: ../../source/getting_started/experiment_analysis.rst:29
+msgid "**LLM Serving**"
+msgstr "LLM Serving"
+
+#: ../../source/getting_started/experiment_analysis.rst:31
+msgid "请参阅 :doc:`llm_serving`"
+msgstr "Refer to :doc:`llm_serving`"
+
+#: ../../source/getting_started/experiment_analysis.rst:33
+msgid "**芯片设计的总结与思考**"
+msgstr "Summary and Reflections on Chip Design"
+
+#: ../../source/getting_started/experiment_analysis.rst:35
+msgid "请参阅 :doc:`chip_design_lesson`"
+msgstr "Refer to :doc:`chip_design_lesson`"
+
+#: ../../source/getting_started/experiment_analysis.rst:38
+#: ../../source/getting_started/implementation_details.rst:27
+#: ../../source/getting_started/run_npu_sim.rst:43
+#: ../../source/getting_started/workload_config_detail.rst:38
+msgid "附属页面"
+msgstr "Affiliated Pages"
+
+#: ../../source/getting_started/hardware_config_detail.rst:4
+msgid "硬件配置"
+msgstr "Hardware Configuration"
+
+#: ../../source/getting_started/hardware_config_detail.rst:6
+msgid ""
+"硬件配置用于描述 **NPU-SIM** 所使用的硬件架构参数，以 **JSON** "
+"格式保存。它主要描述了计算核的总个数、每个计算核的内存大小，带宽、计算核算力、片上网络的核间带宽等参数。"
+msgstr ""
+"Hardware configuration describes the hardware architecture parameters used "
+"by **NPU-SIM** and is saved in **JSON** format. It primarily describes "
+"parameters such as the total number of computing cores, the memory size of "
+"each computing core, bandwidth, computing core performance, and the inter-"
+"core bandwidth of the on-chip network."
+
+#: ../../source/getting_started/hardware_config_detail.rst:8
+msgid "我们提供了若干示例配置文件，用以对不同场景进行仿真。此外硬件配置文件还支持异构计算核心的配置。这些示例配置位于以下目录中："
+msgstr ""
+"We provide several example configuration files for simulating different "
+"scenarios. Additionally, the hardware configuration files support "
+"heterogeneous computing core configurations. These example configurations "
+"are located in the following directory:"
+
+#: ../../source/getting_started/hardware_config_detail.rst:14
+msgid "硬件配置文件书写相较工作负载配置文件而言更加简单，详细的字段说明见下。"
+msgstr ""
+"Hardware configuration files are simpler to write compared to workload "
+"configuration files. Detailed field descriptions are provided below."
+
+#: ../../source/getting_started/hardware_config_detail.rst:17
+#: ../../source/getting_started/simulation_config_detail.rst:17
+#: ../../source/getting_started/workload_config_syntax.rst:4
+msgid "配置字段与书写规范"
+msgstr "Configuration Fields and Writing Specifications"
+
+#: ../../source/getting_started/hardware_config_detail.rst:20
+msgid "计算核阵列"
+msgstr "Computing Core Array"
+
+#: ../../source/getting_started/hardware_config_detail.rst:23
+msgid "x : number"
+msgstr "x"
+
+#: ../../source/getting_started/hardware_config_detail.rst:25
+msgid "计算核心排布为 ``x * x`` 的方阵。"
+msgstr "The computing cores are arranged in an x * x matrix."
+
+#: ../../source/getting_started/hardware_config_detail.rst:28
+#: ../../source/getting_started/simulation_config_detail.rst:62
+msgid "片上网络（Network on Chip）"
+msgstr "Network on Chip"
+
+#: ../../source/getting_started/hardware_config_detail.rst:31
+#: ../../source/getting_started/simulation_config_detail.rst:65
+msgid "noc : dict"
+msgstr "noc : dict"
+
+#: ../../source/getting_started/hardware_config_detail.rst:33
+msgid "片上网络的配置。"
+msgstr "Configuration of the Network-on-Chip."
+
+#: ../../source/getting_started/hardware_config_detail.rst:35
+msgid "**noc_payload_per_cycle : number**"
+msgstr "noc_payload_per_cycle : number"
+
+#: ../../source/getting_started/hardware_config_detail.rst:37
+msgid "片上网络相邻计算核间信道，在一个时钟周期内可以传输的负载包个数（约定一个负载包为128个bits）。"
+msgstr ""
+"The number of payload packets that can be transmitted between adjacent "
+"computing cores of the network-on-chip within one clock cycle (one payload "
+"packet is defined as 128 bits)."
+
+#: ../../source/getting_started/hardware_config_detail.rst:40
+#: ../../source/getting_started/simulation_config_detail.rst:29
+msgid "算子"
+msgstr "operator"
+
+#: ../../source/getting_started/hardware_config_detail.rst:43
+#: ../../source/getting_started/simulation_config_detail.rst:32
+msgid "operand : dict"
+msgstr "operand : dict"
+
+#: ../../source/getting_started/hardware_config_detail.rst:45
+msgid "运算算子的配置。"
+msgstr "Configuration of arithmetic operators."
+
+#: ../../source/getting_started/hardware_config_detail.rst:47
+msgid "**comp_util : double**"
+msgstr "**comp_util : double**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:49
+msgid "算子的计算资源使用效率，即在计算与访存过程中的重叠时间比例。"
+msgstr ""
+"The computational resource utilization efficiency of the operator, i.e., the"
+" proportion of overlapping time during computation and memory access."
+
+#: ../../source/getting_started/hardware_config_detail.rst:51
+msgid "**core_credit : number**"
+msgstr "**core_credit : number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:53
+#: ../../source/getting_started/hardware_config_detail.rst:59
+#: ../../source/getting_started/workload_config_syntax.rst:129
+msgid "**适用模式：pd**"
+msgstr "Applicable mode: pd"
+
+#: ../../source/getting_started/hardware_config_detail.rst:55
+msgid "在一拍中，一个计算核可以最多分配的计算任务量，与 ``pd_ratio`` 相关。"
+msgstr ""
+"In a beat, the maximum computational task that a compute core can be "
+"assigned is related to ``pd_ratio``."
+
+#: ../../source/getting_started/hardware_config_detail.rst:57
+msgid "**pd_ratio : number**"
+msgstr "**pd_ratio : number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:61
+msgid "在 **pd** 模式中，规定一次Decode任务的计算任务量为1。此字段定义了一次Prefill任务的计算量是Decode任务的多少倍。"
+msgstr ""
+"In **pd** mode, the computational workload for one Decode task is defined as"
+" 1. This field defines how many times the computational workload of one "
+"Prefill task is compared to that of a Decode task."
+
+#: ../../source/getting_started/hardware_config_detail.rst:66
+msgid ""
+"若 ``core_credit`` 为8， ``pd_ratio`` 为3，则一拍中可最多为一个计算核分配“2个Prefill + "
+"2个Decode”或“1个Prefill + 5个Decode”或“0个Prefill + 8个Decode”的计算任务。"
+msgstr ""
+"When ``core_credit`` is 8 and ``pd_ratio`` is 3, a single tile can be "
+"assigned a maximum computational task of \"2 Prefill + 2 Decode\" or \"1 "
+"Prefill + 5 Decode\" or \"0 Prefill + 8 Decode\"."
+
+#: ../../source/getting_started/hardware_config_detail.rst:69
+#: ../../source/getting_started/simulation_config_detail.rst:47
+msgid "memory : dict"
+msgstr "memory: dict"
+
+#: ../../source/getting_started/hardware_config_detail.rst:71
+msgid "片上内存的配置。"
+msgstr "On-chip memory configuration."
+
+#: ../../source/getting_started/hardware_config_detail.rst:73
+msgid "**beha_dram_util : double**"
+msgstr "beha_dram_util : double"
+
+#: ../../source/getting_started/hardware_config_detail.rst:75
+#: ../../source/getting_started/hardware_config_detail.rst:98
+#: ../../source/getting_started/hardware_config_detail.rst:102
+#: ../../source/getting_started/simulation_config_detail.rst:59
+#: ../../source/getting_started/simulation_config_detail.rst:95
+msgid "TODO"
+msgstr "To be determined"
+
+#: ../../source/getting_started/hardware_config_detail.rst:77
+msgid "**dram_default_bitwidth: number**"
+msgstr "**dram_default_bitwidth: number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:79
+msgid "DRAM的位宽。"
+msgstr "DRAM bit width."
+
+#: ../../source/getting_started/hardware_config_detail.rst:81
+msgid "**sram_size: number**"
+msgstr "**sram_size: number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:83
+msgid "SRAM的大小，目前仅支持所有核心的SRAM大小相同。"
+msgstr ""
+"The SRAM size currently only supports identical SRAM sizes for all cores."
+
+#: ../../source/getting_started/hardware_config_detail.rst:86
+#: ../../source/getting_started/simulation_config_detail.rst:87
+msgid "gpu : dict"
+msgstr "gpu : dict"
+
+#: ../../source/getting_started/hardware_config_detail.rst:88
+msgid "**适用模式：gpu, gpu_pd**"
+msgstr "**Applicable Modes: gpu, gpu_pd**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:90
+msgid "GPU的配置。"
+msgstr "GPU configuration."
+
+#: ../../source/getting_started/hardware_config_detail.rst:92
+msgid "**dram_bandwidth: number**"
+msgstr "**dram_bandwidth: number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:94
+msgid "DRAM的带宽。"
+msgstr "DRAM bandwidth."
+
+#: ../../source/getting_started/hardware_config_detail.rst:96
+msgid "**dram_burst_size: number**"
+msgstr "**dram_burst_size: number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:100
+msgid "**dram_aligned : number**"
+msgstr "**dram_aligned : number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:105
+#: ../../source/getting_started/workload_config_syntax.rst:240
+msgid "cores : dict[]"
+msgstr "cores : dict[]"
+
+#: ../../source/getting_started/hardware_config_detail.rst:107
+msgid "计算核的配置。"
+msgstr "Compute kernel configuration."
+
+#: ../../source/getting_started/hardware_config_detail.rst:109
+#: ../../source/getting_started/workload_config_syntax.rst:246
+msgid "**id : number**"
+msgstr "**id : number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:111
+msgid "计算核的编号。"
+msgstr "Compute the core number."
+
+#: ../../source/getting_started/hardware_config_detail.rst:113
+msgid "**exu_x : number**"
+msgstr "exu_x : number"
+
+#: ../../source/getting_started/hardware_config_detail.rst:115
+msgid "矩阵运算单元阵列的横向维度大小。"
+msgstr "The horizontal dimension size of the matrix operation unit array."
+
+#: ../../source/getting_started/hardware_config_detail.rst:117
+msgid "**exu_y : number**"
+msgstr "**exu_y : number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:119
+msgid "矩阵运算单元阵列的纵向维度大小。"
+msgstr "Size of the vertical dimension of the matrix arithmetic unit array."
+
+#: ../../source/getting_started/hardware_config_detail.rst:121
+msgid "**sfu_x : number**"
+msgstr "sfu_x : number"
+
+#: ../../source/getting_started/hardware_config_detail.rst:123
+msgid "非线性运算单元的阵列大小。"
+msgstr "Array size of the nonlinear arithmetic unit."
+
+#: ../../source/getting_started/hardware_config_detail.rst:125
+msgid "**sram_bitwidth : number**"
+msgstr "**sram_bitwidth : number**"
+
+#: ../../source/getting_started/hardware_config_detail.rst:127
+msgid "SRAM的位宽。"
+msgstr "SRAM bit width."
+
+#: ../../source/getting_started/hardware_config_detail.rst:130
+msgid "``core`` 数组的长度至少为1。"
+msgstr "The length of the ``core`` array must be at least 1."
+
+#: ../../source/getting_started/hardware_config_detail.rst:132
+msgid ""
+"若在 ``core`` 数组中省略任意核的配置（假设该核编号为 ``x`` ），则核 ``x`` 的配置将被自动设置等同于编号小于 ``x`` "
+"的已定义核中编号最大的核配置。"
+msgstr ""
+"If any core's configuration is omitted in the ``core`` array (assuming the "
+"core number is ``x``), the configuration for core ``x`` will be "
+"automatically set to match the configuration of the highest-numbered defined"
+" core with a number less than ``x``."
+
+#: ../../source/getting_started/implementation_details.rst:4
+msgid "NPU-SIM 实现细节与常见问题"
+msgstr "NPU-SIM Implementation Details and Common Issues"
+
+#: ../../source/getting_started/implementation_details.rst:6
+msgid "本页面将汇总 **NPU-SIM** 中有关架构设计与实现的细节与常见问题。"
+msgstr ""
+"This page summarizes the details and frequently asked questions regarding "
+"the architecture design and implementation in **NPU-SIM**."
+
+#: ../../source/getting_started/implementation_details.rst:9
+#: ../../source/getting_started/primitive_detail.rst:4
+msgid "原语与工作核通信范式"
+msgstr "Paradigm of Communication Between Primitives and Worker Cores"
+
+#: ../../source/getting_started/implementation_details.rst:11
+msgid "详情请参阅：:doc:`primitive_detail`"
+msgstr "For details, refer to: :doc:`primitive_detail`"
+
+#: ../../source/getting_started/implementation_details.rst:15
+#: ../../source/getting_started/memory_detail.rst:4
+msgid "内存访问与标签管理范式"
+msgstr "Memory Access and Tag Management Paradigm"
+
+#: ../../source/getting_started/implementation_details.rst:17
+msgid "详情请参阅：:doc:`memory_detail`"
+msgstr "For details, see: :doc:`memory_detail`"
+
+#: ../../source/getting_started/implementation_details.rst:23
+msgid "详情请参阅：:doc:`advanced_primitive_detail`"
+msgstr "For details, see: :doc:`advanced_primitive_detail`"
+
+#: ../../source/getting_started/install_npu_sim.rst:4
+msgid "安装 NPU-SIM"
+msgstr "Installing NPU-SIM"
+
+#: ../../source/getting_started/install_npu_sim.rst:6
+msgid ""
+"NPU-SIM 是一个基于 **SystemC** 编写的轻量级众核仿真器，能够灵活适配多种众核模式（包括 **SIMD** 与 "
+"**DataFlow**）， 并支持 **LLM Serving** 等场景的仿真。"
+msgstr ""
+"NPU-SIM is a lightweight many-core simulator based on SystemC, capable of "
+"flexibly adapting to various many-core modes (including SIMD and DataFlow), "
+"and supports simulations for scenarios such as LLM Serving."
+
+#: ../../source/getting_started/install_npu_sim.rst:10
+msgid "环境要求"
+msgstr "Environment Requirements"
+
+#: ../../source/getting_started/install_npu_sim.rst:12
+msgid "**操作系统**：Linux"
+msgstr "**Operating System**: Linux"
+
+#: ../../source/getting_started/install_npu_sim.rst:13
+msgid "**SystemC**：2.3.3"
+msgstr "**SystemC**: 2.3.3"
+
+#: ../../source/getting_started/install_npu_sim.rst:14
+msgid "**CMake**：3.31.3"
+msgstr "**CMake**: 3.31.3"
+
+#: ../../source/getting_started/install_npu_sim.rst:15
+msgid "**G++**：9.4.0"
+msgstr "**G++**: 9.4.0"
+
+#: ../../source/getting_started/install_npu_sim.rst:18
+msgid "安装方式"
+msgstr "Installation method"
+
+#: ../../source/getting_started/install_npu_sim.rst:23
+msgid "方法一：通过 Dockerfile 安装（推荐）"
+msgstr "Method 1: Installation via Dockerfile (Recommended)"
+
+#: ../../source/getting_started/install_npu_sim.rst:25
+msgid "使用 Dockerfile 构建镜像，构建过程大约耗时 **3 分钟**。"
+msgstr ""
+"Building an image using a Dockerfile takes approximately **3 minutes**."
+
+#: ../../source/getting_started/install_npu_sim.rst:31
+msgid "构建完成后，运行容器："
+msgstr "After the build is complete, run the container:"
+
+#: ../../source/getting_started/install_npu_sim.rst:37
+msgid "进入容器后，可在当前目录下找到可执行文件 **npusim**。"
+msgstr ""
+"After entering the container, you can find the executable file **npusim** in"
+" the current directory."
+
+#: ../../source/getting_started/install_npu_sim.rst:42
+msgid "方法二：通过源码安装"
+msgstr "Method 2: Install via Source Code"
+
+#: ../../source/getting_started/install_npu_sim.rst:44
+msgid "以下步骤展示如何从源码编译安装 NPU-SIM。"
+msgstr ""
+"The following steps demonstrate how to compile and install NPU-SIM from "
+"source code."
+
+#: ../../source/getting_started/install_npu_sim.rst:47
+msgid "安装 SystemC"
+msgstr "Install SystemC"
+
+#: ../../source/getting_started/install_npu_sim.rst:61
+msgid "若需要使用 GDB 调试 SystemC，可在配置时加上以下参数："
+msgstr ""
+"To debug SystemC with GDB, add the following parameter during configuration:"
+
+#: ../../source/getting_started/install_npu_sim.rst:69
+msgid "安装 CMake 3.31.3"
+msgstr "Installing CMake 3.31.3"
+
+#: ../../source/getting_started/install_npu_sim.rst:78
+msgid "安装 JSON 库"
+msgstr "Install JSON library"
+
+#: ../../source/getting_started/install_npu_sim.rst:90
+msgid "安装多媒体与显示库"
+msgstr "Install multimedia and display libraries"
+
+#: ../../source/getting_started/install_npu_sim.rst:111
+msgid "配置环境变量"
+msgstr "Configure environment variables"
+
+#: ../../source/getting_started/install_npu_sim.rst:121
+msgid "下载并编译 NPU-SIM"
+msgstr "Download and compile NPU-SIM"
+
+#: ../../source/getting_started/install_npu_sim.rst:137
+msgid "仅测试了 **SystemC 2.3.3** 版本，其他版本可能存在不兼容问题。"
+msgstr ""
+"Only tested with **SystemC 2.3.3**; other versions may have compatibility "
+"issues."
+
+#: ../../source/getting_started/llm_serving.rst:4
+msgid "LLM Serving"
+msgstr "LLM Serving"
+
+#: ../../source/getting_started/mapping_config_detail.rst:4
+msgid "映射配置"
+msgstr "Mapping Configuration"
+
+#: ../../source/getting_started/mapping_config_detail.rst:6
+msgid ""
+"为了进一步探索不同核心的任务映射与排布，对于模型部署的影响， **NPU-SIM** 支持在 :doc:`workload_config_detail`"
+" 的基础上进一步使用映射配置定义核心的重映射。"
+msgstr ""
+"To further explore the impact of task mapping and arrangement across "
+"different cores on model deployment, **NPU-SIM** supports further definition"
+" of core remapping using mapping configurations based on "
+":doc:`workload_config_detail`."
+
+#: ../../source/getting_started/mapping_config_detail.rst:8
+msgid "我们提供了示例配置文件，位于以下目录中："
+msgstr "We provide sample configuration files in the following directory:"
+
+#: ../../source/getting_started/mapping_config_detail.rst:15
+msgid "书写方法"
+msgstr "Writing method"
+
+#: ../../source/getting_started/mapping_config_detail.rst:17
+msgid "每一行代表一个重映射规则，使用半角冒号分隔前后两个数字。`A:B`即代表将核心A映射至核心B。"
+msgstr ""
+"Each line represents a remapping rule, using a half-width colon to separate "
+"the two numbers before and after. `A:B` means mapping core A to core B."
+
+#: ../../source/getting_started/mapping_config_detail.rst:21
+msgid "需保证若任意一个核心编号出现在配置中，那么该编号需在所有行的冒号左侧和右侧各出现、且仅出现一次。"
+msgstr ""
+"It must be ensured that if any core number appears in the configuration, it "
+"must appear exactly once on the left side and exactly once on the right side"
+" of the colon in all rows."
+
+#: ../../source/getting_started/memory_detail.rst:6
+msgid ""
+"在 **NPU-SIM** 的实现中，所有数据块在SRAM读写的过程中都拥有一个唯一的标签，该标签在 "
+":doc:`workload_config_detail` 中定义，用于标识数据块，并作为内存访问的索引。"
+msgstr ""
+"In the implementation of **NPU-SIM**, all data blocks have a unique tag "
+"during SRAM read and write operations. This tag is defined in "
+":doc:`workload_config_detail` and is used to identify the data block and "
+"serve as an index for memory access."
+
+#: ../../source/getting_started/memory_detail.rst:8
+msgid "内存标签在工作负载配置文件中的命名规范见下，作为 :doc:`workload_config_detail` 的补充说明。"
+msgstr ""
+"The naming convention for memory tags in the workload configuration file is "
+"detailed below, serving as a supplement to :doc:`workload_config_detail`."
+
+#: ../../source/getting_started/memory_detail.rst:11
+msgid "1. 标签保留规则"
+msgstr "1. Tag Retention Rules"
+
+#: ../../source/getting_started/memory_detail.rst:13
+msgid ""
+"在一个计算原语执行完毕后，默认会从内存中删除 **输入标签** 所对应的数据块。如果希望在后续的计算中使用该数据块，应在标签名前加上下划线 ``_`` "
+"。"
+msgstr ""
+"After a computational primitive completes execution, the data block "
+"corresponding to the **input tag** is deleted from memory by default. If you"
+" wish to use this data block in subsequent computations, you should prefix "
+"the tag name with an underscore ``_``."
+
+#: ../../source/getting_started/memory_detail.rst:18
+msgid ""
+"假设标签 ``x_out`` 作为原语1的输出，并在原语2中作为输入被使用。通常情况下，当原语2执行完毕之后，会从内存中删除 ``x_out`` "
+"所对应的数据块（无论其在SRAM还是DRAM中）。然而当原语2在使用标签时，加上了下划线 ``_`` ，则表示该数据块在原语2执行完毕后，不会被删除。"
+msgstr ""
+"Assuming the label ``x_out`` is the output of primitive 1 and is used as "
+"input in primitive 2. Normally, after primitive 2 finishes execution, the "
+"data block corresponding to ``x_out`` will be deleted from memory (whether "
+"it is in SRAM or DRAM). However, when an underscore ``_`` is appended to the"
+" label used in primitive 2, it indicates that the data block will not be "
+"deleted after primitive 2 finishes execution."
+
+#: ../../source/getting_started/memory_detail.rst:49
+msgid "2. 多输入与多输出"
+msgstr "2. Multiple Input and Multiple Output"
+
+#: ../../source/getting_started/memory_detail.rst:51
+msgid ""
+"在一个计算原语需要多个输入的情况下（如残差连接算子），使用空格分隔多个标签。（见上文中的示例， ``prim_3`` 的输入标签由两个标签 "
+"``y_out`` 和 ``x_out`` 组成）"
+msgstr ""
+"When a computational primitive requires multiple inputs (such as a residual "
+"connection operator), use spaces to separate multiple tags. (See the example"
+" above, the input tags for ``prim_3`` consist of two tags: ``y_out`` and "
+"``x_out``)"
+
+#: ../../source/getting_started/memory_detail.rst:53
+msgid ""
+"原则上，一个计算原语只允许有一个输出标签。如若希望将输出均匀分割为多块，可参考原语的 :doc:`advanced_primitive_detail` "
+"或使用 ``cast`` 的 ``weight`` 字段指定。"
+msgstr ""
+"In principle, a computational primitive is only allowed to have one output "
+"label. If you wish to evenly split the output into multiple blocks, you can "
+"refer to the primitive's :doc:`advanced_primitive_detail` or use the "
+"``weight`` field of ``cast`` to specify it."
+
+#: ../../source/getting_started/memory_detail.rst:56
+msgid "3. 特殊标签"
+msgstr "3. Special Labels"
+
+#: ../../source/getting_started/memory_detail.rst:58
+msgid ""
+"``input_label`` 指代由其他工作核传入本工作核的数据块。当工作核A向工作核B发送数据时，会自动在B的内存中创建一个名为 "
+"``input_label`` 的数据块，并覆盖先前的同名数据块。此标签代表的数据块实际大小将由计算原语的参数自行决定。"
+msgstr ""
+"``input_label`` refers to the data block passed to this work core from other"
+" work cores. When work core A sends data to work core B, a data block named "
+"``input_label`` is automatically created in B's memory, overwriting any "
+"previous data block with the same name. The actual size of the data block "
+"represented by this label is determined by the parameters of the compute "
+"primitive."
+
+#: ../../source/getting_started/memory_detail.rst:60
+msgid "``dram_label x`` 指代该数据块应主动从DRAM中读取，在读取加载至SRAM中后会被命名为 ``x`` 。"
+msgstr ""
+"dram_label x indicates that this data block should be actively read from "
+"DRAM and will be named x after being loaded into SRAM."
+
+#: ../../source/getting_started/memory_detail.rst:62
+msgid "``unset_label`` 指代未被定义的标签名， **不应** 出现在任何配置文件及日志输出文件中。"
+msgstr ""
+"The ``unset_label`` refers to an undefined label name and **must not** "
+"appear in any configuration files or log output files."
+
+#: ../../source/getting_started/primitive_detail.rst:6
+msgid "原语 (primitive) 是工作核执行任务的最小单位。按照原语的执行逻辑，可将其分为三类："
+msgstr ""
+"A primitive is the smallest unit of task execution for a worker core. Based "
+"on their execution logic, primitives can be categorized into three types:"
+
+#: ../../source/getting_started/primitive_detail.rst:8
+msgid "发送原语 (SEND_PRIM)"
+msgstr "SEND Primitive"
+
+#: ../../source/getting_started/primitive_detail.rst:9
+msgid "接收原语 (RECV_PRIM)"
+msgstr "Receive Primitive (RECV_PRIM)"
+
+#: ../../source/getting_started/primitive_detail.rst:10
+msgid "计算原语 (COMP_PRIM)"
+msgstr "Computing Primitive (COMP_PRIM)"
+
+#: ../../source/getting_started/primitive_detail.rst:12
+msgid ""
+"工作核在执行仿真任务时，会严格执行接收数据-执行计算-发送数据的原语执行循环。在 **NPU-SIM** 根据 "
+":doc:`workload_config_detail` 生成原语序列的过程中，会在 :doc:`workload_config_syntax` "
+"中提及的 ``worklist`` 前后各加上对应的 ``SEND_PRIM`` 和 ``RECV_PRIM`` 。"
+msgstr ""
+"The working core strictly adheres to the primitive execution cycle of "
+"receiving data, executing computations, and sending data when performing "
+"simulation tasks. During NPU-SIM's generation of primitive sequences based "
+"on :doc:`workload_config_detail`, it prepends a corresponding SEND_PRIM and "
+"appends a RECV_PRIM before and after the worklist mentioned in "
+":doc:`workload_config_syntax`."
+
+#: ../../source/getting_started/primitive_detail.rst:16
+msgid ""
+"在执行 ``worklist`` 的第一个 ``COMP_PRIM`` 之前， **NPU-SIM** 会先接收从前一个核传来的计算结果。该过程由 "
+"``RECV_PRIM`` 完成。每当接收到一个核的数据，接收计数便增加1。当接收计数等同于该 ``worklist`` 的 ``recv_cnt`` "
+"字段值时，便结束此次 ``RECV_PRIM`` 的执行，进入接下来的 ``COMP_PRIM`` 。"
+msgstr ""
+"Before executing the first `COMP_PRIM` of the `worklist`, **NPU-SIM** first "
+"receives the computation results transmitted from the previous core. This "
+"process is completed by `RECV_PRIM`. Each time data is received from a core,"
+" the receive count increases by one. When the receive count equals the value"
+" of the `recv_cnt` field in the `worklist`, the execution of this "
+"`RECV_PRIM` ends, and it proceeds to the subsequent `COMP_PRIM`."
+
+#: ../../source/getting_started/primitive_detail.rst:18
+msgid ""
+"连续的 ``COMP_PRIM`` 在同一工作核上执行时，其中无需插入 ``RECV_PRIM`` 或 ``SEND_PRIM`` ，但需注意后一个 "
+"``COMP_PRIM`` 的输入数据来自前一个 ``COMP_PRIM`` 的输出数据（请参阅 :doc:`memory_detail` ）。"
+msgstr ""
+"When consecutive ``COMP_PRIM`` operations are executed on the same worker "
+"core, there is no need to insert ``RECV_PRIM`` or ``SEND_PRIM``. However, "
+"note that the input data for the subsequent ``COMP_PRIM`` comes from the "
+"output data of the previous ``COMP_PRIM`` (refer to :doc:`memory_detail`)."
+
+#: ../../source/getting_started/primitive_detail.rst:20
+msgid ""
+"在一个 ``worklist`` 的所有 ``COMP_PRIM`` 执行完成后， **NPU-SIM** 会将计算结果发送给下一个核。该过程由 "
+"``SEND_PRIM`` 完成。发送的地点和次数由 ``cast`` 字段决定。"
+msgstr ""
+"After all `COMP_PRIM` in a `worklist` are executed, **NPU-SIM** sends the "
+"calculation results to the next core. This process is completed by "
+"`SEND_PRIM`. The destination and frequency of sending are determined by the "
+"`cast` field."
+
+#: ../../source/getting_started/quickstart.rst:4
+msgid "运行NPU-SIM"
+msgstr "Running NPU-SIM"
+
+#: ../../source/getting_started/quickstart.rst:5
+msgid "快速开始V1"
+msgstr "Quick Start V1"
+
+#: ../../source/getting_started/quickstart.rst:7
+msgid "使用NPU-SIM十分简单："
+msgstr "Using NPU-SIM is very simple:"
+
+#: ../../source/getting_started/quickstart.rst:9
+msgid "准备 对应 Config 文件，在llm/test/workload_config目录下面。"
+msgstr ""
+"Prepare the corresponding Config file in the llm/test/workload_config "
+"directory."
+
+#: ../../source/getting_started/quickstart.rst:10
+msgid "使用命令行启动模型服务。"
+msgstr "Start the model service using the command line."
+
+#: ../../source/getting_started/quickstart.rst:13
+msgid "运行"
+msgstr "Run"
+
+#: ../../source/getting_started/quickstart.rst:20
+msgid "其中 ``config_pd_sim.json`` 为一个配置文件，你可以根据你的需求进行修改。"
+msgstr ""
+"Among them, `config_pd_sim.json` is a configuration file that you can modify"
+" according to your needs."
+
+#: ../../source/getting_started/quickstart.rst:23
+msgid "在继续这个教程之前，请确保你完成了 , 并确保配置了相关的环境变量。"
+msgstr ""
+"Before continuing with this tutorial, please ensure you have completed  and "
+"configured the relevant environment variables."
+
+#: ../../source/getting_started/quickstart.rst:28
+msgid "配置文件说明"
+msgstr "Configuration File Description"
+
+#: ../../source/getting_started/quickstart.rst:30
+msgid "以下是常用的配置文件介绍："
+msgstr "Here are the commonly used configuration files:"
+
+#: ../../source/getting_started/quickstart.rst:42
+msgid "配置字段说明"
+msgstr "Configuration Field Description"
+
+#: ../../source/getting_started/quickstart.rst:44
+msgid "以下是对配置文件中各个字段的详细说明："
+msgstr "Detailed explanation of each field in the configuration file:"
+
+#: ../../source/getting_started/quickstart.rst:47
+msgid "通用控制参数"
+msgstr "General Control Parameters"
+
+#: ../../source/getting_started/quickstart.rst:50
+msgid "random"
+msgstr "random"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "bool, optional"
+msgstr "布尔值，可选"
+
+#: ../../source/getting_started/quickstart.rst:50
+msgid "默认为 false，是否启用工作核随机排列，会反应在生成的数据流图上。"
+msgstr ""
+"The default value is false, indicating whether to enable worker core random "
+"permutation, which will be reflected in the generated data flow graph."
+
+#: ../../source/getting_started/quickstart.rst:54
+msgid "pipeline"
+msgstr "pipeline"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "int, optional"
+msgstr "integer, optional"
+
+#: ../../source/getting_started/quickstart.rst:53
+msgid ""
+"默认为 1。如果该值大于 1，则开启 pipeline 模式，具体表现为 memInterface 会将 source 字段中的 start data "
+"复制对应次数连续发送给工作核，在 memInterface 接收到 pipeline 对应数量的 DONE 信号后，程序结束。 "
+"简单的来说，pipeline 的次数就是 下发的 input 请求的次数。"
+msgstr ""
+"The default value is 1. If this value is greater than 1, the pipeline mode "
+"is enabled. Specifically, memInterface will copy the start data in the "
+"source field and send it consecutively to the worker core for the "
+"corresponding number of times. The program ends after memInterface receives "
+"the DONE signal for the corresponding number of pipeline operations. Simply "
+"put, the pipeline count is the number of submitted input requests."
+
+#: ../../source/getting_started/quickstart.rst:75
+msgid "sequential"
+msgstr "顺序"
+
+#: ../../source/getting_started/quickstart.rst:57
+msgid ""
+"默认为 false。如果为 true，则开启 sequential 模式，具体表现为 memInterface 会在接收到每一个 DONE "
+"信号之后，依次发送 source 字段数组下的所有 start data，每次只发送数组中的一个元素，在发送完毕并接收到最后的 DONE "
+"信号之后，程序结束。"
+msgstr ""
+"The default is false. If set to true, sequential mode is enabled. "
+"Specifically, the memInterface will sequentially send all start data under "
+"the source field array after receiving each DONE signal, sending only one "
+"element from the array at a time. The program terminates after all data is "
+"sent and the final DONE signal is received."
+
+#: ../../source/getting_started/quickstart.rst:60
+msgid "``sequential`` 和 ``pipeline`` 模式不能同时启用。目前 ``sequential`` 仅用于 pd 阶段的模拟。"
+msgstr ""
+"The `sequential` and `pipeline` modes cannot be enabled simultaneously. "
+"Currently, `sequential` is only used for simulation in the pd stage."
+
+#: ../../source/getting_started/quickstart.rst:75
+msgid ""
+"上面的配置表示 1次0，L次3 模拟 ``prefill`` 和 ``decoding`` 阶段的 input 下发 "
+"如果在pd阶段。表示一个core中原语复制的次数，几个transformer block。"
+msgstr ""
+"The above configuration indicates 1 time 0, L times 3, simulating the input "
+"distribution during the ``prefill`` and ``decoding`` phases if in the pd "
+"phase. It represents the number of primitive replications in a core, several"
+" transformer blocks."
+
+#: ../../source/getting_started/quickstart.rst:84
+#: ../../source/getting_started/quickstart.rst:597
+msgid "vars"
+msgstr "variables"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "dict"
+msgstr "dictionary"
+
+#: ../../source/getting_started/quickstart.rst:78
+msgid "记录数值的键值对，在下方的配置中出现的所有字符串可以在这里转换成对应的数字。"
+msgstr ""
+"The key-value pairs for recording numerical values; all strings appearing in"
+" the configuration below can be converted into corresponding numbers here."
+
+#: ../../source/getting_started/quickstart.rst:82
+msgid ""
+"如果配置 sram 的地址的话，需要 1024 "
+"个元素对齐，即所需要的数据量除以1024（这里不会乘上每个数据的BYTE数，或默认为INT8存储所需要的地址偏移）。 "
+"这样的设计可以避免数据类型变化对地址索引的影响。"
+msgstr ""
+"If configuring the address for SRAM, it needs to be aligned to 1024 "
+"elements, meaning the required data amount is divided by 1024 (here, it will"
+" not multiply by the BYTE count per data element, or the address offset "
+"required for INT8 storage by default). This design avoids the impact of data"
+" type changes on the address index."
+
+#: ../../source/getting_started/quickstart.rst:96
+msgid "source"
+msgstr "目标"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "list of dicts"
+msgstr "字典列表"
+
+#: ../../source/getting_started/quickstart.rst:87
+msgid ""
+"一个数组，记录了所有 start data 的相关信息。如果不为 sequential 模式，则在程序开始时、发送完所有的 prepare data "
+"之后，memInterface 会一次性发送所有的 start data。"
+msgstr ""
+"An array that records all the information related to the start data. If not "
+"in sequential mode, the memInterface will send all the start data at once at"
+" the beginning of the program, after all the prepare data has been sent."
+
+#: ../../source/getting_started/quickstart.rst:89
+#: ../../source/getting_started/quickstart.rst:101
+msgid "每个字典包含以下字段："
+msgstr "Each dictionary contains the following fields:"
+
+#: ../../source/getting_started/quickstart.rst:91
+#: ../../source/getting_started/quickstart.rst:580
+msgid "dest"
+msgstr "destination"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "int"
+msgstr "int"
+
+#: ../../source/getting_started/quickstart.rst:92
+msgid "start data 发送的目的地核编号。"
+msgstr "start data The destination core number to send to."
+
+#: ../../source/getting_started/quickstart.rst:93
+msgid "size"
+msgstr "size"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "string"
+msgstr "string"
+
+#: ../../source/getting_started/quickstart.rst:94
+msgid "start data 的大小，在 ``vars`` 中查找对应值。"
+msgstr "The size of start data, look up the corresponding value in ``vars``."
+
+#: ../../source/getting_started/quickstart.rst:96
+msgid "loop"
+msgstr "loop"
+
+#: ../../source/getting_started/quickstart.rst:96
+msgid "默认为 1。需要循环发送本 start data 的次数，**仅在 sequential 模式下使用**。"
+msgstr ""
+"The default is 1. The number of times this start data needs to be sent in a "
+"loop, **used only in sequential mode**."
+
+#: ../../source/getting_started/quickstart.rst:108
+msgid "chip"
+msgstr "芯片"
+
+#: ../../source/getting_started/quickstart.rst:99
+msgid "记录拓扑配置，虽然是数组但目前仅使用数组的第一个元素。"
+msgstr ""
+"Record topology configuration. Although it is an array, currently only the "
+"first element of the array is used."
+
+#: ../../source/getting_started/quickstart.rst:103
+msgid "GridX"
+msgstr "GridX"
+
+#: ../../source/getting_started/quickstart.rst:104
+msgid "X 维度计算核的个数。"
+msgstr "Number of kernels in the X dimension."
+
+#: ../../source/getting_started/quickstart.rst:105
+msgid "GridY"
+msgstr "GridY"
+
+#: ../../source/getting_started/quickstart.rst:106
+msgid "Y 维度计算核的个数（目前需要强制等同于 GridX）。"
+msgstr ""
+"Number of kernels in the Y dimension (currently must be equal to GridX)."
+
+#: ../../source/getting_started/quickstart.rst:108
+msgid "cores"
+msgstr "cores"
+
+#: ../../source/getting_started/quickstart.rst:108
+msgid "计算核相关配置，每一个数组元素代表一个核。"
+msgstr ""
+"Compute core related configurations, each array element represents a core."
+
+#: ../../source/getting_started/quickstart.rst:111
+msgid "core 配置"
+msgstr "core configuration"
+
+#: ../../source/getting_started/quickstart.rst:113
+msgid "每个 core 包含以下字段："
+msgstr "Each core contains the following fields:"
+
+#: ../../source/getting_started/quickstart.rst:116
+msgid "id"
+msgstr "ID"
+
+#: ../../source/getting_started/quickstart.rst:116
+msgid "计算核 ID。"
+msgstr "Compute core ID."
+
+#: ../../source/getting_started/quickstart.rst:119
+msgid "prim_prefill"
+msgstr "prefill"
+
+#: ../../source/getting_started/quickstart.rst:119
+msgid "默认为 false。该核是否需要支持无限循环执行，在 pipeline 模式下需要开启。"
+msgstr ""
+"Default is false. Whether the kernel needs to support infinite loop "
+"execution, which must be enabled in pipeline mode."
+
+#: ../../source/getting_started/quickstart.rst:123
+msgid "prim_copy"
+msgstr "prim_copy"
+
+#: ../../source/getting_started/quickstart.rst:122
+msgid ""
+"默认为 -1（不开启）。该核是否需要完全复制另一个核 worklist 中的原语。但需注意如果要复制的话，还是需要在自己的 worklist "
+"中注明对应的 cast、recv_cnt 和 recv_tag。 该数值表示复制哪一个 core_id 的原语组"
+msgstr ""
+"The default is -1 (disabled). Whether this core needs to fully replicate the"
+" primitives from another core's worklist. Note that if replication is "
+"required, the corresponding cast, recv_cnt, and recv_tag must still be "
+"specified in its own worklist. This value indicates which core_id's "
+"primitive group to replicate."
+
+#: ../../source/getting_started/quickstart.rst:624
+msgid "worklist"
+msgstr "worklist"
+
+#: ../../source/getting_started/quickstart.rst:562
+msgid "按照顺序指示计算核需要完成的工作。"
+msgstr "The core calculates the work to be completed in sequence."
+
+#: ../../source/getting_started/quickstart.rst:564
+msgid "每个 worklist 元素包含以下字段："
+msgstr "Each worklist element contains the following fields:"
+
+#: ../../source/getting_started/quickstart.rst:567
+msgid "recv_cnt"
+msgstr "Received count"
+
+#: ../../source/getting_started/quickstart.rst:567
+msgid "在执行这个 worklist 数组元素的原语之前，需要接收到多少个对应 tag 的 SEND_DRAM 原语的 end packet。"
+msgstr ""
+"Before executing the primitive for this worklist array element, the number "
+"of end packets from SEND_DRAM primitives corresponding to the tag must be "
+"received."
+
+#: ../../source/getting_started/quickstart.rst:573
+msgid "recv_tag"
+msgstr "receive tag"
+
+#: ../../source/getting_started/quickstart.rst:570
+msgid "默认值为此计算核 id。被此 worklist 数组元素所接受的 SEND msg 的 tag。不是此 tag 的消息不会被接收。"
+msgstr ""
+"The default value is the id of this compute core. It is the tag of the SEND "
+"message accepted by this worklist array element. Messages without this tag "
+"will not be received."
+
+#: ../../source/getting_started/quickstart.rst:573
+msgid ""
+"在配置文件时，需要注意每一个核的第一个 worklist 数组元素的 tag 必须与此计算核的 id 相同。且在后续的 worklist 元素中，tag"
+" 必须与此计算核的 id 不同，推荐在原 id 基础上增加一个较大的值。"
+msgstr ""
+"When configuring the file, note that the tag of the first worklist array "
+"element for each core must be the same as the id of that compute core. "
+"Furthermore, the tags in subsequent worklist elements must be different from"
+" the id of this compute core; it is recommended to add a large value to the "
+"original id."
+
+#: ../../source/getting_started/quickstart.rst:583
+msgid "cast"
+msgstr "cast"
+
+#: ../../source/getting_started/quickstart.rst:576
+msgid "在此 worklist 元素的所有原语完成之后，需要将结果发送到哪些核。"
+msgstr ""
+"After all primitives in this worklist element are completed, the results "
+"need to be sent to which cores."
+
+#: ../../source/getting_started/quickstart.rst:578
+msgid "每个 cast 元素包含以下字段："
+msgstr "Each cast element contains the following fields:"
+
+#: ../../source/getting_started/quickstart.rst:581
+msgid "目标核 ID。"
+msgstr "Target ID."
+
+#: ../../source/getting_started/quickstart.rst:583
+msgid "addr"
+msgstr "address"
+
+#: ../../source/getting_started/quickstart.rst:583
+msgid "目标核 DRAM 偏移量。"
+msgstr "Target DRAM offset."
+
+#: ../../source/getting_started/quickstart.rst:624
+msgid "prims"
+msgstr "prims"
+
+#: ../../source/getting_started/quickstart.rst:586
+msgid "此 worklist 元素需要完成的所有 comp 原语。"
+msgstr "All comp primitives that this worklist element needs to complete."
+
+#: ../../source/getting_started/quickstart.rst:588
+msgid "每个 prim 元素包含以下字段："
+msgstr "Each prim element contains the following fields:"
+
+#: ../../source/getting_started/quickstart.rst:594
+msgid "type"
+msgstr "type"
+
+#: ../../source/getting_started/quickstart.rst:594
+msgid "原语类型（需填写指定字符串）。"
+msgstr "Primitive type (must fill in the specified string)."
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "string or int"
+msgstr "string or int"
+
+#: ../../source/getting_started/quickstart.rst:597
+msgid "vars 处填写原语需要的参数名，值可以用 string 在 ``vars`` 字段查找，也可以填写数字。"
+msgstr ""
+"vars specifies the parameter names required by the primitive. Values can be "
+"looked up using a string in the ``vars`` field, or a number can be entered."
+
+#: ../../source/getting_started/quickstart.rst:610
+msgid "sram_address"
+msgstr "sram_address"
+
+#: ../../source/getting_started/quickstart.rst:600
+msgid "此原语在 SRAM 中存储相关。"
+msgstr "This primitive stores correlations in SRAM."
+
+#: ../../source/getting_started/quickstart.rst:607
+msgid "indata"
+msgstr "input data"
+
+#: ../../source/getting_started/quickstart.rst:603
+msgid ""
+"此原语的输入位于 SRAM 的什么标签处。如果需要从 DRAM 获取，则必须先写 \"dram_label\"，随后在一个空格后加上从 DRAM "
+"读取出数据后存放在 SRAM 中的标签名。如果原语会有几部分的输入，则统一用一个空格隔开。"
+msgstr ""
+"Where is the input of this primitive located in SRAM's labels. If it needs "
+"to be fetched from DRAM, you must first write \"dram_label\", followed by a "
+"space and then the label name in SRAM where the data read from DRAM is "
+"stored. If the primitive has multiple parts of input, separate them "
+"uniformly with a space."
+
+#: ../../source/getting_started/quickstart.rst:606
+msgid ""
+"对于上一个核路由传进来的输入数据（保存在 SRAM 上），则在 ``sram_address`` 中用 ``input_label`` 表示。"
+msgstr ""
+"For the input data passed from the previous kernel (stored in SRAM), it is "
+"represented by ``input_label`` in ``sram_address``."
+
+#: ../../source/getting_started/quickstart.rst:607
+msgid ""
+"一般来说，算子的输入张量，用完即可清除，但是对于类似 residual 算子，一个输入张量可能会被后续张量使用，需要在 ``input_label`` "
+"前加上 ``_input_label``。"
+msgstr ""
+"Generally, the input tensors of an operator can be cleared immediately after"
+" use. However, for operators like residual connections, an input tensor "
+"might be used by subsequent tensors, requiring the addition of "
+"``_input_label`` before the ``input_label``."
+
+#: ../../source/getting_started/quickstart.rst:610
+msgid "outdata"
+msgstr "Outdata"
+
+#: ../../source/getting_started/quickstart.rst:610
+msgid "此原语的输出会保存在 SRAM 的什么标签处。"
+msgstr "Where will the output of this primitive be stored in the SRAM label."
+
+#: ../../source/getting_started/quickstart.rst:624
+msgid "dram_address"
+msgstr "dram address"
+
+#: ../../source/getting_started/quickstart.rst:613
+msgid "此原语在 DRAM 中存储相关。"
+msgstr "This primitive is related to storage in DRAM."
+
+#: ../../source/getting_started/quickstart.rst:616
+msgid "input"
+msgstr "输入"
+
+#: ../../source/getting_started/quickstart.rst:-1
+msgid "string or int, optional"
+msgstr "string or int, optional"
+
+#: ../../source/getting_started/quickstart.rst:616
+msgid "默认为 0。此原语输入在 DRAM 中的位置。"
+msgstr "Default is 0. This primitive input's location in DRAM."
+
+#: ../../source/getting_started/quickstart.rst:619
+msgid "data"
+msgstr "data"
+
+#: ../../source/getting_started/quickstart.rst:619
+msgid "默认为 0。此原语数据、权重在 DRAM 中的位置，如果为 -1，则表示此原语不需要权重的数据。"
+msgstr ""
+"The default is 0. This primitive data and the location of the weights in "
+"DRAM; if it is -1, it indicates that this primitive does not require weight "
+"data."
+
+#: ../../source/getting_started/quickstart.rst:624
+msgid "out"
+msgstr "out"
+
+#: ../../source/getting_started/quickstart.rst:622
+msgid "默认为 0。此原语输出在 DRAM 中的位置。"
+msgstr "The default is 0. This primitive outputs the location in DRAM."
+
+#: ../../source/getting_started/run_npu_sim.rst:4
+msgid "运行 NPU-SIM"
+msgstr "Run NPU-SIM"
+
+#: ../../source/getting_started/run_npu_sim.rst:6
+msgid "使用以下命令运行 NPU-SIM："
+msgstr "Run NPU-SIM using the following command:"
+
+#: ../../source/getting_started/run_npu_sim.rst:17
+msgid "命令行参数说明"
+msgstr "Command Line Argument Description"
+
+#: ../../source/getting_started/run_npu_sim.rst:19
+msgid "以下是各个命令行参数的说明："
+msgstr "The following are descriptions of each command-line parameter:"
+
+#: ../../source/getting_started/run_npu_sim.rst:21
+msgid "**--workload-config** 指定工作负载配置文件路径。"
+msgstr ""
+"**--workload-config** specifies the path to the workload configuration file."
+
+#: ../../source/getting_started/run_npu_sim.rst:24
+msgid "详情请参阅：:doc:`workload_config_detail`"
+msgstr "For details, refer to: :doc:`workload_config_detail`"
+
+#: ../../source/getting_started/run_npu_sim.rst:26
+msgid "**--simulation-config** 指定仿真配置文件路径。"
+msgstr ""
+"**--simulation-config** specifies the simulation configuration file path."
+
+#: ../../source/getting_started/run_npu_sim.rst:29
+msgid "详情请参阅：:doc:`simulation_config_detail`"
+msgstr "For details, please refer to: :doc:`simulation_config_detail`"
+
+#: ../../source/getting_started/run_npu_sim.rst:31
+msgid "**--hardware-config** 指定硬件配置文件路径。"
+msgstr "**--hardware-config** specifies the hardware configuration file path."
+
+#: ../../source/getting_started/run_npu_sim.rst:34
+msgid "详情请参阅：:doc:`hardware_config_detail`"
+msgstr "For details, please refer to: :doc:`hardware_config_detail`"
+
+#: ../../source/getting_started/run_npu_sim.rst:36
+msgid "**--mapping-config** 指定映射配置文件路径。"
+msgstr "**--mapping-config** specifies the mapping configuration file path."
+
+#: ../../source/getting_started/run_npu_sim.rst:39
+msgid "详情请参阅：:doc:`mapping_config_detail`"
+msgstr "For details, refer to: :doc:`mapping_config_detail`"
+
+#: ../../source/getting_started/simulation_config_detail.rst:6
+msgid ""
+"仿真配置用于描述 **NPU-SIM** 在仿真过程中使用的仿真参数，以 **JSON** 格式保存。它主要描述了 **NPU-SIM** "
+"对不同组件的仿真方式、优化技术、控制台输出等参数。"
+msgstr ""
+"Simulation configuration describes the simulation parameters used by **NPU-"
+"SIM** during the simulation process and is saved in **JSON** format. It "
+"primarily describes how **NPU-SIM** simulates different components, "
+"optimization techniques, console output, and other parameters."
+
+#: ../../source/getting_started/simulation_config_detail.rst:8
+msgid "我们提供了示例配置文件，其中包含对于所有可配置参数的记录。它位于以下目录中："
+msgstr ""
+"We provide a sample configuration file that documents all configurable "
+"parameters. It is located in the following directory:"
+
+#: ../../source/getting_started/simulation_config_detail.rst:14
+msgid "有关仿真配置的详细字段说明见下。"
+msgstr ""
+"For detailed field descriptions of the simulation configuration, see below."
+
+#: ../../source/getting_started/simulation_config_detail.rst:20
+msgid "字体文件"
+msgstr "Font file"
+
+#: ../../source/getting_started/simulation_config_detail.rst:23
+msgid "ttf_file : string"
+msgstr "ttf file : string"
+
+#: ../../source/getting_started/simulation_config_detail.rst:25
+msgid "字体文件相对于主程序入口文件的路径。"
+msgstr "The path to the font file relative to the main program entry file."
+
+#: ../../source/getting_started/simulation_config_detail.rst:34
+msgid "**use_perf_gemm : boolean**"
+msgstr "**use_perf_gemm : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:36
+msgid "是否使用性能优化的GEMM算子。在模拟计算周期时，会得到更准确的结果。"
+msgstr ""
+"Whether to use the performance-optimized GEMM operator. More accurate "
+"results will be obtained when simulating computation cycles."
+
+#: ../../source/getting_started/simulation_config_detail.rst:38
+msgid "**load_static_as_tile : boolean**"
+msgstr "**load_static_as_tile : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:40
+msgid ""
+"在向SRAM中加载数据时，是否将静态数据作为tile进行加载。此方法会显著减少SRAM用量，从而减少溢出次数。但会引入额外的DRAM访问开销。"
+msgstr ""
+"When loading data into SRAM, should static data be loaded as tiles? This "
+"method significantly reduces SRAM usage, thereby decreasing the number of "
+"spills. However, it introduces additional DRAM access overhead."
+
+#: ../../source/getting_started/simulation_config_detail.rst:44
+msgid "内存"
+msgstr "memory"
+
+#: ../../source/getting_started/simulation_config_detail.rst:49
+msgid "**use_beha_sram : boolean**"
+msgstr "**use_beha_sram : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:51
+msgid "是否使用行为级SRAM仿真。此方法会大幅加快仿真现实速度，但会略微丢失仿真精度。"
+msgstr ""
+"Whether to use behavioral-level SRAM simulation. This method significantly "
+"accelerates simulation speed but slightly reduces simulation accuracy."
+
+#: ../../source/getting_started/simulation_config_detail.rst:53
+msgid "**use_beha_dram : boolean**"
+msgstr "use_beha_dram : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:55
+msgid "是否使用行为级DRAM仿真。此方法会大幅加快仿真现实速度，但会略微丢失仿真精度。"
+msgstr ""
+"Whether to use behavioral-level DRAM simulation. This method significantly "
+"accelerates simulation speed but slightly reduces simulation accuracy."
+
+#: ../../source/getting_started/simulation_config_detail.rst:57
+msgid "**use_dramsys : boolean**"
+msgstr "use_dramsys : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:67
+msgid "**use_beha_noc : boolean**"
+msgstr "use_beha_noc : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:69
+msgid "是否使用行为级片上网络仿真。此方法会大幅加快仿真现实速度，但会略微丢失仿真精度。"
+msgstr ""
+"Whether to use behavioral-level on-chip network simulation. This method "
+"significantly accelerates simulation speed but slightly reduces simulation "
+"accuracy."
+
+#: ../../source/getting_started/simulation_config_detail.rst:71
+msgid "**router_pipe : boolean**"
+msgstr "**router_pipe : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:73
+msgid "是否开启路由器的流水线模式。此方法可以隐藏路由器从SRAM中读取数据的时间。"
+msgstr ""
+"Enable the router's pipeline mode. This method can hide the time it takes "
+"for the router to read data from SRAM."
+
+#: ../../source/getting_started/simulation_config_detail.rst:75
+msgid "**fast_warmup : boolean**"
+msgstr "**fast_warmup : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:77
+msgid "是否跳过激活数据流图的初始数据分发。"
+msgstr ""
+"Skip the initial data distribution for activating the data flow graph."
+
+#: ../../source/getting_started/simulation_config_detail.rst:79
+msgid "**send_recv_parallel : boolean**"
+msgstr "send_recv_parallel : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:81
+msgid "是否同时执行工作核的SEND_PRIM和RECV_PRIM。在开启 ``use_beha_noc`` 时，启用此参数将不会有显著效果。"
+msgstr ""
+"Whether to simultaneously execute the SEND_PRIM and RECV_PRIM of the work "
+"core. When `use_beha_noc` is enabled, turning on this parameter will not "
+"have a significant effect."
+
+#: ../../source/getting_started/simulation_config_detail.rst:84
+msgid "GPU"
+msgstr "GPU"
+
+#: ../../source/getting_started/simulation_config_detail.rst:89
+msgid "**use_inner_mm : boolean**"
+msgstr "**use_inner_mm : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:91
+msgid "执行矩阵乘法时，是否使用内积。若不开启，则采用外积。"
+msgstr ""
+"When performing matrix multiplication, whether to use the inner product. If "
+"not enabled, the outer product is used."
+
+#: ../../source/getting_started/simulation_config_detail.rst:93
+msgid "**cache_log : boolean**"
+msgstr "**cache_log : boolean**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:97
+msgid "**dram_config_file : string**"
+msgstr "**dram_config_file : string**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:99
+msgid "指定GPU的内存配置文件相对于主程序文件入口的路径。"
+msgstr ""
+"Specify the path of the GPU memory configuration file relative to the entry "
+"point of the main program file."
+
+#: ../../source/getting_started/simulation_config_detail.rst:102
+msgid "控制台输出"
+msgstr "Console output"
+
+#: ../../source/getting_started/simulation_config_detail.rst:105
+msgid "log : dict"
+msgstr "log : dict"
+
+#: ../../source/getting_started/simulation_config_detail.rst:107
+msgid "**log_level : number**"
+msgstr "**log_level : number**"
+
+#: ../../source/getting_started/simulation_config_detail.rst:109
+msgid "控制台输出的详细程度。0为输出所有信息，1为省略Debug信息。"
+msgstr ""
+"The verbosity of console output. 0 outputs all information, 1 omits debug "
+"information."
+
+#: ../../source/getting_started/simulation_config_detail.rst:111
+msgid "**verbose_debug : boolean**"
+msgstr "verbose_debug : boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:113
+msgid "是否输出以 ``_debug`` 结尾的标签。关闭此参数可省略一部分的输出信息。"
+msgstr ""
+"Whether to output labels ending with ``_debug``. Disabling this parameter "
+"will omit some output information."
+
+#: ../../source/getting_started/simulation_config_detail.rst:115
+msgid "**colored : boolean**"
+msgstr "colored: boolean"
+
+#: ../../source/getting_started/simulation_config_detail.rst:117
+msgid "是否在控制台输出中显示颜色。"
+msgstr "Whether to display colors in the console output."
+
+#: ../../source/getting_started/simulator_validation.rst:6
+msgid ""
+"图中左侧对比了在 **NPU-SIM** 上运行的 **Qwen3_4B** 模型与在 **Ascend-NPU-910B** "
+"硬件上运行时的端到端延迟。实验在不同的解码序列长度（128 和 256）以及批大小（8 到 64）下进行。在相同的硬件配置条件下， **NPU-"
+"SIM** 的模拟运行时间与真实硬件的执行时间高度一致。尽管真实执行会受到硬件资源利用率和软件优化等因素影响， **NPU-SIM** "
+"仍然能够保持与实际性能趋势的一致性。"
+msgstr ""
+"The left side of the figure compares the end-to-end latency of the "
+"**Qwen3_4B** model running on **NPU-SIM** versus on **Ascend-NPU-910B** "
+"hardware. Experiments were conducted with different decoding sequence "
+"lengths (128 and 256) and batch sizes (8 to 64). Under the same hardware "
+"configuration, the simulated runtime of **NPU-SIM** closely matches the "
+"execution time on actual hardware. Although real execution is influenced by "
+"factors such as hardware resource utilization and software optimization, "
+"**NPU-SIM** still maintains consistency with the actual performance trend."
+
+#: ../../source/getting_started/simulator_validation.rst:8
+msgid "TODO：验证图片"
+msgstr "TODO: Verify Image"
+
+#: ../../source/getting_started/simulator_validation.rst:10
+msgid ""
+"在 **NPU-SIM** "
+"中，各个组件均可独立配置不同的仿真模式，主要分为两种：时钟精确级，即在每一个硬件的时钟周期进行一次组件的状态计算和更新。此仿真模式具有较高的仿真精确度，但仿真耗时较高；另一种行为级仿真，则是采用了"
+" **屋檐模型** ，可以跳过重复的周期仿真，将硬件组件的行为用模型近似，在丢失较少仿真精度的情况下，大幅加快仿真速度。"
+msgstr ""
+"In **NPU-SIM**, each component can be independently configured with "
+"different simulation modes, primarily divided into two types: cycle-"
+"accurate, which performs state calculation and updates for each component at"
+" every hardware clock cycle. This simulation mode offers high accuracy but "
+"incurs significant simulation time; the other type, behavioral-level "
+"simulation, employs the **roofline model**, which can skip repetitive cycle "
+"simulations by approximating hardware component behavior with models, "
+"greatly accelerating simulation speed while sacrificing minimal accuracy."
+
+#: ../../source/getting_started/simulator_validation.rst:12
+msgid ""
+"图中右侧展示了两种仿真模式对运行效率和准确性的影响。我们在 **Qwen3_4B** 的不同工作负载下进行测试，其中前三个（C1 到 "
+"C3）代表内存密集型场景，其余则代表计算密集型场景。结果表明，在内存密集型场景中，基于性能模型的仿真可以将实时执行开销降低 4.93 倍到 11.27 "
+"倍，但会带来最高达 38.56% 的误差；而在计算密集型场景中，由于计算过程是确定性的，准确性可以保持在 3% 以内。"
+msgstr ""
+"The right side of the figure illustrates the impact of two simulation modes "
+"on runtime efficiency and accuracy. We tested under different workloads of "
+"**Qwen3_4B**, where the first three (C1 to C3) represent memory-intensive "
+"scenarios, and the rest represent compute-intensive scenarios. The results "
+"show that in memory-intensive scenarios, performance model-based simulation "
+"can reduce real-time execution overhead by 4.93x to 11.27x, but introduces "
+"up to 38.56% error; whereas in compute-intensive scenarios, since the "
+"computation process is deterministic, the accuracy can be maintained within "
+"3%."
+
+#: ../../source/getting_started/tp_mapping.rst:4
+msgid "模型并行与计算核映射"
+msgstr "Model Parallelism and Compute Kernel Mapping"
+
+#: ../../source/getting_started/tp_mapping.rst:6
+msgid "本页面将介绍三种优化后的模型并行（TP）策略，以及不同计算核放置策略所带来的模型执行效率提升。"
+msgstr ""
+"This page introduces three optimized model parallelism (TP) strategies and "
+"the resulting improvements in model execution efficiency from different "
+"computational kernel placement strategies."
+
+#: ../../source/getting_started/tp_mapping.rst:9
+msgid "模型并行策略"
+msgstr "Model Parallelism Strategy"
+
+#: ../../source/getting_started/tp_mapping.rst:11
+msgid "下图简单表示了三种优化后的模型并行策略。与传统的TP不同，此处的TP会同时切割输入与权重。"
+msgstr ""
+"The following diagram simply illustrates three optimized model parallelism "
+"strategies. Unlike traditional TP, the TP here simultaneously partitions "
+"both the input and the weights."
+
+#: ../../source/getting_started/tp_mapping.rst:13
+msgid "TODO：TP图片"
+msgstr "TODO: TP Image"
+
+#: ../../source/getting_started/tp_mapping.rst:16
+msgid "M/N 维度切分"
+msgstr "M/N Dimension Sharding"
+
+#: ../../source/getting_started/tp_mapping.rst:18
+msgid ""
+"将输入沿行方向切割，将权重按列方向切割。计算时保持输入不动，在经过一轮矩阵乘计算后，通过 All Gather "
+"操作轮转所有TP核心上的权重，直至每一块切分后的权重均被所有核接收过至少一次。"
+msgstr ""
+"Split the input along the row direction and split the weights along the "
+"column direction. During computation, keep the input stationary. After one "
+"round of matrix multiplication calculation, rotate the weights across all TP"
+" cores through an All Gather operation until each partitioned weight block "
+"has been received by all cores at least once."
+
+#: ../../source/getting_started/tp_mapping.rst:20
+msgid ""
+"在计算过程中，每一个核心最多在本地存放一个权重块。在最终对输出进行 All Gather 操作之前，每一个核心最多仅存放总输出大小的 ``1/TP`` "
+"。"
+msgstr ""
+"During computation, each core stores at most one weight block locally. "
+"Before the final All Gather operation on the output, each core stores at "
+"most ``1/TP`` of the total output size."
+
+#: ../../source/getting_started/tp_mapping.rst:23
+msgid "K 维度切分"
+msgstr "K-Dimensional Partitioning"
+
+#: ../../source/getting_started/tp_mapping.rst:25
+msgid "将输入沿列方向切割，将权重按行方向切割。计算时所有数据均保持静止，仅对输出结果进行 All Reduce 操作。"
+msgstr ""
+"Split the input along the column direction and split the weights along the "
+"row direction. During computation, all data remains stationary, and only the"
+" output results undergo an All Reduce operation."
+
+#: ../../source/getting_started/tp_mapping.rst:27
+msgid ""
+"在计算过程中，每一个核心始终需要维护一块大小等同于最终输出的数据块，且最后的输出结果在送往下一步计算前，需要强制进行 All Reduce 操作。"
+msgstr ""
+"During the computation process, each core must continuously maintain a data "
+"block equal in size to the final output, and a mandatory All Reduce "
+"operation is required before the final output result is passed to the next "
+"computation step."
+
+#: ../../source/getting_started/tp_mapping.rst:30
+msgid "二维 MN/K 切分"
+msgstr "Two-dimensional MN/K partitioning"
+
+#: ../../source/getting_started/tp_mapping.rst:32
+msgid ""
+"是前两种TP策略的融合。输入与权重在行和列方向均进行切割。具有较为复杂的通信逻辑。在进行一轮矩阵乘法之后，首先进行 K 方向上的 All Reduce "
+"操作，将每一行核心的输出数据进行整合。随后进行 MN 方向上的 All Gather 操作，将权重搬运到同一列上的其他核心。将一次完整的行 All "
+"Reduce 和一轮列 All Gather 流转标记为一次循环。该循环需要重复执行数次，数量等同于权重在列方向上被切分的数量。"
+msgstr ""
+"It is a fusion of the first two TP strategies. Both the input and weights "
+"are partitioned along the row and column directions. It involves relatively "
+"complex communication logic. After performing one round of matrix "
+"multiplication, an All-Reduce operation is first performed along the K "
+"direction to consolidate the output data from each core in a row. "
+"Subsequently, an All-Gather operation is performed along the MN direction to"
+" gather the weights to other cores in the same column. One complete cycle "
+"consists of a row-wise All-Reduce and a column-wise All-Gather. This cycle "
+"needs to be repeated several times, with the number of repetitions equal to "
+"the number of partitions of the weights along the column direction."
+
+#: ../../source/getting_started/tp_mapping.rst:35
+msgid "模型并行测试"
+msgstr "Model Parallel Testing"
+
+#: ../../source/getting_started/tp_mapping.rst:37
+msgid "下图展示了不同规模的模型，在不同TP策略下的端到端执行时延。"
+msgstr ""
+"The following figure shows the end-to-end execution latency of models of "
+"different scales under various TP strategies."
+
+#: ../../source/getting_started/tp_mapping.rst:39
+msgid "TODO：TP结果图"
+msgstr "TODO: TP Result Diagram"
+
+#: ../../source/getting_started/tp_mapping.rst:41
+msgid ""
+"当输入序列长度小于模型的隐藏维度时，沿 K 维度的划分具有更好的性能。例如，在 Qwen3_4B 且序列长度为 256 的情况下，K 维度划分的速度比 "
+"MN 维度划分快 6.03 倍。然而，一旦序列长度超过隐藏维度，K 维度划分的性能会急剧下降。相比于一维 MN 划分，二维 MN/K "
+"划分表现出更优的性能，平均可获得 1.44 倍的加速。"
+msgstr ""
+"When the input sequence length is less than the model's hidden dimension, "
+"partitioning along the K dimension yields better performance. For example, "
+"with Qwen3_4B and a sequence length of 256, K-dimension partitioning is 6.03"
+" times faster than MN-dimension partitioning. However, once the sequence "
+"length exceeds the hidden dimension, the performance of K-dimension "
+"partitioning drops sharply. Compared to one-dimensional MN partitioning, "
+"two-dimensional MN/K partitioning demonstrates superior performance, "
+"achieving an average speedup of 1.44 times."
+
+#: ../../source/getting_started/tp_mapping.rst:44
+msgid "计算核放置策略"
+msgstr "Computing Core Placement Strategy"
+
+#: ../../source/getting_started/tp_mapping.rst:46
+msgid ""
+"除了张量划分之外，计算核放置策略也在多核 NPU 的性能中起着关键作用。我们首先将所有 NPU "
+"核心划分为多个流水线（pipeline），其中每条流水线负责处理模型的一层或多层。在每条流水线内部，我们采用张量划分，并结合不同的核心放置策略（如一维或二维、环形或顺序放置）。"
+msgstr ""
+"In addition to tensor partitioning, the computational kernel placement "
+"strategy also plays a key role in the performance of multi-core NPUs. We "
+"first divide all NPU cores into multiple pipelines, where each pipeline is "
+"responsible for processing one or more layers of the model. Within each "
+"pipeline, we employ tensor partitioning and combine it with different core "
+"placement strategies (such as one-dimensional or two-dimensional, ring or "
+"sequential placement)."
+
+#: ../../source/getting_started/tp_mapping.rst:48
+msgid "TODO：放置图片"
+msgstr "TODO: Place image"
+
+#: ../../source/getting_started/tp_mapping.rst:51
+msgid "放置策略性能对比"
+msgstr "Placement Strategy Performance Comparison"
+
+#: ../../source/getting_started/tp_mapping.rst:53
+msgid ""
+"对于 TP=4，linear-interleave 和 linear-seq 的性能相近，而 mesh 和 ring 拓扑分别可获得约 1.17× "
+"的加速。在较小的 TP 规模下，替代拓扑带来的性能提升并不显著。当 TP 扩展至 16 时，优化核心放置策略带来的收益更加明显。相较于 linear-"
+"interleave，linear-seq、mesh 和 ring 策略分别可带来最高 1.18×、1.25× 和 1.32× 的加速。虽然 "
+"Wafer-LLM 在 Cerebras 上的实验得出 linear-interleave "
+"是最优方案，但这种效果在不同平台上可能有所差异。在我们的实现中，为了确保核间通信无死锁，我们引入了通道锁机制，这反而削弱了交错式通信的性能。相比之下，mesh"
+" 和 ring 映射在我们的硬件上表现得更为高效。"
+msgstr ""
+"For TP=4, the performance of linear-interleave and linear-seq is similar, "
+"while mesh and ring topologies achieve approximately 1.17× speedup "
+"respectively. At smaller TP scales, the performance improvement from "
+"alternative topologies is not significant. When TP is scaled to 16, the "
+"benefits of optimizing core placement strategies become more pronounced. "
+"Compared to linear-interleave, linear-seq, mesh, and ring strategies can "
+"achieve up to 1.18×, 1.25×, and 1.32× speedup respectively. Although Wafer-"
+"LLM experiments on Cerebras concluded that linear-interleave is the optimal "
+"solution, this effect may vary across different platforms. In our "
+"implementation, to ensure deadlock-free inter-core communication, we "
+"introduced channel locking mechanisms, which conversely weakened the "
+"performance of interleaved communication. In contrast, mesh and ring "
+"mappings perform more efficiently on our hardware."
+
+#: ../../source/getting_started/workload_config_detail.rst:4
+msgid "工作负载配置"
+msgstr "Workload Configuration"
+
+#: ../../source/getting_started/workload_config_detail.rst:6
+msgid ""
+"工作负载配置用于定义 **NPU-SIM** 在仿真过程中所需的数据流图（Dataflow Graph），以 **JSON** "
+"格式保存。它主要描述了模型结构、模型参数、计算原语（primitive）所对应的工作负载、以及各工作核之间的通信流程等内容。"
+msgstr ""
+"Workload configuration is used to define the Dataflow Graph required by "
+"**NPU-SIM** during the simulation process and is saved in **JSON** format. "
+"It primarily describes the model structure, model parameters, the workload "
+"corresponding to computation primitives, and the communication flow between "
+"various processing cores, among other details."
+
+#: ../../source/getting_started/workload_config_detail.rst:8
+msgid "我们提供了若干示例配置文件，与论文中的各类实验场景相对应。这些示例配置位于以下目录中："
+msgstr ""
+"We provide several example configuration files corresponding to various "
+"experimental scenarios in the paper. These example configurations are "
+"located in the following directory:"
+
+#: ../../source/getting_started/workload_config_detail.rst:14
+msgid "详细的字段说明可参阅：:doc:`workload_config_syntax`"
+msgstr ""
+"For detailed field descriptions, please refer to: "
+":doc:`workload_config_syntax`"
+
+#: ../../source/getting_started/workload_config_detail.rst:16
+msgid "进阶原语配置说明可参阅： :doc:`advanced_primitive_detail`"
+msgstr ""
+"For advanced primitive configuration details, refer to: "
+":doc:`advanced_primitive_detail`"
+
+#: ../../source/getting_started/workload_config_detail.rst:19
+msgid "生成配置"
+msgstr "Generate configuration"
+
+#: ../../source/getting_started/workload_config_detail.rst:22
+msgid "方法一：使用 Python 脚本自动生成"
+msgstr "Method 1: Automatically Generate Using Python Script"
+
+#: ../../source/getting_started/workload_config_detail.rst:24
+msgid ""
+"使用官方提供的 **Python** 脚本，可以快速生成指定模型结构（如 **GPT**、**Qwen** "
+"等）的工作负载配置。该方法支持自定义模型参数与并行策略，适用于常规模型的仿真任务，开箱即用。"
+msgstr ""
+"Using the official **Python** script, you can quickly generate workload "
+"configurations for specified model architectures (such as **GPT**, **Qwen**,"
+" etc.). This method supports custom model parameters and parallelization "
+"strategies, is suitable for simulation tasks of conventional models, and "
+"works out-of-the-box."
+
+#: ../../source/getting_started/workload_config_detail.rst:26
+msgid ""
+"需要注意的是，该方法 **不支持对模型结构进行自定义修改** 。如需了解使用方式，请参阅：:doc:`workload_config_script`"
+msgstr ""
+"Please note that this method **does not support custom modifications to the "
+"model structure**. For usage instructions, please refer to "
+":doc:`workload_config_script`"
+
+#: ../../source/getting_started/workload_config_detail.rst:29
+msgid "方法二：手动编写配置文件"
+msgstr "Method 2: Manually Write Configuration Files"
+
+#: ../../source/getting_started/workload_config_detail.rst:31
+msgid "如果用户希望自定义模型结构，或专注于探索片上核间通信范式，可以选择 **手动编写工作负载配置文件** 。"
+msgstr ""
+"If users wish to customize the model architecture or focus on exploring on-"
+"chip inter-core communication paradigms, they can choose to **manually write"
+" workload configuration files**."
+
+#: ../../source/getting_started/workload_config_detail.rst:33
+msgid "**NPU-SIM** 的工作负载配置文件采用一套可读性强、语义清晰的自定义语法，支持灵活描述算子与通信关系，便于研究与验证不同架构设计。"
+msgstr ""
+"**NPU-SIM** workload configuration files employ a custom syntax that is "
+"highly readable and semantically clear, supporting flexible descriptions of "
+"operator and communication relationships, facilitating research and "
+"validation of different architecture designs."
+
+#: ../../source/getting_started/workload_config_detail.rst:35
+msgid "详细的配置语法说明，请参阅：:doc:`workload_config_syntax`"
+msgstr ""
+"For detailed configuration syntax, refer to: :doc:`workload_config_syntax`"
+
+#: ../../source/getting_started/workload_config_script.rst:4
+msgid "配置生成脚本"
+msgstr "Configuration Generation Script"
+
+#: ../../source/getting_started/workload_config_script.rst:6
+msgid "自动生成工作负载配置的Python脚本位于以下路径："
+msgstr ""
+"The Python script for automatically generating workload configurations is "
+"located at the following path:"
+
+#: ../../source/getting_started/workload_config_script.rst:13
+msgid "脚本使用方法："
+msgstr "Script Usage:"
+
+#: ../../source/getting_started/workload_config_script.rst:15
+msgid "可参考脚本中定义的各参数使用。目前支持的参数配置如下："
+msgstr ""
+"Refer to the usage of each parameter defined in the script. The currently "
+"supported parameter configurations are as follows:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:6
+msgid "完整的工作负载配置以 **JSON** 字典的形式呈现，以下对各个字段的含义与书写规范进行说明。"
+msgstr ""
+"The complete workload configuration is presented in the form of a **JSON** "
+"dictionary. The following describes the meaning and writing specifications "
+"of each field."
+
+#: ../../source/getting_started/workload_config_syntax.rst:9
+msgid "仿真模式"
+msgstr "Simulation mode"
+
+#: ../../source/getting_started/workload_config_syntax.rst:12
+msgid "mode : string"
+msgstr "mode : string"
+
+#: ../../source/getting_started/workload_config_syntax.rst:14
+msgid "**支持的值：[\"dataflow\", \"pd\", \"pds\", \"gpu\", \"gpu_pd\"]**"
+msgstr "**Supported values: [\"dataflow\", \"pd\", \"pds\", \"gpu\", \"gpu_pd\"]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:16
+msgid "指定当前配置文件的仿真模式。对于不同的仿真模式，配置文件的书写方法略有不同。"
+msgstr ""
+"Specify the simulation mode for the current configuration file. The writing "
+"method of the configuration file varies slightly for different simulation "
+"modes."
+
+#: ../../source/getting_started/workload_config_syntax.rst:18
+msgid "**dataflow**: 众核数据流模式。"
+msgstr "**dataflow**: Many-core dataflow pattern."
+
+#: ../../source/getting_started/workload_config_syntax.rst:19
+msgid "**pd**: LLM Serving模式，且采用 **PD-aggregation** 。"
+msgstr "**pd**: LLM Serving mode, and using **PD-aggregation**."
+
+#: ../../source/getting_started/workload_config_syntax.rst:20
+msgid "**pds**: LLM Serving模式，且采用 **PD-split** 。"
+msgstr "**pds**: LLM Serving mode, and using **PD-split**."
+
+#: ../../source/getting_started/workload_config_syntax.rst:21
+msgid "**gpu**: GPU模式。"
+msgstr "**gpu**: GPU mode."
+
+#: ../../source/getting_started/workload_config_syntax.rst:22
+msgid "**gpu_pd**: GPU模式，且采用 **PD-aggregation** 。"
+msgstr "**gpu_pd**: GPU mode, using **PD-aggregation**."
+
+#: ../../source/getting_started/workload_config_syntax.rst:25
+msgid "一个配置文件仅支持一种仿真模式。"
+msgstr "A configuration file supports only one simulation mode."
+
+#: ../../source/getting_started/workload_config_syntax.rst:26
+msgid "在本页面其余字段的说明下方，会标记出该字段所适用的仿真模式。"
+msgstr ""
+"Below the description of other fields on this page, the simulation modes "
+"applicable to each field are indicated."
+
+#: ../../source/getting_started/workload_config_syntax.rst:29
+msgid "模型参数与架构设置"
+msgstr "Model Parameters and Architecture Settings"
+
+#: ../../source/getting_started/workload_config_syntax.rst:32
+msgid "vars : dict"
+msgstr "vars: dict"
+
+#: ../../source/getting_started/workload_config_syntax.rst:34
+msgid "**适用模式：dataflow, gpu**"
+msgstr "**Applicable modes: dataflow, gpu**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:36
+msgid ""
+"定义在配置文件中所使用到的变量键值对。键代表变量名，值代表变量值。在配置文件中，若使用字符串作为任意字段的值，优先为其赋予 ``vars`` "
+"中该变量名所对应的值。"
+msgstr ""
+"Define the key-value pairs of variables used in the configuration file. The "
+"key represents the variable name, and the value represents the variable "
+"value. In the configuration file, if a string is used as the value of any "
+"field, it is preferentially assigned the value corresponding to that "
+"variable name in ``vars``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:41
+msgid "在配置文件中，vars定义如下："
+msgstr "In the configuration file, vars are defined as follows:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:52
+msgid "随后在配置文件的其他位置，使用如下写法，将 ``some_random_field`` 的值设置为123.456："
+msgstr ""
+"Then, in another part of the configuration file, use the following syntax to"
+" set the value of ``some_random_field`` to 123.456:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:61
+msgid "变量值仅支持整型与浮点型。"
+msgstr "Variable values only support integer and floating-point types."
+
+#: ../../source/getting_started/workload_config_syntax.rst:62
+msgid "不能对同一变量名重复定义，且不能在配置文件中使用未定义的变量。"
+msgstr ""
+"You cannot redefine the same variable name, and you cannot use undefined "
+"variables in configuration files."
+
+#: ../../source/getting_started/workload_config_syntax.rst:63
+msgid "使用变量时，不支持对变量名进行运算。例如\"foo+1\"、\"foo / bar\"、\"2foo\"等，在仅定义了 ``foo`` 变量的情况下，均是错误写法。"
+msgstr ""
+"When using variables, operations on variable names are not supported. For "
+"example, \"foo+1\", \"foo / bar\", and \"2foo\" are all incorrect "
+"expressions if only the ``foo`` variable is defined."
+
+#: ../../source/getting_started/workload_config_syntax.rst:66
+msgid "pipeline : number, optional"
+msgstr "pipeline: number, optional"
+
+#: ../../source/getting_started/workload_config_syntax.rst:68
+msgid "**适用模式：dataflow**"
+msgstr "**Applicable mode: dataflow**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:70
+msgid "在简单数据流模式下，表示 **总请求个数** 。该模式无法指定请求到达时间分布，因此所有请求视为在仿真开始时刻（0s）同时到达。"
+msgstr ""
+"In simple data flow mode, it represents the **total number of requests**. "
+"This mode cannot specify the request arrival time distribution, so all "
+"requests are considered to arrive simultaneously at the start of the "
+"simulation (0s)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:73
+msgid "requests : dict"
+msgstr "requests : dict"
+
+#: ../../source/getting_started/workload_config_syntax.rst:75
+#: ../../source/getting_started/workload_config_syntax.rst:119
+msgid "**适用模式：pd, pds**"
+msgstr "Applicable modes: pd, pds"
+
+#: ../../source/getting_started/workload_config_syntax.rst:77
+msgid "描述所有请求的元数据。包括总请求个数、请求到达时刻、请求token长度（input token）。"
+msgstr ""
+"Describe the metadata of all requests. Includes the total number of "
+"requests, the arrival time of the requests, and the token length of the "
+"requests (input token)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:79
+msgid "**count : number**"
+msgstr "**count : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:81
+msgid "所有请求的总个数。"
+msgstr "Total number of all requests."
+
+#: ../../source/getting_started/workload_config_syntax.rst:83
+msgid "**seq_len : number**"
+msgstr "sequence length : number"
+
+#: ../../source/getting_started/workload_config_syntax.rst:85
+msgid "所有请求的平均token数，代表模型推理的平均input token长度。"
+msgstr ""
+"The average token count for all requests represents the average input token "
+"length for model inference."
+
+#: ../../source/getting_started/workload_config_syntax.rst:87
+msgid "**eof_chance : double**"
+msgstr "**eof_chance : double**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:89
+msgid "所有请求所生成的平均token数，代表模型推理的平均output token长度。实际数值等同于 ``2 / eof_chance`` 。"
+msgstr ""
+"The average number of tokens generated per request represents the average "
+"output token length of model inference. The actual value is equivalent to "
+"``2 / eof_chance``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:91
+msgid "**arrival : number[]**"
+msgstr "**arrival : number[]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:93
+msgid ""
+"所有请求的到达时刻分布。数组中的每一个元素代表请求到达的时间戳（单位：ns）。 "
+"若数组长度小于总请求个数，则剩余请求的到达时刻统一为数组中的最后一个元素。"
+msgstr ""
+"The arrival time distribution for all requests. Each element in the array "
+"represents the timestamp (unit: ns) when a request arrives. If the array "
+"length is less than the total number of requests, the arrival time for the "
+"remaining requests is uniformly set to the last element in the array."
+
+#: ../../source/getting_started/workload_config_syntax.rst:97
+msgid "请求的到达时刻分布必须为非递减序列。"
+msgstr ""
+"The request arrival time distribution must be a non-decreasing sequence."
+
+#: ../../source/getting_started/workload_config_syntax.rst:98
+msgid "数组长度至少为1。"
+msgstr "The array length must be at least 1."
+
+#: ../../source/getting_started/workload_config_syntax.rst:103
+msgid ""
+"定义一次LLM Serving流程，共10个请求。所有请求的平均input "
+"token长度为64。前三个请求的到达时刻分别为1、10、100ns，从第4个请求开始，所有请求的到达时刻均为1000ns。"
+msgstr ""
+"Define an LLM serving process with a total of 10 requests. The average input"
+" token length for all requests is 64. The arrival times of the first three "
+"requests are 1, 10, and 100 nanoseconds, respectively. Starting from the "
+"fourth request, all requests arrive at 1000 nanoseconds."
+
+#: ../../source/getting_started/workload_config_syntax.rst:117
+msgid "model : dict"
+msgstr "model : dict"
+
+#: ../../source/getting_started/workload_config_syntax.rst:121
+msgid "在LLM Serving仿真模式下，定义有关模型与仿真流程的元信息。"
+msgstr ""
+"In LLM Serving simulation mode, define metadata related to the model and "
+"simulation process."
+
+#: ../../source/getting_started/workload_config_syntax.rst:123
+msgid "**heads : number**"
+msgstr "**heads : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:125
+msgid "模型注意力头个数。"
+msgstr "Number of model attention heads."
+
+#: ../../source/getting_started/workload_config_syntax.rst:127
+msgid "**stage : number**"
+msgstr "stage : number"
+
+#: ../../source/getting_started/workload_config_syntax.rst:131
+msgid "模型进行流水线并行（PP）的大小。"
+msgstr "Pipeline parallelism (PP) size for the model."
+
+#: ../../source/getting_started/workload_config_syntax.rst:133
+msgid "**prefill_stage : number**"
+msgstr "**prefill_stage : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:135
+#: ../../source/getting_started/workload_config_syntax.rst:141
+#: ../../source/getting_started/workload_config_syntax.rst:147
+#: ../../source/getting_started/workload_config_syntax.rst:153
+#: ../../source/getting_started/workload_config_syntax.rst:316
+#: ../../source/getting_started/workload_config_syntax.rst:322
+msgid "**适用模式：pds**"
+msgstr "Applicable Mode: pds"
+
+#: ../../source/getting_started/workload_config_syntax.rst:137
+msgid "Prefill工作核进行流水线并行（PP）的大小。"
+msgstr "Prefill working kernel size for pipeline parallelism (PP)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:139
+msgid "**decode_stage : number**"
+msgstr "**decode_stage : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:143
+msgid "Decode工作核进行流水线并行（PP）的大小。"
+msgstr "Decode the pipeline parallel (PP) size of the work kernel."
+
+#: ../../source/getting_started/workload_config_syntax.rst:145
+msgid "**prefill_cores : number**"
+msgstr "**prefill_cores : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:149
+msgid "进行Prefill的工作核个数，需保证为 ``prefill_stage`` 的倍数。"
+msgstr ""
+"The number of work kernels for prefill must be a multiple of the "
+"prefill_stage."
+
+#: ../../source/getting_started/workload_config_syntax.rst:151
+msgid "**decode_cores : number**"
+msgstr "**decode_cores : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:155
+msgid "进行Decode的工作核个数，需保证为 ``decode_stage`` 的倍数。"
+msgstr ""
+"The number of worker cores for decoding must be a multiple of "
+"``decode_stage``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:157
+msgid "**kv_heads : number**"
+msgstr "**kv_heads : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:159
+msgid "模型KV头个数，用于包含GQA算子的模型。"
+msgstr ""
+"Number of model KV heads, used for models that include the GQA operator."
+
+#: ../../source/getting_started/workload_config_syntax.rst:161
+msgid "**head_size : number**"
+msgstr "**head_size : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:163
+msgid "模型注意力头维度。"
+msgstr "Model attention head dimension."
+
+#: ../../source/getting_started/workload_config_syntax.rst:165
+msgid "**hidden_size : number**"
+msgstr "**hidden_size : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:167
+msgid "模型隐藏层维度。"
+msgstr "Model hidden layer dimension."
+
+#: ../../source/getting_started/workload_config_syntax.rst:169
+msgid "**intermediate_size**"
+msgstr "**intermediate_size**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:171
+msgid "模型中间层维度。"
+msgstr "Model intermediate layer dimension."
+
+#: ../../source/getting_started/workload_config_syntax.rst:173
+msgid "**prefill_iters : number**"
+msgstr "**prefill_iters : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:175
+msgid ""
+"使用Chunked Prefill优化，将Prefill工作拆分为均等chunk的个数。如果希望关闭Chunked Prefill，则设置为1。"
+msgstr ""
+"Using Chunked Prefill optimization, the Prefill work is split into equal "
+"chunks. To disable Chunked Prefill, set this value to 1."
+
+#: ../../source/getting_started/workload_config_syntax.rst:177
+#: ../../source/getting_started/workload_config_syntax.rst:350
+msgid "示例1"
+msgstr "Example 1"
+
+#: ../../source/getting_started/workload_config_syntax.rst:180
+msgid ""
+"在LLM Serving **PD aggregation** "
+"模式中，模型的注意力头数为24，KV头数为6，模型头维度为128，流水线并行大小为12（每一拍流水线执行的模型层数等于 ``模型总层数 / PP大小``"
+" ）。不使用Chunked Prefill。"
+msgstr ""
+"In the LLM Serving **PD aggregation** mode, the model has 24 attention "
+"heads, 6 KV heads, and a model head dimension of 128. The pipeline "
+"parallelism size is 12 (the number of model layers executed per pipeline "
+"stage equals ``total model layers / PP size``). Chunked Prefill is not used."
+
+#: ../../source/getting_started/workload_config_syntax.rst:182
+msgid ""
+"此时使用的核心总数量至少为12个，实际数量由硬件配置文件决定（可参阅硬件配置文件 :doc:`hardware_config_detail` ）。"
+msgstr ""
+"The minimum number of cores used at this point is 12, and the actual number "
+"is determined by the hardware configuration file (refer to the hardware "
+"configuration file :doc:`hardware_config_detail`)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:196
+#: ../../source/getting_started/workload_config_syntax.rst:397
+msgid "示例2"
+msgstr "Example 2"
+
+#: ../../source/getting_started/workload_config_syntax.rst:199
+msgid ""
+"在LLM Serving **PD Split** 模式中，模型的注意力头数为24，KV头数为6，模型头维度为128。使用Chunked "
+"Prefill将每一个Prefill任务分解为均等的2个小chunk。Prefill与Decode的流水线并行大小均为7，其中进行Prefill的总核数为42，进行Decode的总核数为21。这意味着Prefill工作核的数据并行（DP）大小为"
+" ``42 / 7 = 6`` ，Decode工作核的数据并行（DP）大小为 ``21 / 7 = 3`` 。"
+msgstr ""
+"In the LLM Serving **PD Split** mode, the model has 24 attention heads, 6 KV"
+" heads, and a model head dimension of 128. Chunked Prefill is used to split "
+"each Prefill task into 2 equal small chunks. The pipeline parallel size for "
+"both Prefill and Decode is 7, with a total of 42 cores for Prefill and 21 "
+"cores for Decode. This means the data parallel (DP) size for the Prefill "
+"worker cores is ``42 / 7 = 6``, and the data parallel (DP) size for the "
+"Decode worker cores is ``21 / 7 = 3``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:201
+msgid "此时使用核心总数量为 ``42 + 21 = 63`` 个，在指定硬件配置文件时需满足这一点。"
+msgstr ""
+"At this point, the total number of cores used is ``42 + 21 = 63``, which "
+"must be satisfied when specifying the hardware configuration file."
+
+#: ../../source/getting_started/workload_config_syntax.rst:219
+msgid "工作核负载"
+msgstr "Work Core Load"
+
+#: ../../source/getting_started/workload_config_syntax.rst:221
+msgid ""
+"工作核的负载由原语按顺序排列而成，记录在 ``cores`` 字段中。为了仿真平台的可扩展性，我们要求在书写 ``cores`` 字段时，必须将其包含在"
+" ``chips`` 字段中，具体写法如下："
+msgstr ""
+"The workload of a working core is composed of primitives arranged in "
+"sequence, recorded in the ``cores`` field. To ensure the scalability of the "
+"simulation platform, we require that when writing the ``cores`` field, it "
+"must be contained within the ``chips`` field, as shown below:"
+
+#: ../../source/getting_started/workload_config_syntax.rst:237
+msgid "除了 ``cores`` 字段以外，其余内容为固定结构，不允许修改。"
+msgstr ""
+"Except for the ``cores`` field, the remaining content has a fixed structure "
+"and cannot be modified."
+
+#: ../../source/getting_started/workload_config_syntax.rst:242
+msgid "**适用模式：dataflow, pd, pds, gpu, gpu_pd**"
+msgstr "Applicable modes: dataflow, pd, pds, gpu, gpu_pd"
+
+#: ../../source/getting_started/workload_config_syntax.rst:244
+msgid "记录每一个工作核的负载信息。"
+msgstr "Records the load information of each worker core."
+
+#: ../../source/getting_started/workload_config_syntax.rst:248
+msgid "工作核编号。"
+msgstr "Job ID."
+
+#: ../../source/getting_started/workload_config_syntax.rst:250
+msgid "**loop : string/number**"
+msgstr "**loop: string/number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:252
+msgid "循环执行 ``worklist`` 中所记录原语的次数。"
+msgstr ""
+"Number of times to execute the primitive recorded in the ``worklist`` in a "
+"loop."
+
+#: ../../source/getting_started/workload_config_syntax.rst:254
+msgid "**prim_copy : number, optional**"
+msgstr "**prim_copy : number, optional**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:256
+msgid ""
+"为了书写便利，使用此字段复制其他工作核的所有worklist及其中的所有原语。需注意被复制的核不能是未定义的核、或是另一个指定了 "
+"``prim_copy`` 字段的核。在主动复制原语之后，仍需填写所有 ``worklist`` 中的 ``cast`` 字段，无需填写 "
+"``worklist`` 中的 ``prims`` 字段。"
+msgstr ""
+"For writing convenience, use this field to copy all worklists and all "
+"primitives from another work core. Note that the copied core must not be an "
+"undefined core or another core that has specified the ``prim_copy`` field. "
+"After actively copying the primitives, you still need to fill in all the "
+"``cast`` fields in the ``worklist``, but you do not need to fill in the "
+"``prims`` fields in the ``worklist``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:258
+msgid "**worklist : dict[]**"
+msgstr "**worklist : dict[]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:260
+msgid ""
+"按顺序执行的原语列表。每一个worklist中记录了一系列 **计算** 原语（COMP_PRIM）。NPU-"
+"SIM会自动在每一个worklist执行前加上一个 **接收** 原语（RECV_PRIM），在worklist执行结束后加上一个 **发送** "
+"原语（SEND_PRIM），因此工作核间的通信流程由 ``worklist`` 数组对工作流程的切割隐式决定。具体原语通信范式可参阅 "
+":doc:`primitive_detail` 。"
+msgstr ""
+"A list of primitives executed in sequence. Each worklist records a series of"
+" **computation** primitives (COMP_PRIM). NPU-SIM automatically prepends a "
+"**receive** primitive (RECV_PRIM) before executing each worklist and appends"
+" a **send** primitive (SEND_PRIM) after the worklist execution is completed."
+" Therefore, the communication flow between worker cores is implicitly "
+"determined by how the ``worklist`` array segments the workflow. For specific"
+" primitive communication paradigms, refer to :doc:`primitive_detail`."
+
+#: ../../source/getting_started/workload_config_syntax.rst:262
+msgid "**recv_cnt : number**"
+msgstr "**recv_cnt : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:264
+msgid "在执行此 ``worklist`` 之前，需要等待从其他工作核传来的数据份数。若为0，则表示无需等待。"
+msgstr ""
+"Before executing this ``worklist``, it is necessary to wait for the number "
+"of data portions transmitted from other work cores. If it is 0, it indicates"
+" no waiting is required."
+
+#: ../../source/getting_started/workload_config_syntax.rst:266
+msgid "**recv_tag : number, optional**"
+msgstr "**recv_tag : number, optional**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:268
+msgid ""
+"接收数据时，过滤指定的标签号。只有与发送核侧指定了相同的标签号时，才能成功接收。与 ``cast`` 中的 ``tag`` "
+"配合使用。若未指定此字段，则默认为本核编号。"
+msgstr ""
+"When receiving data, filter by the specified tag number. Data can only be "
+"successfully received if it matches the tag number specified on the sending "
+"core side. This is used in conjunction with the ``tag`` in ``cast``. If this"
+" field is not specified, it defaults to the current core's number."
+
+#: ../../source/getting_started/workload_config_syntax.rst:270
+msgid "**cast : dict[]**"
+msgstr "**cast : dict[]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:272
+msgid "在此worklist执行完毕后，将数据发送至其他工作核的相关信息。"
+msgstr ""
+"After the worklist execution is complete, send the data to other work cores."
+
+#: ../../source/getting_started/workload_config_syntax.rst:274
+msgid "**dest : number**"
+msgstr "**dest : number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:276
+msgid "目标核编号。"
+msgstr "Target core number."
+
+#: ../../source/getting_started/workload_config_syntax.rst:278
+msgid "**tag : number, optional**"
+msgstr "**tag : number, optional**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:280
+msgid ""
+"发送数据时，为数据添加的标签号。只有与接收核侧指定了相同的标签号时，才能成功发送。与 ``worklist`` 中的 ``recv_tag`` "
+"配合使用。若未指定此字段，则默认为目标核编号。"
+msgstr ""
+"The tag number added to the data when sending. The data can only be "
+"successfully sent if the receiving core specifies the same tag number. Used "
+"in conjunction with `recv_tag` in the `worklist`. If this field is not "
+"specified, it defaults to the target core number."
+
+#: ../../source/getting_started/workload_config_syntax.rst:282
+msgid "**weight : number, optional**"
+msgstr "**weight : number, optional**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:284
+msgid "发送数据占总数据的比例（ ``1 / weight`` ，均匀划分）。默认值为1。"
+msgstr ""
+"The proportion of data sent to the total data (`1 / weight`, evenly "
+"divided). The default value is 1."
+
+#: ../../source/getting_started/workload_config_syntax.rst:286
+msgid "**prims : dict[]**"
+msgstr "**prims : dict[]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:288
+msgid "此worklist的原语序列，由前至后依次执行。"
+msgstr ""
+"The primitive sequence of this worklist is executed sequentially from front "
+"to back."
+
+#: ../../source/getting_started/workload_config_syntax.rst:290
+msgid "**type : string**"
+msgstr "**type : string**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:292
+msgid "原语类型（需填写指定字符串，见下）。"
+msgstr "Primitive type (must be a specific string, see below)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:294
+msgid "**{{var}} : string/number**"
+msgstr "**{{var}} : string/number**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:296
+msgid "原语的参数列表。不同原语所需参数及参数名均不相同，可参考以下目录中的头文件定义（其中包含原语类型名）："
+msgstr ""
+"The parameter list of the primitive. The required parameters and their names"
+" vary for different primitives. Please refer to the header file definitions "
+"in the following directory (which includes the primitive type names):"
+
+#: ../../source/getting_started/workload_config_syntax.rst:302
+msgid "**sram_address : dict**"
+msgstr "SRAM address : dict"
+
+#: ../../source/getting_started/workload_config_syntax.rst:304
+msgid "指定计算原语在SRAM中的输入输出标签，具体内存读写与标签管理范式可参考 :doc:`memory_detail` 。"
+msgstr ""
+"Specify the input and output labels of the computation primitive in SRAM. "
+"For details on memory read/write operations and label management paradigms, "
+"refer to :doc:`memory_detail`."
+
+#: ../../source/getting_started/workload_config_syntax.rst:306
+msgid "**indata : string**"
+msgstr "**indata : string**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:308
+msgid "输入标签。此字段不会被NPU-SIM理解为 ``vars`` 中的变量。"
+msgstr ""
+"Input label. This field is not interpreted by NPU-SIM as variables in "
+"``vars``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:310
+msgid "**outdata : string**"
+msgstr "**outdata : string**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:312
+msgid "输出标签。此字段不会被NPU-SIM理解为 ``vars`` 中的变量。"
+msgstr ""
+"Output label. This field is not interpreted by NPU-SIM as a variable in "
+"``vars``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:314
+msgid "**prefill : dict[]**"
+msgstr "**prefill : dict[]**"
+
+#: ../../source/getting_started/workload_config_syntax.rst:318
+msgid "标记Prefill工作核的 ``worklist`` 。使用方法见下。"
+msgstr "Mark the Prefill worker's ``worklist``. See below for usage."
+
+#: ../../source/getting_started/workload_config_syntax.rst:320
+msgid "**decode : dict[]**"
+msgstr "decode : dict[]"
+
+#: ../../source/getting_started/workload_config_syntax.rst:324
+msgid "标记Decode工作核的 ``worklist`` 。使用方法见下。"
+msgstr "Decode the worklist of the worker core. Usage is as follows."
+
+#: ../../source/getting_started/workload_config_syntax.rst:346
+msgid ""
+"在 **pd** 与 **pds** 模式中，只需在配置文件中指定单个张量并行（TP）组中所有核心的配置即可。例如在 **pds** "
+"模式下，Prefill任务与Decode任务的TP大小均为2，此时配置文件中 ``prefill`` 和 ``decode`` "
+"字段中都只应包含核0与核1的配置。对于其中的收发目标和编号与数据标签号，按照该TP组内填写（例如在核0与核1组成的TP组中，核0的发送目的地即为核1）。"
+msgstr ""
+"In **pd** and **pds** modes, you only need to specify the configuration for "
+"all cores in a single tensor parallel (TP) group in the configuration file. "
+"For example, in **pds** mode, if the TP size for both Prefill tasks and "
+"Decode tasks is 2, then the `prefill` and `decode` fields in the "
+"configuration file should only contain the configurations for core 0 and "
+"core 1. For the send/receive targets and IDs within them, fill them out "
+"according to the TP group (for instance, in a TP group consisting of core 0 "
+"and core 1, the send destination for core 0 is core 1)."
+
+#: ../../source/getting_started/workload_config_syntax.rst:348
+msgid ""
+"在 **pd** 模式下，所需求的最少核心总数量等于 ``stage * TP大小`` 。在 **pds** 模式下，核心总数量等于 "
+"``(prefill_cores + decode_cores) * TP大小`` 。"
+msgstr ""
+"In **pd** mode, the minimum total number of cores required equals ``stage * "
+"TP size``. In **pds** mode, the total number of cores equals "
+"``(prefill_cores + decode_cores) * TP size``."
+
+#: ../../source/getting_started/workload_config_syntax.rst:353
+msgid ""
+"对于一组收发核，发送方的数据标签需等同于接收方的数据标签。在示例中，需要等待核0与核1 ``worklist`` "
+"中的原语执行完毕，发送给核2，使其接收到两份数据后，方可执行核2的第一个 ``worklist`` 中的原语。"
+msgstr ""
+"For a set of send-receive cores, the sender's data tag must be equivalent to"
+" the receiver's data tag. In the example, it is necessary to wait for the "
+"primitives in the worklist of Core 0 and Core 1 to complete execution and be"
+" sent to Core 2. Only after Core 2 receives both sets of data can the "
+"primitives in the first worklist of Core 2 be executed."
+
+#: ../../source/getting_started/workload_config_syntax.rst:400
+msgid "对于使用 ``prim_copy`` 的原语，需要显式指定所有 ``worklist`` 及其中的 ``cast`` 字段。"
+msgstr ""
+"For primitives using ``prim_copy``, all ``worklist`` and their ``cast`` "
+"fields must be explicitly specified."
+
+#: ../../source/getting_started/workload_config_syntax.rst:440
+msgid "示例3"
+msgstr "Example 3"
+
+#: ../../source/getting_started/workload_config_syntax.rst:443
+msgid ""
+"需确保每一个计算原语的输入标签都曾经作为某个其他计算原语的输出标签出现过（相关内存读取与标签管理范式可参阅 :doc:`memory_detail` "
+"）。在示例中， ``layernorm1_in`` 标签就曾作为 ``parse_input`` 原语的输出标签出现过。"
+msgstr ""
+"Ensure that the input label of each computational primitive has previously "
+"appeared as the output label of some other computational primitive (for "
+"related memory read and label management paradigms, see "
+":doc:`memory_detail`). In the example, the ``layernorm1_in`` label "
+"previously appeared as the output label of the ``parse_input`` primitive."

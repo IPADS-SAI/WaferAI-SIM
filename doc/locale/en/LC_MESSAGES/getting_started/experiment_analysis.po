@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/experiment_analysis.rst:4
+msgid "测试分析"
+msgstr "Test Analysis"
+
+#: ../../source/getting_started/experiment_analysis.rst:6
+msgid "在论文中，我们使用 **NPU-SIM** 对众核AI加速器在多场景、多硬件配置下的表现进行了仿真和比较。"
+msgstr ""
+"In this paper, we use **NPU-SIM** to simulate and compare the performance of"
+" many-core AI accelerators across multiple scenarios and hardware "
+"configurations."
+
+#: ../../source/getting_started/experiment_analysis.rst:9
+msgid "仿真配置"
+msgstr "Simulation Configuration"
+
+#: ../../source/getting_started/experiment_analysis.rst:11
+msgid ""
+"在测试中，我们主要采用两大类的芯片硬件配置：大核模式，即计算核总数相对较少，但每一个计算核具有较强的算力、内存等硬件配置；小核模式，与大核模式相反，包含较多且各硬件指标较低的计算核。具体的参数自由配置空间参见下表。"
+msgstr ""
+"During testing, we primarily use two major types of chip hardware "
+"configurations: the big-core mode, which features a relatively small total "
+"number of computing cores, but each core has strong computing power, memory,"
+" and other hardware resources; and the small-core mode, which is the "
+"opposite of the big-core mode, containing a large number of computing cores "
+"with lower hardware specifications. For specific parameter customization "
+"options, please refer to the table below."
+
+#: ../../source/getting_started/experiment_analysis.rst:13
+msgid "TODO：表格图片"
+msgstr "TODO: Table Image"
+
+#: ../../source/getting_started/experiment_analysis.rst:16
+msgid "仿真器验证与仿真耗时"
+msgstr "Simulator Verification and Simulation Time Consumption"
+
+#: ../../source/getting_started/experiment_analysis.rst:18
+msgid ""
+"我们将 **NPU-SIM** 与真实硬件的运行结果进行比较，验证其仿真结果的精度，并分析了在采用混合仿真模式（Hybrid-"
+"mode）下的仿真耗时。具体结果请参阅 :doc:`simulator_validation`。"
+msgstr ""
+"We compare **NPU-SIM** with actual hardware execution results to verify the "
+"accuracy of its simulation results and analyze the simulation time "
+"consumption when using hybrid mode. For specific results, please refer to "
+":doc:`simulator_validation`."
+
+#: ../../source/getting_started/experiment_analysis.rst:21
+msgid "多场景测试"
+msgstr "Multi-scenario testing"
+
+#: ../../source/getting_started/experiment_analysis.rst:23
+msgid "我们使用 **NPU-SIM** 模拟了AI众核芯片在多场景下的表现，并给出了对应场景下硬件设计的改进思路。"
+msgstr ""
+"We simulated the performance of the AI many-core chip in multiple scenarios "
+"using **NPU-SIM** and proposed improvement ideas for the hardware design in "
+"the corresponding scenarios."
+
+#: ../../source/getting_started/experiment_analysis.rst:25
+msgid "**模型并行与计算核映射**"
+msgstr "Model Parallelism and Compute Kernel Mapping"
+
+#: ../../source/getting_started/experiment_analysis.rst:27
+msgid "请参阅 :doc:`tp_mapping`"
+msgstr "Please refer to :doc:`tp_mapping`"
+
+#: ../../source/getting_started/experiment_analysis.rst:29
+msgid "**LLM Serving**"
+msgstr "Large Language Model Serving"
+
+#: ../../source/getting_started/experiment_analysis.rst:31
+msgid "请参阅 :doc:`llm_serving`"
+msgstr "Please refer to :doc:`llm_serving`"
+
+#: ../../source/getting_started/experiment_analysis.rst:33
+msgid "**芯片设计的总结与思考**"
+msgstr "Summary and Reflections on Chip Design"
+
+#: ../../source/getting_started/experiment_analysis.rst:35
+msgid "请参阅 :doc:`chip_design_lesson`"
+msgstr "Please refer to :doc:`chip_design_lesson`"
+
+#: ../../source/getting_started/experiment_analysis.rst:38
+msgid "附属页面"
+msgstr "Subsidiary pages"

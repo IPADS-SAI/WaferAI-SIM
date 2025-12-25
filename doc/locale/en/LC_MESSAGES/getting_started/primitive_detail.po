@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, dahu feng
+# This file is distributed under the same license as the npu-sim package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: npu-sim\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-03 14:35+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: en <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/getting_started/primitive_detail.rst:4
+msgid "原语与工作核通信范式"
+msgstr "The Communication Paradigm Between Primitives and Worker Cores"
+
+#: ../../source/getting_started/primitive_detail.rst:6
+msgid "原语 (primitive) 是工作核执行任务的最小单位。按照原语的执行逻辑，可将其分为三类："
+msgstr ""
+"A primitive is the smallest unit of task execution in the worker core. Based"
+" on their execution logic, primitives can be categorized into three types:"
+
+#: ../../source/getting_started/primitive_detail.rst:8
+msgid "发送原语 (SEND_PRIM)"
+msgstr "SEND_PRIMITIVE"
+
+#: ../../source/getting_started/primitive_detail.rst:9
+msgid "接收原语 (RECV_PRIM)"
+msgstr "Receive Primitive (RECV_PRIM)"
+
+#: ../../source/getting_started/primitive_detail.rst:10
+msgid "计算原语 (COMP_PRIM)"
+msgstr "Computing Primitives (COMP_PRIM)"
+
+#: ../../source/getting_started/primitive_detail.rst:12
+msgid ""
+"工作核在执行仿真任务时，会严格执行接收数据-执行计算-发送数据的原语执行循环。在 **NPU-SIM** 根据 "
+":doc:`workload_config_detail` 生成原语序列的过程中，会在 :doc:`workload_config_syntax` "
+"中提及的 ``worklist`` 前后各加上对应的 ``SEND_PRIM`` 和 ``RECV_PRIM`` 。"
+msgstr ""
+"When executing simulation tasks, the work core strictly follows the "
+"primitive execution cycle of receiving data, performing calculations, and "
+"sending data. During the process where **NPU-SIM** generates the primitive "
+"sequence based on :doc:`workload_config_detail`, it adds the corresponding "
+"``SEND_PRIM`` and ``RECV_PRIM`` before and after the ``worklist`` mentioned "
+"in :doc:`workload_config_syntax`."
+
+#: ../../source/getting_started/primitive_detail.rst:16
+msgid ""
+"在执行 ``worklist`` 的第一个 ``COMP_PRIM`` 之前， **NPU-SIM** 会先接收从前一个核传来的计算结果。该过程由 "
+"``RECV_PRIM`` 完成。每当接收到一个核的数据，接收计数便增加1。当接收计数等同于该 ``worklist`` 的 ``recv_cnt`` "
+"字段值时，便结束此次 ``RECV_PRIM`` 的执行，进入接下来的 ``COMP_PRIM`` 。"
+msgstr ""
+"Before executing the first ``COMP_PRIM`` of the ``worklist``, **NPU-SIM** "
+"first receives the computation results from the previous core. This process "
+"is completed by ``RECV_PRIM``. Each time data from a core is received, the "
+"receive count increases by 1. When the receive count equals the ``recv_cnt``"
+" field value of the ``worklist``, the execution of this ``RECV_PRIM`` ends, "
+"and it proceeds to the subsequent ``COMP_PRIM``."
+
+#: ../../source/getting_started/primitive_detail.rst:18
+msgid ""
+"连续的 ``COMP_PRIM`` 在同一工作核上执行时，其中无需插入 ``RECV_PRIM`` 或 ``SEND_PRIM`` ，但需注意后一个 "
+"``COMP_PRIM`` 的输入数据来自前一个 ``COMP_PRIM`` 的输出数据（请参阅 :doc:`memory_detail` ）。"
+msgstr ""
+"Consecutive ``COMP_PRIM`` operations executed on the same worker core do not"
+" require inserting ``RECV_PRIM`` or ``SEND_PRIM`` between them. However, "
+"note that the input data for the subsequent ``COMP_PRIM`` comes from the "
+"output data of the preceding ``COMP_PRIM`` (refer to :doc:`memory_detail`)."
+
+#: ../../source/getting_started/primitive_detail.rst:20
+msgid ""
+"在一个 ``worklist`` 的所有 ``COMP_PRIM`` 执行完成后， **NPU-SIM** 会将计算结果发送给下一个核。该过程由 "
+"``SEND_PRIM`` 完成。发送的地点和次数由 ``cast`` 字段决定。"
+msgstr ""
+"After all ``COMP_PRIM`` in a ``worklist`` are executed, **NPU-SIM** sends "
+"the computation results to the next core. This process is completed by "
+"``SEND_PRIM``. The destination and frequency of the transmission are "
+"determined by the ``cast`` field."
